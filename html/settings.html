@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Settings</title>
+    </head>
+    <body>
+        <h1>Profile Settings</h1>
+
+        <!--textfields for name/surname and the dropdown menu for beverage selection-->
+        <fieldset>
+            <legend>Base Data</legend>
+
+            <label for="first_name">First Name</label><br>
+            <input type="text" id="first_name" placeholder="Your name"> <br>
     
-</body>
+            <label for="last_name">Last Name</label><br>
+            <input type="text" id="last_name" placeholder="Your surname"> <br>
+
+            <label for="coffee_or_tea">Coffee or Tea?</label>
+            <select name="coffee_or_tea" id="coffee_or_tea">
+                <option value="neither_nor">Neither nor</option>
+                <option value="coffee">Coffee</option>
+                <option value="tea">Tea</option>
+            </select> <br>
+        </fieldset>
+
+        <!--textfield for user comment-->
+        <fieldset>
+            <legend>Tell Something About You</legend>
+            <textarea rows='2' cols='20' placeholder="Leave a comment here"></textarea> <br>
+        </fieldset>
+
+        <!--radiobuttons to let the user choose their line settings-->
+        <fieldset>
+            <legend>Prefered Chat Layout</legend>
+
+            <input type='radio' id='one_line'
+            name='line_setting'>
+            <label for='one_line'>Username and message in one line</label><br>
+
+            <input type='radio' id='seperated_lines'
+                name='line_setting'>
+            <label for='seperated_lines'>Username and message in separated lines</label><br>
+        </fieldset>
+        
+        <!--buttons to save/cancel-->
+        <a href='friends.html' target='_self'>
+            <button>Cancel</button>
+        </a> 
+        <a href='settings.html' target='_self'>
+            <button>Save</button>
+        </a>
+    </body>
 </html>
