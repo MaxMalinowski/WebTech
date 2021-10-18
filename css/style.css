@@ -12,3 +12,25 @@
     .special {
         color: red !important;
     }
+    
+    button {
+        color: white;
+        background-color: #bfbfbf;
+        border: hidden;
+        padding: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .blue-button {
+        background-color: dodgerblue;
+    }
+    
+    fieldset {
+        border: 0.5px dashed #bfbfbf;
+        padding: 10px;
+    }
+    
+    img {
+        border-radius: 100%;
+    }
