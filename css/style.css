@@ -1,0 +1,14 @@
+    a:-webkit-any-link {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    .special {
+        color: red !important;
+    }
