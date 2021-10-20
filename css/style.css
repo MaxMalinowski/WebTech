@@ -52,3 +52,19 @@
     legend {
         font-size: larger;
     }
+
+    /* Rules for responive design */
+    .form-row {
+        width: 100%;
+    }
+
+    .form-col{
+        display: inline-block;
+        width: 40%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .form-col {
+            width: 100%;
+        }
+    }
