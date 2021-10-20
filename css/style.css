@@ -18,7 +18,7 @@ body {
     width: 9%;
     display: inline-block;
 }
-span{
+.special-span{
     color: white !important;    
     background-color: dodgerblue; 
     
