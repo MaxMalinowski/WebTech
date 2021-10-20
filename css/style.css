@@ -70,7 +70,6 @@
         text-align: center  ;
     }
 
-<<<<<<< HEAD
     .form-col-left {
         display: inline-block;
         text-align: right;
@@ -81,11 +80,6 @@
         display: inline-block;
         text-align: left;
         width: 49%;
-=======
-   
-    .form-col{
-        display: inline-block;
->>>>>>> 9acaa2ed0854980aae51caa7b4e288478f4bd45a
     }
 
     .login_fieldset  {
