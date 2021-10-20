@@ -39,10 +39,17 @@
     
     img {
         border-radius: 100%;
+        display: block;
+        margin: auto;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: rgb(0, 51, 102);
+        color: black;
+        text-align: center;
+    }
+
+    .button_div{
+        text-align: center;
     }
 
     dt {    
@@ -56,12 +63,18 @@
     /* Rules for responive design */
     .form-row {
         width: 100%;
+        text-align: center  ;
     }
 
+   
     .form-col{
         display: inline-block;
-        width: 40%;
     }
+
+    .login_fieldset  {
+        width: 80%  ;
+    }
+    
 
     @media only screen and (max-width: 600px) {
         .form-col {
