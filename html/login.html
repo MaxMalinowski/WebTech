@@ -16,12 +16,26 @@
     <form>
         <fieldset>
             <legend>Login</legend>
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Username"><br>
-            <label for="password">Password</label>
-            <input type="text" id="password" placeholder="Password">
-        </fieldset>
+            
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="username">Username</label>
+                    </div> 
+                    <div class="form-col">
+                        <input type="text" id="username" placeholder="Username">
+                    </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="password">Password</label>
+                    </div> 
+                    <div class="form-col">
+                        <input type="text" id="password" placeholder="Password">
+                    </div>
+                </div>
+                
+         </fieldset>
         <button type="submit" formaction="./register.html">Register</button>
         <button type="submit" formaction="./friends.html" class="blue-button">Login</button>
     </form>

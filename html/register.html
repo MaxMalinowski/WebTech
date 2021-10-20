@@ -14,9 +14,32 @@
     <form>
         <fieldset>
             <legend> Register</legend>
-            <p><label for="Username">Username </label> <input type="text" placeholder='Username'></p>
-            <p><label for="Password">Password </label> <input type="text" placeholder='Password'></p>
-            <p><label for="Confirm">Confirm Password </label><input type="text" placeholder='Password'></p>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="Username">Username</label>
+                    </div>
+                    <div class="form-col">
+                        <input type="text" placeholder='Username'>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="form-col">
+                        <input type="text" placeholder='Password'>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="Confirm">Confirm Password</label>
+                    </div>
+                    <div class="form-col">
+                        <input type="text" placeholder='Password'>
+                    </div>
+                </div>
         </fieldset>
         <button formaction="./login.html">Cancel</button>
         <button type="submit" formaction="./friends.html" class="blue-button">Create Account</button>
