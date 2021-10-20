@@ -1,100 +1,114 @@
-    html, body {
-        max-width: 900px;
-        margin: auto;
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: mintcream;
-    }
+html,
+body {
+  max-width: 900px;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: mintcream;
+}
 
-    a:-webkit-any-link {
-        color: dodgerblue;
-        text-decoration: none;
-    }
-    
-    a:hover {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-    }
-    
-    .special {
-        color: red !important;
-    }
-    
-    button {
-        color: white;
-        background-color: #bfbfbf;
-        border: hidden;
-        padding: 8px;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    .blue-button {
-        background-color: dodgerblue;
-    }
-    
-    fieldset {
-        border: 0.5px dashed #bfbfbf;
-        background-color: white;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-    hr{
-        border: 0.5px dashed #bfbfbf;
-    }
-    
-    img {
-        width: 100px;
-        height: 100px;
-        margin: 20px auto 0px auto;
-        border-radius: 100%;
-        display: block;
-    }
+a:-webkit-any-link {
+  color: dodgerblue;
+  text-decoration: none;
+}
 
-    h1, h2, h3, h4, h5, h6 {
-        color: black;
-        text-align: center;
-    }
+a:hover {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+}
 
-    .button_div{
-        text-align: center;
-    }
+.special {
+  color: red !important;
+}
 
-    dt {    
-        font-weight: bold;
-    }
+button {
+  color: white;
+  background-color: #bfbfbf;
+  border: hidden;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
-    legend {
-        font-size: larger;
-    }
+.blue-button {
+  background-color: dodgerblue;
+}
 
-    /* Rules for responive design */
-    .form-row {
-        width: 100%;
-        margin-bottom: 10px;
-        text-align: center  ;
-    }
+fieldset {
+  border: 0.5px dashed #bfbfbf;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.spezial-fieldset {
+  border: 1px dashed #bfbfbf;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-style: solid !important;
+}
 
-    .form-col-left {
-        display: inline-block;
-        text-align: right;
-        width: 49%;
-    }
+hr {
+  border: 0.5px  #bfbfbf;
+  
+}
 
-    .form-col-right {
-        display: inline-block;
-        text-align: left;
-        width: 49%;
-    }
+img {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto 0px auto;
+  border-radius: 100%;
+  display: block;
+}
 
-    .logout_text {
-        text-align: center;
-    }
-    
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: black;
+  text-align: center;
+}
 
-    @media only screen and (max-width: 600px) {
-        [class*="form-col-"] {
-            text-align: center;
-            width: 100%;
-        }
-    }
+.button_div {
+  text-align: center;
+}
+
+dt {
+  font-weight: bold;
+}
+
+legend {
+  font-size: larger;
+}
+
+/* Rules for responive design */
+.form-row {
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.form-col-left {
+  display: inline-block;
+  text-align: right;
+  width: 49%;
+}
+
+.form-col-right {
+  display: inline-block;
+  text-align: left;
+  width: 49%;
+}
+
+.logout_text {
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  [class*="form-col-"] {
+    text-align: center;
+    width: 100%;
+  }
+}
