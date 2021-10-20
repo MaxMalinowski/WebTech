@@ -49,11 +49,10 @@ fieldset {
 }
 
 hr {
-  border: 0.5px  #bfbfbf;
-  
+  border: 0.5px dashed #bfbfbf;
 }
 
-img {
+.rounded_img {
   width: 100px;
   height: 100px;
   margin: 20px auto 0px auto;
@@ -61,13 +60,7 @@ img {
   display: block;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: black;
+.centered_h {
   text-align: center;
 }
 
@@ -104,6 +97,25 @@ legend {
 
 .logout_text {
   text-align: center;
+}
+
+#profile_div_left {
+  float: left;
+  width: 40%;
+  margin: 0.5%;
+}
+
+#profile_picture {
+  width: 100%;
+}
+
+#profile_div_right {
+  border: 1px solid black;
+  padding: 0.5%;
+}
+
+#remove_friend {
+  color: red;
 }
 
 @media only screen and (max-width: 600px) {
