@@ -51,18 +51,20 @@
         <!--textfield for user comment-->
         <fieldset>
             <legend>Tell Something About You</legend>
-            <textarea rows='2' cols='20' name="about_you" placeholder="Leave a comment here"></textarea> <br>
+            <textarea name="about_you" placeholder="Leave a comment here"></textarea> <br>
         </fieldset>
     
         <!--radiobuttons to let the user choose their line settings-->
         <fieldset>
             <legend>Prefered Chat Layout</legend>
-    
-            <input type='radio' id='one_line' name='one_line'>
-            <label for='one_line'>Username and message in one line</label><br>
-    
-            <input type='radio' id='seperated_lines' name='seperated_lines'>
-            <label for='seperated_lines'>Username and message in separated lines</label><br>
+            <div class="radio-buttons">
+                <input type='radio' id='one_line' name='one_line'>
+                <label for='one_line'>Username and message in one line</label>
+            </div>
+            <div class="radio-buttons">
+                <input type='radio' id='seperated_lines' name='seperated_lines'>
+                <label for='seperated_lines'>Username and message in separated lines</label>
+            </div>
         </fieldset>
     
         <!--buttons to save/cancel-->
@@ -70,7 +72,6 @@
             <button type="submit" formaction="./friends.html">Cancel</button>
             <button class="blue-button" type="submit">Save</button>  
         </div>
-    
     </form>
 </body>
 
