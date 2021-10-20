@@ -21,7 +21,7 @@
                     <label for="first_name">First Name</label>
                 </div>
                 <div class="form-col-right">
-                    <input type="text" id="first_name" placeholder="Your name">
+                    <input type="text" id="first_name" name="first_name" placeholder="Your name">
                 </div>
             </div>
     
@@ -30,7 +30,7 @@
                     <label for="last_name">Last Name</label>
                 </div>
                 <div class="form-col-right">
-                    <input type="text" id="last_name" placeholder="Your surname"> <br>
+                    <input type="text" id="last_name" name="last_name" placeholder="Your surname"> <br>
                 </div>
             </div>
     
@@ -51,17 +51,17 @@
         <!--textfield for user comment-->
         <fieldset>
             <legend>Tell Something About You</legend>
-            <textarea rows='2' cols='20' placeholder="Leave a comment here"></textarea> <br>
+            <textarea rows='2' cols='20' name="about_you" placeholder="Leave a comment here"></textarea> <br>
         </fieldset>
     
         <!--radiobuttons to let the user choose their line settings-->
         <fieldset>
             <legend>Prefered Chat Layout</legend>
     
-            <input type='radio' id='one_line' name='line_setting'>
+            <input type='radio' id='one_line' name='one_line'>
             <label for='one_line'>Username and message in one line</label><br>
     
-            <input type='radio' id='seperated_lines' name='line_setting'>
+            <input type='radio' id='seperated_lines' name='seperated_lines'>
             <label for='seperated_lines'>Username and message in separated lines</label><br>
         </fieldset>
     
