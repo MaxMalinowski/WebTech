@@ -99,23 +99,29 @@ legend {
   text-align: center;
 }
 
-#profile_div_left {
-  float: left;
-  width: 40%;
-  margin: 0.5%;
+.profile-div-right {
+  width: 55%;
+  display: inline-block;
+  border: 1px dashed #bfbfbf;
+  background-color: white;
+  border-style: solid !important;
+  padding: 0.8%;
+  }
+
+.profile-div-left {
+  width: 35%;
+  display: inline-block;
+  margin-right: 4%;
 }
 
-#profile_picture {
-  width: 100%;
+.profile-picture {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-#profile_div_right {
-  border: 1px solid black;
-  padding: 0.5%;
-}
-
-#remove_friend {
-  color: red;
+.top-links {
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 600px) {
