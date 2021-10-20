@@ -11,41 +11,42 @@
 <body>
     <img src="../assets/images/user.png" alt="">
     <h1>Register yourself</h1>
-    <form>
+    <form action="./friends.html">
         <fieldset class="form_fieldset">
             <legend> Register</legend>
-                <div class="form-row">
-                    <div class="form-col-left">
-                        <label for="Username">Username</label>
-                    </div>
-                    <div class="form-col-right">
-                        <input type="text" placeholder='Username'>
-                    </div>
+                
+            <div class="form-row">
+                <div class="form-col-left">
+                    <label for="Username">Username</label>
                 </div>
+                <div class="form-col-right">
+                    <input type="text" placeholder='Username'>
+                </div>
+            </div>
 
-                <div class="form-row">
-                    <div class="form-col-left">
-                        <label for="Password">Password</label>
-                    </div>
-                    <div class="form-col-right">
-                        <input type="text" placeholder='Password'>
-                    </div>
+            <div class="form-row">
+                <div class="form-col-left">
+                    <label for="Password">Password</label>
                 </div>
+                <div class="form-col-right">
+                    <input type="text" placeholder='Password'>
+                </div>
+            </div>
 
-                <div class="form-row">
-                    <div class="form-col-left">
-                        <label for="Confirm">Confirm Password</label>
-                    </div>
-                    <div class="form-col-right">
-                        <input type="text" placeholder='Password'>
-                    </div>
+            <div class="form-row">
+                <div class="form-col-left">
+                    <label for="Confirm">Confirm Password</label>
                 </div>
+                <div class="form-col-right">
+                    <input type="text" placeholder='Password'>
+                </div>
+            </div>
         </fieldset>
-        <div class="button_div">
-            <button formaction="./login.html">Cancel</button>
-            <button type="submit" formaction="./friends.html" class="blue-button">Create Account</button>   
-        </div>
 
+        <div class="button_div">
+            <button type="submit" formaction="./login.html">Cancel</button>
+            <button class="blue-button" type="submit">Create Account</button>   
+        </div>
     </form>
 </body>
 

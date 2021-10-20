@@ -84,14 +84,11 @@
         width: 49%;
     }
 
-<<<<<<< HEAD
-=======
     .logout_text {
         text-align: center;
     }
     
 
->>>>>>> 8bf7f9d4b72f4fecf36f113131dea53549b83595
     @media only screen and (max-width: 600px) {
         [class*="form-col-"] {
             text-align: center;
