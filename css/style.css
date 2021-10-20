@@ -17,7 +17,7 @@ a:hover {
   font-size: 18px;
 }
 
-.special {
+.special-link {
   color: red !important;
 }
 
@@ -40,7 +40,7 @@ fieldset {
   margin-bottom: 10px;
   padding: 10px;
 }
-.spezial-fieldset {
+.special-fieldset {
   border: 1px dashed #bfbfbf;
   background-color: white;
   margin-bottom: 10px;
