@@ -62,13 +62,21 @@
         width: 100%;
     }
 
-    .form-col{
+    .form-col-left {
         display: inline-block;
-        width: 40%;
+        text-align: right;
+        width: 49%;
+    }
+
+    .form-col-right {
+        display: inline-block;
+        text-align: left;
+        width: 49%;
     }
 
     @media only screen and (max-width: 600px) {
-        .form-col {
+        [class*="form-col-"] {
+            text-align: center;
             width: 100%;
         }
     }
