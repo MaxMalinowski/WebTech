@@ -39,6 +39,9 @@
         margin-bottom: 10px;
         padding: 10px;
     }
+    hr{
+        border: 0.5px dashed #bfbfbf;
+    }
     
     img {
         width: 100px;
