@@ -43,10 +43,17 @@
         height: 100px;
         margin-top: 20px;
         border-radius: 100%;
+        display: block;
+        margin: auto;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: rgb(0, 51, 102);
+        color: black;
+        text-align: center;
+    }
+
+    .button_div{
+        text-align: center;
     }
 
     dt {    
@@ -60,8 +67,10 @@
     /* Rules for responive design */
     .form-row {
         width: 100%;
+        text-align: center  ;
     }
 
+<<<<<<< HEAD
     .form-col-left {
         display: inline-block;
         text-align: right;
@@ -72,7 +81,17 @@
         display: inline-block;
         text-align: left;
         width: 49%;
+=======
+   
+    .form-col{
+        display: inline-block;
+>>>>>>> 9acaa2ed0854980aae51caa7b4e288478f4bd45a
     }
+
+    .login_fieldset  {
+        width: 80%  ;
+    }
+    
 
     @media only screen and (max-width: 600px) {
         [class*="form-col-"] {
