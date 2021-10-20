@@ -172,6 +172,10 @@ textarea {
   float: right;
 }
 
+.wrapper {
+  display: flex;
+}
+
 
 @media only screen and (max-width: 600px) {
   [class*="form-col-"] {
