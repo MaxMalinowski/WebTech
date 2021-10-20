@@ -124,6 +124,10 @@ legend {
   margin-bottom: 10px;
 }
 
+ul {
+    list-style-type: none;
+}
+
 @media only screen and (max-width: 600px) {
   [class*="form-col-"] {
     text-align: center;
