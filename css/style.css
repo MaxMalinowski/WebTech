@@ -2,6 +2,7 @@
         max-width: 900px;
         margin: auto;
         font-family: Arial, Helvetica, sans-serif;
+        background-color: mintcream;
     }
 
     a:-webkit-any-link {
@@ -34,6 +35,7 @@
     
     fieldset {
         border: 0.5px dashed #bfbfbf;
+        background-color: white;
         margin-bottom: 10px;
         padding: 10px;
     }
@@ -41,10 +43,9 @@
     img {
         width: 100px;
         height: 100px;
-        margin-top: 20px;
+        margin: 20px auto 0px auto;
         border-radius: 100%;
         display: block;
-        margin: auto;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -67,6 +68,7 @@
     /* Rules for responive design */
     .form-row {
         width: 100%;
+        margin-bottom: 10px;
         text-align: center  ;
     }
 
