@@ -6,11 +6,8 @@ The execises solved can be found in the specification folder. For each exercise 
 
 ## Infos
 
-#### Env-Vars
 Environmental variables are stored in the .env file in the project's root directory.
 
-#### Dummy Data
 Dummy data for execise 3 can be found in the dummy_users.json file.  
 
-#### API Docu
 The API documentation for the backend used can be found under https://online-lectures-cs.thi.de/chat/full (authentication via moodle - only for thi students).
