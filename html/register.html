@@ -3,50 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
     <title>Register</title>
   </head>
 
   <body>
-    <img class="special-img" src="../assets/images/user.png" alt="" />
+    <img src="../assets/images/user.png" alt="" />
 
-    <h1 class="special-h">Register yourself</h1>
+    <h1 >Register yourself</h1>
     
     <form action="./friends.html" method="post">
-      <fieldset class="form_fieldset">
+      <fieldset>
         <legend>Register</legend>
 
-        <div class="form-row">
-          <div class="form-col-left">
-            <label for="username">Username</label>
-          </div>
-          <div class="form-col-right">
-            <input type="text" id="username" name="username" placeholder="Username" required/>
-          </div>
+        <div>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username" required/>
         </div>
 
-        <div class="form-row">
-          <div class="form-col-left">
-            <label for="password">Password</label>
-          </div>
-          <div class="form-col-right">
-            <input type="password" id="password" name="password" placeholder="Password" required/>
-          </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required/>
         </div>
 
-        <div class="form-row">
-          <div class="form-col-left">
-            <label for="confirm">Confirm Password</label>
-          </div>
-          <div class="form-col-right">
-            <input type="password" id="confirm" name="confirm" placeholder="Password" required/>
-          </div>
+        <div>
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" name="confirm" placeholder="Password" required/>
         </div>
       </fieldset>
 
-      <div class="button-div">
+      <div>
         <button type="submit" formaction="./login.html">Cancel</button>
-        <button class="blue-button" type="submit">Create Account</button>
+        <button type="submit">Create Account</button>
       </div>
     </form>
   </body>
