@@ -1,29 +1,51 @@
-html,
+/* #################################################
+Gernerall tag-wide settings 
+################################################# */
 body {
   max-width: 900px;
   margin: auto;
   font-family: Arial, Helvetica, sans-serif;
   background-color: mintcream;
 }
-.label-link{
-    color: black !important;     
-    text-align: left;
-    width: 89%;
-    display: inline-block;
+
+button {
+  color: white;
+  background-color: #bfbfbf;
+  border: hidden;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.label-counter{
-    
-    text-align: right;
-    width: 9%;
-    display: inline-block;
-}
-.special-span{
-    color: white !important;    
-    background-color: dodgerblue; 
-    
+fieldset {
+  border: 0.5px dashed #bfbfbf;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
+hr {
+  border: 0.5px dashed #bfbfbf;
+}
+
+dt {
+  font-weight: bold;
+}
+
+legend {
+  font-size: larger;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 10px;
+  line-height: 40px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+}
 
 a:-webkit-any-link {
   color: dodgerblue;
@@ -36,28 +58,13 @@ a:hover {
   font-size: 18px;
 }
 
-.special-link {
-  color: red !important;
-}
-
-button {
-  color: white;
-  background-color: #bfbfbf;
-  border: hidden;
-  padding: 8px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.blue-button {
-  background-color: dodgerblue;
-}
-
-fieldset {
-  border: 0.5px dashed #bfbfbf;
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 10px;
+/* #################################################
+Special class definitions
+--> General & special Settings
+################################################# */
+.special-span {
+  color: white !important;    
+  background-color: dodgerblue; 
 }
 
 .special-fieldset {
@@ -68,11 +75,7 @@ fieldset {
   border-style: solid !important;
 }
 
-hr {
-  border: 0.5px dashed #bfbfbf;
-}
-
-.rounded_img {
+.special-img {
   width: 100px;
   height: 100px;
   margin: 20px auto 0px auto;
@@ -80,23 +83,79 @@ hr {
   display: block;
 }
 
-.centered_h {
+.special-h {
   text-align: center;
 }
 
-.button_div {
+.logout-col {
   text-align: center;
 }
 
-dt {
-  font-weight: bold;
+
+/* #################################################
+Special class definitions
+--> Labels
+################################################# */
+.label-link {
+  color: black !important;     
+  text-align: left;
+  width: 89%;
+  display: inline-block;
 }
 
-legend {
-  font-size: larger;
+.label-counter {
+  text-align: right;
+  width: 9%;
+  display: inline-block;
 }
 
-/* Rules for responive design */
+/* #################################################
+Special class definitions
+--> Links
+################################################# */
+.special-link {
+  color: red !important;
+}
+
+.top-links {
+  margin-bottom: 10px;
+}
+
+
+/* #################################################
+Special class definitions
+--> Inputs
+################################################# */
+.button-div {
+  text-align: center;
+}
+
+.blue-button {
+  background-color: dodgerblue;
+}
+
+.long-button {
+  background-color: gray;
+  width: 19%;
+  text-align: center;
+  float: right;
+}
+
+.radio-buttons {
+  margin: 5px;
+}
+
+.long-input {
+  width: 75%;
+  margin-right: 3%;
+  height: 25px;
+}
+
+
+/* #################################################
+Special class definitions
+--> Forms
+################################################# */
 .form-row {
   width: 100%;
   margin-bottom: 10px;
@@ -115,11 +174,12 @@ legend {
   width: 49%;
 }
 
-.logout_text {
-  text-align: center;
-}
 
-.profile-div-right {
+/* #################################################
+Special class definitions
+--> Profile
+################################################# */
+.profile-col-right {
   vertical-align: top;
   width: 55%;
   display: inline-block;
@@ -129,7 +189,7 @@ legend {
   padding: 0.8%;
   }
 
-.profile-div-left {
+.profile-col-left {
   vertical-align: top;
   width: 35%;
   display: inline-block;
@@ -142,43 +202,11 @@ legend {
   object-fit: contain;
 }
 
-.top-links {
-  margin-bottom: 10px;
-}
 
-ul {
-    list-style-type: none;
-    padding-inline-start: 10px;
-    line-height: 40px;
-}
-
-textarea {
- width: 100%;
- height: 150px;
-}
-
-.radio-buttons {
-  margin: 5px;
-}
-
-.long-input {
-  width: 75%;
-  margin-right: 3%;
-  height: 25px;
-}
-
-.long-button {
-  background-color: gray;
-  width: 19%;
-  text-align: center;
-  float: right;
-}
-
-.wrapper {
-  display: flex;
-}
-
-
+/* #################################################
+Special class definitions
+--> Responsiveness for froms
+################################################# */
 @media only screen and (max-width: 600px) {
   [class*="form-col-"] {
     text-align: center;
