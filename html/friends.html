@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Friends</title>
-</head>
-<body>
+  </head>
+
+  <body>
     <h1>Friends</h1>
 
-    <a href="./logout.html"> < Logout</a> | <a href="./settings.html">Settings</a>
+    <div class="top-links">
+      <a href="./logout.html"> &lt Logout</a> |
+      <a href="./settings.html">Settings</a>
+    </div>
 
-    <hr>
+    <hr />
 
-    <ul>
-        <li><a href="./chat.html">Tom (3)</a></li>
-        <li><a href="./chat.html">Marvin (1)</a></li>
-        <li><a href="./chat.html">Tick</a></li>
-        <li><a href="./chat.html">Trick</a></li>
-    </ul>
+    <fieldset class="special-fieldset">
+      <ul>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Tom </a>
+          </div>
+          <div class="label-counter"><span class="special-span">3</span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Marvin </a>
+          </div>
+          <div class="label-counter"><span class="special-span">1</span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Tick </a>
+          </div>
+          <div class="label-counter"><span class="special-span"></span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Trick </a>
+          </div>
+          <div class="label-counter"><span class="special-span"></span></div>
+        </li>
+      </ul>
+    </fieldset>
+    <hr />
 
-    <hr>
-
-    <h1>New Request</h1>
+    <h3>New Request</h3>
 
     <ol>
-        <li><a href="">Friend request from <b>Track</b></a></li>
+      <li>
+        <a href="">Friend request from <b>Track</b></a>
+      </li>
     </ol>
 
-    <hr>
+    <hr />
 
-    <input type="text" placeholder="Add Friend to List">
-    <button>Add</button>
-</body>
+    <form action="#" method="post">
+      <input class="long-input" type="text" placeholder="Add Friend to List" required />
+      <button class="long-button" type="submit">Add</button>
+    </form>
+  </body>
 </html>
