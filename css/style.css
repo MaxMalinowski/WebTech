@@ -63,8 +63,8 @@ Special class definitions
 --> General & special Settings
 ################################################# */
 .special-span {
-  color: white !important;    
-  background-color: dodgerblue; 
+  color: white !important;
+  background-color: dodgerblue;
 }
 
 .special-fieldset {
@@ -91,13 +91,12 @@ Special class definitions
   text-align: center;
 }
 
-
 /* #################################################
 Special class definitions
 --> Labels
 ################################################# */
 .label-link {
-  color: black !important;     
+  color: black !important;
   text-align: left;
   width: 89%;
   display: inline-block;
@@ -120,7 +119,6 @@ Special class definitions
 .top-links {
   margin-bottom: 10px;
 }
-
 
 /* #################################################
 Special class definitions
@@ -151,7 +149,6 @@ Special class definitions
   height: 25px;
 }
 
-
 /* #################################################
 Special class definitions
 --> Forms
@@ -174,7 +171,6 @@ Special class definitions
   width: 49%;
 }
 
-
 /* #################################################
 Special class definitions
 --> Profile
@@ -187,7 +183,7 @@ Special class definitions
   background-color: white;
   border-style: solid !important;
   padding: 0.8%;
-  }
+}
 
 .profile-col-left {
   vertical-align: top;
@@ -201,7 +197,6 @@ Special class definitions
   max-height: 100%;
   object-fit: contain;
 }
-
 
 /* #################################################
 Special class definitions
