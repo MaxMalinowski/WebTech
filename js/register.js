@@ -55,6 +55,17 @@ function checkConfirmedPassword() {
 }
 
 /*
+Function to check, whether the supplied values for username and password are ok
+*/
+function checkForm() {
+    var usernameBorder = window.getComputedStyle(document.getElementById("username")).borderColor;
+    var passwordBorder = window.getComputedStyle(document.getElementById("password")).borderColor;
+    var confirmBorder = window.getComputedStyle(document.getElementById("confirm")).borderColor;
+
+    return ((new Set([usernameBorder, passwordBorder, confirmBorder])).size === 1) ? true :false;
+}
+
+/*
 Function to set the border color of a specific element to a specific color
 */
 function _setBorderColor(element, color) {
