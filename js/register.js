@@ -69,5 +69,5 @@ function checkForm() {
 Function to set the border color of a specific element to a specific color
 */
 function _setBorderColor(element, color) {
-    element.style.borderColor = color;
+    element.style.border = "2px solid " + color;
 }
