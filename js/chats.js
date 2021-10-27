@@ -33,10 +33,25 @@ function recieveMessages() {
 function appendMessages() {
     var fieldsetElement = document.getElementById("chat");
     fieldsetElement.textContent = '';
-    
+
     messagesOnServer.forEach(msg => {
       let newElement = document.createElement("p");
-      newElement.innerText = msg["msg"];
+      let newMsgName = document.createElement("span");
+      let newMsgText = document.createElement("span");
+      let newMsgDate = document.createElement("span");
+
+      newElement.classList.add("chat-message")
+      newMsgName.classList.add("chat-message-name")
+      newMsgText.classList.add("chat-message-text")
+      newMsgDate.classList.add("chat-message-date")
+
+      newMsgName.innerText = msg["from"] 
+      newMsgText.innerText = msg["msg"] 
+      newMsgDate.innerText = (new Date(msg["time"])).toLocaleString("en-DE")
+
+      newElement.appendChild(newMsgName)
+      newElement.appendChild(newMsgText)
+      newElement.appendChild(newMsgDate)
       fieldsetElement.appendChild(newElement);
     });
 }
