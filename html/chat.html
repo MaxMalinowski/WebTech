@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/chats.js"></script>
+    <script>
+      window.chatCollectionId = "08505ef5-058b-40a6-9530-483823b5901a";
+      window.chatServer = "https://online-lectures-cs.thi.de/chat";
+    </script>
     <title>Chat</title>
   </head>
 
@@ -19,7 +23,7 @@
 
     <hr />
 
-    <fieldset class="special-fieldset">
+    <fieldset class="special-fieldset" >
       <p>Tom: Hallo, Welt!</p>
       <p>Jerry: Wie gehts?</p>
     </fieldset>
@@ -27,8 +31,8 @@
     <hr />
 
     <form action="#" method="post">
-      <input class="long-input" type="text" placeholder="New Message" required/>
-      <button class="long-button" type="submit">Send</button>
+      <input class="long-input" id="message" type="message" name="message" placeholder="New Message" required/>
+      <button class="long-button" type="submit" onclick="sendMessage()">Send</button>
     </form>
   </body>
   
