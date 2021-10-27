@@ -12,24 +12,37 @@ function update() {
  * Nachrichten versenden
  */
 function sendMessage() {
-  let message = document.getElementById("message").value;
-  var url =
-    window.chatServer +
-    "/" +
-    window.chatCollectionId +
-    "/chat/" +
-    message.value;
-  var xmlhttp = new XMLHttpRequest();
+  let messageText = document.getElementById("message").value;
+  let xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
+      console.log("done...");
+    }
+  };
+  var url = window.chatServer + "/chat/" + window.chatCollectionId + "/message";
   xmlhttp.open("POST", url, true);
-  xmlhttp.send();
+
+  let data = {
+    message: messageText,
+    to: "Jerry",
+  };
+  let jsonString = JSON.stringify(data);
+  xmlhttp.send(jsonString);
 }
 
 /**
  * Nachrichten empfangen
  */
 function receiveMessage() {
-  var url = window.chatServer + "/" + window.chatCollectionId + "/chat";
   var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      let data = JSON.parse(xmlhttp.responseText);
+      console.log(data);
+    }
+  };
+  var url =
+    window.chatServer + "/chat/" + window.chatCollectionId + "/message/Jerry";
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
 }
