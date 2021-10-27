@@ -1,73 +1,79 @@
-/*
-Function to check, wheter the supplied username for registration satisfies the following criteria:
-- username has at least 3 characters
-- username does not already exists on the server
-*/
-function checkUsername() {
-    var usernameElement = document.getElementById("username");
-    usernameElement.value.length < 3 
-    ? _setBorderColor(usernameElement, "red") 
-    : _userExists(usernameElement);
+// Variables to store the state of the form
+var usernameStatus = false
+var passwordStatus = false
+var confirmStatus = false
+var timer = null
+
+// Function to set the border color of a specific element to a specific color
+function setStatus(flag, element, color) {
+    if (color == "green") {
+        flag = true
+    } else {
+        flag = false
+    }
+
+    element.style.border = "2px solid " + color;
 }
 
-/*
-Function to execute a server request to check whether a username already exists or not
-- Response 404: username does not exists -> good
-- Response 204: username does exists -> bad
-*/
-function _userExists(usernameElement) {
+// Function to check to verify the username after 1 sec of no input 
+function checkUsername() {
+    let usernameElement = document.getElementById("username");
+    setStatus(usernameStatus, usernameElement, "grey")
+    clearTimeout(timer); 
+    timer = setTimeout(() => {isUsernameValid(usernameElement)}, 1000)
+}
+
+// Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
+function isUsernameValid(usernameElement) {
+    if (usernameElement.value.length < 3) {
+        setStatus(usernameStatus, usernameElement, "red")
+    } else {
+        doesUserExist(usernameElement)
+    }
+}
+
+// Function to execute a server request to check whether a username already exists or not
+function doesUserExist(usernameElement) {
+    var url = window.chatServer + "/" + window.chatCollectionId + "/user/" + usernameElement.value;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
-            _setBorderColor(usernameElement, "red");
+            setStatus(usernameStatus, usernameElement, "red")
         } else if (xmlhttp.status == 404) {
-            _setBorderColor(usernameElement, "green");
+            setStatus(usernameStatus, usernameElement, "green")
         }
     };
 
-    var url = window.chatServer + "/" + window.chatCollectionId + "/user/" + usernameElement.value;
-    console.log(url);
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
 
-/*
-Function to check, wheter the supplied password for registration satisfies the following criteria:
-- password least 8 characters
-*/
+//Function to check, wheter the supplied password us least 8 characters
 function checkPassword() {
     var passwordElement = document.getElementById("password");
-    passwordElement.value.length < 8
-        ? _setBorderColor(passwordElement, "red")
-        : _setBorderColor(passwordElement, "green");
+
+    if (passwordElement.value.length < 8) {
+        setStatus(passwordStatus, passwordElement, "red")
+    } else {
+        setStatus(passwordStatus, passwordElement, "green");
+    }
 }
 
-/*
-Function to check, wheter the supplied confirmation password for registration satisfies the following criteria:
-- confirmation password matches the password
-*/
+
+// Function to check, wheter the supplied confirmation password matches the password
 function checkConfirmedPassword() {
     var passwordElement = document.getElementById("password");
     var confirmationElement = document.getElementById("confirm");
-    passwordElement.value === confirmationElement.value 
-    ? _setBorderColor(confirmationElement, "green")
-    : _setBorderColor(confirmationElement, "red");
+
+    if (passwordElement.value === confirmationElement.value) {
+        setStatus(confirmStatus, confirmationElement, "green")  
+    } else {
+        setStatus(confirmStatus, confirmationElement, "red");  
+    }
 }
 
-/*
-Function to check, whether the supplied values for username and password are ok
-*/
+
+// Function to check, whether the supplied values for username and password are ok
 function checkForm() {
-    var usernameBorder = window.getComputedStyle(document.getElementById("username")).borderColor;
-    var passwordBorder = window.getComputedStyle(document.getElementById("password")).borderColor;
-    var confirmBorder = window.getComputedStyle(document.getElementById("confirm")).borderColor;
-
-    return ((new Set([usernameBorder, passwordBorder, confirmBorder])).size === 1) ? true :false;
-}
-
-/*
-Function to set the border color of a specific element to a specific color
-*/
-function _setBorderColor(element, color) {
-    element.style.border = "2px solid " + color;
+    return ((new Set([usernameStatus, passwordStatus, confirmStatus])).size === 1) ? true :false;
 }
