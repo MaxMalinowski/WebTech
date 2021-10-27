@@ -7,7 +7,7 @@
     <script src="../js/chats.js"></script>
     <script>
       window.chatCollectionId = "08505ef5-058b-40a6-9530-483823b5901a";
-      window.chatServer = "https://online-lectures-cs.thi.de/chat";
+      window.chatServer = "https://online-lectures-cs.thi.de/chat/";
     </script>
     <title>Chat</title>
   </head>
@@ -23,16 +23,14 @@
 
     <hr />
 
-    <fieldset class="special-fieldset" >
-      <p>Tom: Hallo, Welt!</p>
-      <p>Jerry: Wie gehts?</p>
+    <fieldset id="chat" class="special-fieldset" >
     </fieldset>
 
     <hr />
 
-    <form action="#" method="post">
-      <input class="long-input" id="message" type="message" name="message" placeholder="New Message" required/>
-      <button class="long-button" type="submit" onclick="sendMessage()">Send</button>
+    <form onsubmit="return sendMessage()">
+      <input class="long-input" id="message" type="text" name="message" placeholder="New Message" required/>
+      <button class="long-button" type="submit">Send</button>
     </form>
   </body>
   
