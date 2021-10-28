@@ -8,6 +8,16 @@ body {
   background-color: mintcream;
 }
 
+table {
+  table-layout: fixed;
+  max-width: 500px;
+}
+
+td {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
 button {
   color: white;
   background-color: #bfbfbf;
@@ -22,6 +32,7 @@ fieldset {
   background-color: white;
   margin-bottom: 10px;
   padding: 10px;
+  border-radius: 5px;
 }
 
 hr {
@@ -75,7 +86,7 @@ Special class definitions
   border-style: solid !important;
   overflow: scroll;
   max-height: 600px;
-  
+  border-radius: 5px;
 }
 
 .special-img {
@@ -152,7 +163,8 @@ Special class definitions
   height: 25px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   outline: none;
 }
 
@@ -168,22 +180,20 @@ Special class definitions
 
 .chat-message-name {
   display: inline-flex;
-  align-items: center;
   text-align: start;
-  width:1em;
+  width: 5%;
 }
 
 .chat-message-text {
   display: inline-flex;
-  align-items: center;
   text-align: start;
   width: 70%;
+  max-width: 70%;
 }
 
 .chat-message-date {
   color: lightgray;
   display: inline-flex;
-  align-items: center;
   text-align: end;
   width: 20%;
 }

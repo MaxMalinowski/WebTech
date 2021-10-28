@@ -47,10 +47,10 @@ function appendMessages(messagesToAppend) {
  * Build a param-element representing a message in the chat
  */
 function buildMessage(msgFrom, msgText, msgDate) {
-  let newElement = document.createElement("p");
-  let newMsgName = document.createElement("span");
-  let newMsgText = document.createElement("span");
-  let newMsgDate = document.createElement("span");
+  let newElement = document.createElement("table");
+  let newMsgName = document.createElement("td");
+  let newMsgText = document.createElement("td");
+  let newMsgDate = document.createElement("td");
 
   newElement.classList.add("chat-message")
   newMsgName.classList.add("chat-message-name")
