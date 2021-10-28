@@ -1,6 +1,9 @@
 /* #################################################
 Gernerall tag-wide settings 
 ################################################# */
+::selection{
+  background-color: lightgray;
+}
 body {
   max-width: 900px;
   margin: auto;
