@@ -176,6 +176,7 @@ Special class definitions
   display: flex;
   justify-content: space-between;
   max-width: 850px;
+  margin-bottom: 10px;
 }
 
 .chat-message-name {
