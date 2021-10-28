@@ -1,11 +1,14 @@
-var messagesOnServer
+var messagesDisplayed = 0
+var messagesOnServer = []
 
 /**
  * Update every second to check if new messages available
  */
 window.setInterval(function () {
     recieveMessages();
-    appendMessages();
+    if (messagesOnServer.length > messagesDisplayed) {
+      appendMessages(messagesOnServer.slice(messagesDisplayed));
+    }
 }, 1000);
 
 /**
@@ -30,30 +33,39 @@ function recieveMessages() {
 /**
  * Create new message elements in chat if not yet displayed
  */
-function appendMessages() {
+function appendMessages(messagesToAppend) {
     var fieldsetElement = document.getElementById("chat");
-    fieldsetElement.textContent = '';
 
-    messagesOnServer.forEach(msg => {
-      let newElement = document.createElement("p");
-      let newMsgName = document.createElement("span");
-      let newMsgText = document.createElement("span");
-      let newMsgDate = document.createElement("span");
-
-      newElement.classList.add("chat-message")
-      newMsgName.classList.add("chat-message-name")
-      newMsgText.classList.add("chat-message-text")
-      newMsgDate.classList.add("chat-message-date")
-
-      newMsgName.innerText = msg["from"] 
-      newMsgText.innerText = msg["msg"] 
-      newMsgDate.innerText = (new Date(msg["time"])).toLocaleString("en-DE")
-
-      newElement.appendChild(newMsgName)
-      newElement.appendChild(newMsgText)
-      newElement.appendChild(newMsgDate)
+    messagesToAppend.forEach(msg => {
+      newElement = buildMessage(msg["from"], msg["msg"], msg["time"])
       fieldsetElement.appendChild(newElement);
+      messagesDisplayed++
     });
+}
+
+/**
+ * Build a param-element representing a message in the chat
+ */
+function buildMessage(msgFrom, msgText, msgDate) {
+  let newElement = document.createElement("p");
+  let newMsgName = document.createElement("span");
+  let newMsgText = document.createElement("span");
+  let newMsgDate = document.createElement("span");
+
+  newElement.classList.add("chat-message")
+  newMsgName.classList.add("chat-message-name")
+  newMsgText.classList.add("chat-message-text")
+  newMsgDate.classList.add("chat-message-date")
+
+  newMsgName.innerText = msgFrom
+  newMsgText.innerText = msgText
+  newMsgDate.innerText = (new Date(msgDate)).toLocaleString("en-DE")
+
+  newElement.appendChild(newMsgName)
+  newElement.appendChild(newMsgText)
+  newElement.appendChild(newMsgDate)
+
+  return newElement
 }
 
 /**
@@ -78,4 +90,7 @@ function sendMessage() {
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjM1MDAyNDI5fQ.sXgsn2HsU0vZspogYuMhWLiWBNIZV5OGPBF-cdsNogQ"
     );
     xmlhttp.send(messageJson);
+    
+    document.getElementById('message').value = ''
+    return false
 }
