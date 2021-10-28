@@ -166,21 +166,22 @@ Special class definitions
   display: inline-flex;
   align-items: center;
   text-align: start;
-  width: 10%;
+  width:1em;
 }
 
 .chat-message-text {
   display: inline-flex;
   align-items: center;
   text-align: start;
-  width: 75%;
+  width: 70%;
 }
 
 .chat-message-date {
+  color: lightgray;
   display: inline-flex;
   align-items: center;
   text-align: end;
-  width: 10%;
+  width: 20%;
 }
 
 /* #################################################

@@ -57,7 +57,7 @@ function buildMessage(msgFrom, msgText, msgDate) {
   newMsgText.classList.add("chat-message-text")
   newMsgDate.classList.add("chat-message-date")
 
-  newMsgName.innerText = msgFrom
+  newMsgName.innerText = msgFrom + ":"
   newMsgText.innerText = msgText
   newMsgDate.innerText = (new Date(msgDate)).toLocaleString("en-DE")
 
