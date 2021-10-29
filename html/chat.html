@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/chats.js"></script>
-    <script>
-      window.chatCollectionId = "08505ef5-058b-40a6-9530-483823b5901a";
-      window.chatServer = "https://online-lectures-cs.thi.de/chat/";
-    </script>
-    <title>Chat</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <script src="../js/chats.js"></script>
+        <script>
+            window.chatCollectionId = "08505ef5-058b-40a6-9530-483823b5901a";
+            window.chatServer = "https://online-lectures-cs.thi.de/chat/";
+        </script>
+        <title>Chat</title>
+    </head>
 
-  <body>
-    <h1>Chat with Tom</h1>
+    <body>
+        <h1>Chat with Tom</h1>
 
-    <div class="top-links">
-      <a href="./friends.html"> &lt Back</a> |
-      <a href="./profile.html">Profile</a> |
-      <a href="./friends.html" class="special-link">Remove Friend</a>
-    </div>
+        <div class="top-links">
+            <a href="./friends.html"> &lt Back</a> | <a href="./profile.html">Profile</a> |
+            <a href="./friends.html" class="special-link">Remove Friend</a>
+        </div>
 
-    <hr />
+        <hr />
 
-    <fieldset id="chat" class="special-fieldset"></fieldset>
+        <fieldset id="chat" class="special-fieldset">
+            <div id="dot-container" class="dot-container">
+                <div class="dot-flashing"></div>
+            </div>
+        </fieldset>
 
-    <hr />
+        <hr />
 
-    <form onsubmit="return sendMessage()">
-      <input
-        class="long-input"
-        id="message"
-        type="text"
-        name="message"
-        placeholder="New Message"
-        required
-      />
-      <button class="long-button" type="submit">Send</button>
-    </form>
-  </body>
+        <form onsubmit="return sendMessage()">
+            <input
+                class="long-input"
+                id="message"
+                type="text"
+                name="message"
+                placeholder="New Message"
+                autofocus
+                required
+            />
+            <button class="long-button" type="submit">Send</button>
+        </form>
+    </body>
 </html>

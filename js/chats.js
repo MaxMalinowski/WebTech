@@ -34,6 +34,7 @@ function recieveMessages() {
  * Create new message elements in chat if not yet displayed
  */
 function appendMessages(messagesToAppend) {
+  
     var fieldsetElement = document.getElementById("chat");
 
     messagesToAppend.forEach(msg => {
@@ -41,6 +42,8 @@ function appendMessages(messagesToAppend) {
       fieldsetElement.appendChild(newElement);
       messagesDisplayed++
     });
+    removeLoadingIndicator()
+    scrollUpdate()
 }
 
 /**
@@ -92,5 +95,44 @@ function sendMessage() {
     xmlhttp.send(messageJson);
     
     document.getElementById('message').value = ''
+    insertLoadingIndicator()
+    scrollUpdate()
     return false
+}
+
+/**
+ * Insert a loading indicator
+ */
+function insertLoadingIndicator() {
+    var fieldsetElement = document.getElementById("chat");
+
+    let newDotContainer = document.createElement("div")
+    let newFlashingDots = document.createElement("div")
+
+    newDotContainer.id = "dot-container"
+    newDotContainer.classList.add("dot-container")
+    newFlashingDots.classList.add("dot-flashing")
+
+    newDotContainer.appendChild(newFlashingDots)
+    fieldsetElement.appendChild(newDotContainer)
+}
+
+/**
+ * Remove a loading indicator
+ */
+function removeLoadingIndicator() {
+  console.log("removing dots ...")
+  let exists = document.getElementById("dot-container")
+  if (exists != undefined) {
+    document.getElementById("dot-container").remove()
+  }
+}
+
+/**
+ * Scroll down to the latest message
+ */
+function scrollUpdate() {
+  console.log("updating scroll ...")
+  var chatElement = document.getElementById("chat");
+  chatElement.scrollTop = chatElement.scrollHeight;
 }
