@@ -88,7 +88,7 @@ Special class definitions
     padding: 10px;
     border-style: solid !important;
     overflow-y: scroll;
-    max-height: 600px;
+    max-height: 60vh;
     border-radius: 5px;
 }
 
