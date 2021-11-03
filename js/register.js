@@ -1,7 +1,8 @@
 // Variables to store the state of the form
-var usernameStatus = {Value: false, Msg: ""};
-var passwordStatus = {Value: false, Msg: ""};
-var confirmStatus = {Value: false, Msg: ""};
+var usernameLengthStatus = {Value: false};
+var usernameExistencyStatus = {Value: false};
+var passwordLengthStatus = {Value: false};
+var passwordConfirmationStatus = {Value: false};
 var timer = null;
 
 // Function to set the border color of a specific element to a specific color
@@ -18,7 +19,7 @@ function setStatus(flag, element, color) {
 // Function to check to verify the username after 1 sec of no input
 function checkUsername() {
   usernameElement = document.getElementById("username");
-  setStatus(usernameStatus, usernameElement, "grey");
+  setStatus(usernameLengthStatus, usernameElement, "grey");
   clearTimeout(timer);
   timer = setTimeout(() => {
     isUsernameValid(usernameElement);
@@ -28,10 +29,10 @@ function checkUsername() {
 // Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
 function isUsernameValid(usernameElement) {
   if (usernameElement.value.length < 3) {
-    setStatus(usernameStatus, usernameElement, "red");
-    return false;
+    setStatus(usernameLengthStatus, usernameElement, "red");
   } else {
-    return !doesUserExist(usernameElement);
+    setStatus(usernameLengthStatus, usernameElement, "green");
+    doesUserExist(usernameElement);
   }
 }
 
@@ -41,11 +42,9 @@ function doesUserExist(usernameElement) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
-      setStatus(usernameStatus, usernameElement, "red");
-      return true;
+      setStatus(usernameExistencyStatus, usernameElement, "red");
     } else if (xmlhttp.status == 404) {
-      setStatus(usernameStatus, usernameElement, "green");
-      return false;
+      setStatus(usernameExistencyStatus, usernameElement, "green");
     }
   };
 
@@ -58,11 +57,9 @@ function checkPassword() {
   var passwordElement = document.getElementById("password");
 
   if (passwordElement.value.length < 8) {
-    setStatus(passwordStatus, passwordElement, "red");
-    return false;
+    setStatus(passwordLengthStatus, passwordElement, "red");
   } else {
-    setStatus(passwordStatus, passwordElement, "green");
-    return true;
+    setStatus(passwordLengthStatus, passwordElement, "green");
   }
 }
 
@@ -72,17 +69,22 @@ function checkConfirmedPassword() {
   var confirmationElement = document.getElementById("confirm");
 
   if (passwordElement.value === confirmationElement.value) {
-    setStatus(confirmStatus, confirmationElement, "green");
-    return true;
+    setStatus(passwordConfirmationStatus, confirmationElement, "green");
   } else {
-    setStatus(confirmStatus, confirmationElement, "red");
-    return false;
+    setStatus(passwordConfirmationStatus, confirmationElement, "red");
   }
 }
 
 // Function to check, whether the supplied values for username and password are ok
 function checkForm() {
-  let valid = new Set([usernameStatus.Value, passwordStatus.Value, confirmStatus.Value])
+  let valid = new Set([usernameLengthStatus.Value, usernameExistencyStatus.Value, passwordLengthStatus.Value, passwordConfirmationStatus.Value])
+
+  console.log("----------------------------------")
+  console.log(usernameLengthStatus.Value)
+  console.log(usernameExistencyStatus.Value)
+  console.log(passwordLengthStatus.Value)
+  console.log(passwordConfirmationStatus.Value)
+
 
   if (valid.size === 1 && valid.has(true)) {
     return true
@@ -97,19 +99,19 @@ function writeAlert() {
   let message = "";
 
   // TODO: inplement does user Exist alert
-  // if (doesUserExist(usernameElement)) {
-  //   message = message + "\nUsername already exists";
-  // }
+  if (!usernameExistencyStatus.Value) {
+    message = message + "\nUsername already exists";
+  }
 
-  if (!isUsernameValid(usernameElement)) {
+  if (!usernameLengthStatus.Value) {
     message = message + "\nUsername must consist of at least 3 characters";
   }
 
-  if (!checkPassword()) {
+  if (!passwordLengthStatus.Value) {
     message = message + "\nPassword must consist of at least 8 characters";
   }
 
-  if (!checkConfirmedPassword()) {
+  if (!passwordConfirmationStatus.Value) {
     message = message + "\nPasswords do not match";
   }
 
