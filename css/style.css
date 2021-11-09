@@ -164,6 +164,7 @@ Special class definitions
     width: 75%;
     margin-right: 3%;
     height: 25px;
+    text-indent: 2%;
 }
 
 input[type="text"]:focus,
@@ -249,6 +250,24 @@ Special class definitions
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+}
+
+/* #################################################
+Special class definitions
+--> List
+################################################# */
+
+.suggestion-list {
+    margin-top: 5px;
+    list-style: none;
+}
+
+.suggestion-item:hover {
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+
 }
 
 /* #################################################
