@@ -5,7 +5,9 @@ var passwordLengthStatus = {Value: false};
 var passwordConfirmationStatus = {Value: false};
 var timer = null;
 
-// Function to set the border color of a specific element to a specific color
+/**
+ * Function to set the border color of a specific element to a specific color
+ */
 function setStatus(flag, element, color) {
   element.style.border = "2px solid " + color;
   
@@ -16,7 +18,9 @@ function setStatus(flag, element, color) {
   }
 }
 
-// Function to check to verify the username after 1 sec of no input
+/**
+ * Function to check to verify the username after 1 sec of no input
+ */
 function checkUsername() {
   usernameElement = document.getElementById("username");
   setStatus(usernameLengthStatus, usernameElement, "grey");
@@ -26,7 +30,9 @@ function checkUsername() {
   }, 1000);
 }
 
-// Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
+/**
+ * Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
+ */
 function isUsernameValid(usernameElement) {
   if (usernameElement.value.length < 3) {
     setStatus(usernameLengthStatus, usernameElement, "red");
@@ -36,7 +42,9 @@ function isUsernameValid(usernameElement) {
   }
 }
 
-// Function to execute a server request to check whether a username already exists or not
+/**
+ * Function to execute a server request to check whether a username already exists or not
+ */
 function doesUserExist(usernameElement) {
   var url = window.chatServer + "/" + window.chatCollectionId + "/user/" + usernameElement.value;
   var xmlhttp = new XMLHttpRequest();
@@ -52,7 +60,9 @@ function doesUserExist(usernameElement) {
   xmlhttp.send();
 }
 
-//Function to check, wheter the supplied password us least 8 characters
+/**
+ * Function to check, wheter the supplied password us least 8 characters
+ */
 function checkPassword() {
   var passwordElement = document.getElementById("password");
 
@@ -63,7 +73,9 @@ function checkPassword() {
   }
 }
 
-// Function to check, wheter the supplied confirmation password matches the password
+/**
+ * Function to check, wheter the supplied confirmation password matches the password
+ */
 function checkConfirmedPassword() {
   var passwordElement = document.getElementById("password");
   var confirmationElement = document.getElementById("confirm");
@@ -75,30 +87,25 @@ function checkConfirmedPassword() {
   }
 }
 
-// Function to check, whether the supplied values for username and password are ok
+/**
+ * Function to check, whether the supplied values for username and password are ok
+ */
 function checkForm() {
   let valid = new Set([usernameLengthStatus.Value, usernameExistencyStatus.Value, passwordLengthStatus.Value, passwordConfirmationStatus.Value])
-
-  console.log("----------------------------------")
-  console.log(usernameLengthStatus.Value)
-  console.log(usernameExistencyStatus.Value)
-  console.log(passwordLengthStatus.Value)
-  console.log(passwordConfirmationStatus.Value)
-
 
   if (valid.size === 1 && valid.has(true)) {
     return true
   } else {
-    writeAlert()
-    return false
+    return writeAlert()
   }
 }
 
-//Function for Alerts
+/**
+ * Function for Alerts 
+ */
 function writeAlert() {
   let message = "";
 
-  // TODO: inplement does user Exist alert
   if (!usernameExistencyStatus.Value) {
     message = message + "\nUsername already exists";
   }
@@ -116,6 +123,7 @@ function writeAlert() {
   }
 
   if (message !== "") {
-    alert(message);
+    alert(message)
+    return false
   } 
 }
