@@ -1,10 +1,14 @@
-let inputField = document.getElementById("friend-add-input");
-let autocompleteDiv = document.getElementById("autocomplete-div");
-let data;
-inputField.onkeyup = function() {getPossibleFriends()};
+var inputField = null;
+var autocompleteDiv = null;
+var data = null;
 
-
+/**
+ * Function to get friends from server
+ */
 function getPossibleFriends() {
+    inputField = document.getElementById("friend-add-input");
+    autocompleteDiv = document.getElementById("autocomplete-div");
+
     let url = window.chatServer + "/" + window.chatCollectionId + "/user";
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -29,6 +33,9 @@ function getPossibleFriends() {
     xmlhttp.send();
 }
 
+/**
+ * Function to show suggestions under input field
+ */
 function showSuggestions(suggestions) {
     autocompleteDiv.innerText = "";
     let sugggestionList = document.createElement("ul");
@@ -43,11 +50,17 @@ function showSuggestions(suggestions) {
     })
 }
 
+/**
+ * Function so select suggestion and display it in the input field
+ */
 function selectSuggestion(item) {
     inputField.value = item.innerText;
     autocompleteDiv.style.display = "none";
 }
 
+/**
+ * Function to check whether supplied input value is in suggestions list
+ */
 function checkForm() {
     if (data.includes(inputField.value)) {
         return true;

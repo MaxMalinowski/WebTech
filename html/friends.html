@@ -60,7 +60,7 @@
     <hr />
 
     <form action="#" method="post" onsubmit="return checkForm()">
-      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" required />
+      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
       <button class="long-button" type="submit">Add</button>
     </form>
     <div id="autocomplete-div"></div>
