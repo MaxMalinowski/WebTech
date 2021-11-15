@@ -1,8 +1,12 @@
+/**
+ *  Variables for functions below
+ */
 var messagesDisplayed = 0;
 var messagesOnServer = [];
 
 /**
  * Update every second to check if new messages available
+ * --> Function not called explicitly, but continously every 1 second
  */
 window.setInterval(function () {
     recieveMessages();
@@ -10,6 +14,27 @@ window.setInterval(function () {
         appendMessages(messagesOnServer.slice(messagesDisplayed));
     }
 }, 1000);
+
+/**
+ * Send new message to the server
+ * --> Function used in HTML files
+ */
+function sendMessage() {
+    let url = window.chatServer + window.chatCollectionId + "/message";
+    let messageText = { to: "Tom", message: document.getElementById("message").value };
+    let messageJson = JSON.stringify(messageText);
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", url, false);
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
+    xmlhttp.send(messageJson);
+
+    document.getElementById("message").value = "";
+    insertLoadingIndicator();
+    scrollUpdate();
+    return false;
+}
 
 /**
  * Retrieve messages from the server
@@ -66,26 +91,6 @@ function buildMessage(msgFrom, msgText, msgDate) {
     newElement.appendChild(newMsgDate);
 
     return newElement;
-}
-
-/**
- * Send new message to the server
- */
-function sendMessage() {
-    let url = window.chatServer + window.chatCollectionId + "/message";
-    let messageText = { to: "Tom", message: document.getElementById("message").value };
-    let messageJson = JSON.stringify(messageText);
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", url, false);
-    xmlhttp.setRequestHeader("Content-type", "application/json");
-    xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
-    xmlhttp.send(messageJson);
-
-    document.getElementById("message").value = "";
-    insertLoadingIndicator();
-    scrollUpdate();
-    return false;
 }
 
 /**

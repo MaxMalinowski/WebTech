@@ -1,8 +1,12 @@
+/**
+ * Variables for functions below
+ */
 var inputField = null;
 var data = null;
 
 /**
  * Function to get friends from server
+ * --> used in HTML files
  */
 function getPossibleFriends() {
     inputField = document.getElementById("friend-add-input");
@@ -12,8 +16,8 @@ function getPossibleFriends() {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            data = JSON.parse(xmlhttp.responseText)
-            extractFriends(inputField.value) 
+            data = JSON.parse(xmlhttp.responseText);
+            extractFriends(inputField.value);
         }
     };
 
@@ -23,12 +27,26 @@ function getPossibleFriends() {
 }
 
 /**
+ * Function to check whether supplied input value is in suggestions list
+ * --> used in HTML files
+ */
+function checkForm() {
+    if (data.includes(inputField.value)) {
+        return true;
+    } else {
+        alert("Input must be a valid username!");
+        return false;
+    }
+}
+
+/**
  * Function to extract possible users into a list
  */
 function extractFriends(input) {
+    let suggestions = [];
+
     if (input) {
-        let suggestions = [];
-        data.forEach(name => {
+        data.forEach((name) => {
             if (name.startsWith(input)) {
                 suggestions.push(name);
             }
@@ -46,11 +64,13 @@ function extractFriends(input) {
 function showSuggestions(suggestions) {
     let sugggestionList = document.createElement("ul");
     sugggestionList.classList.add("suggestion-list");
-    
+
     autocompleteDiv.innerText = "";
     autocompleteDiv.appendChild(sugggestionList);
-    
-    suggestions.forEach(item => {sugggestionList.appendChild(createAutocompleteListItem(item))})
+
+    suggestions.forEach((item) => {
+        sugggestionList.appendChild(createAutocompleteListItem(item));
+    });
 }
 
 /**
@@ -61,7 +81,7 @@ function createAutocompleteListItem(suggestion) {
     listItem.classList.add("suggestion-item");
     listItem.innerText = suggestion;
     listItem.setAttribute("onclick", "selectSuggestion(this)");
-    return listItem
+    return listItem;
 }
 
 /**
@@ -73,20 +93,8 @@ function selectSuggestion(item) {
 }
 
 /**
- * Function to check whether supplied input value is in suggestions list
- */
-function checkForm() {
-    if (data.includes(inputField.value)) {
-        return true;
-    } else {
-        alert("Input must be a valid username!")
-        return false;
-    }
-}
-
-/**
- * Function so set the autosuggestion visability 
+ * Function so set the autosuggestion visability
  */
 function setAutocompleteDiv(display) {
-    autocompleteDiv.style.display = display
+    autocompleteDiv.style.display = display;
 }
