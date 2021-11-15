@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Chat</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/animations.css" />
+        <script src="../js/constants.js"></script>
+        <script src="../js/chats.js"></script>
+        <title>Chat</title>
+    </head>
 
-  <body>
-    <h1>Chat with Tom</h1>
+    <body>
+        <h1>Chat with Tom</h1>
 
-    <div class="top-links">
-      <a href="./friends.html"> &lt Back</a> |
-      <a href="./profile.html">Profile</a> |
-      <a href="./friends.html" class="special-link">Remove Friend</a>
-    </div>
+        <div class="top-links">
+            <a href="./friends.html"> &lt Back</a> | <a href="./profile.html">Profile</a> |
+            <a href="./friends.html" class="special-link">Remove Friend</a>
+        </div>
 
-    <hr />
+        <hr />
 
-    <fieldset class="special-fieldset">
-      <p>Tom: Hallo, Welt!</p>
-      <p>Jerry: Wie gehts?</p>
-    </fieldset>
+        <fieldset id="chat" class="special-fieldset">
+            <div id="dot-container" class="dot-container">
+                <div class="dot-flashing"></div>
+            </div>
+        </fieldset>
 
-    <hr />
+        <hr />
 
-    <form action="#" method="post">
-      <input class="long-input" type="text" placeholder="New Message" required/>
-      <button class="long-button" type="submit">Send</button>
-    </form>
-  </body>
+        <form onsubmit="return sendMessage()">
+            <input
+                class="long-input"
+                id="message"
+                type="text"
+                name="message"
+                placeholder="New Message"
+                autofocus
+                required
+            />
+            <button class="long-button" type="submit">Send</button>
+        </form>
+    </body>
 </html>

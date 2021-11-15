@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/friends.js"></script>
+    <script src="../js/constants.js"></script>
     <title>Friends</title>
   </head>
 
@@ -57,9 +59,10 @@
 
     <hr />
 
-    <form action="#" method="post">
-      <input class="long-input" type="text" placeholder="Add Friend to List" required />
+    <form action="#" method="post" onsubmit="return checkForm()">
+      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
       <button class="long-button" type="submit">Add</button>
     </form>
+    <div id="autocomplete-div"></div>
   </body>
 </html>

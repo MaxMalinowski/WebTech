@@ -1,61 +1,75 @@
 /* #################################################
 Gernerall tag-wide settings 
 ################################################# */
+::selection {
+    background-color: lightgray;
+}
 body {
-  max-width: 900px;
-  margin: auto;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: mintcream;
+    max-width: 900px;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: mintcream;
+}
+
+table {
+    table-layout: fixed;
+    max-width: 500px;
+}
+
+td {
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 button {
-  color: white;
-  background-color: #bfbfbf;
-  border: hidden;
-  padding: 8px;
-  padding-left: 15px;
-  padding-right: 15px;
+    color: white;
+    background-color: #bfbfbf;
+    border: hidden;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 fieldset {
-  border: 0.5px dashed #bfbfbf;
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 10px;
+    border: 0.5px dashed #bfbfbf;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 hr {
-  border: 0.5px dashed #bfbfbf;
+    border: 0.5px dashed #bfbfbf;
 }
 
 dt {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 legend {
-  font-size: larger;
+    font-size: larger;
 }
 
 ul {
-  list-style-type: none;
-  padding-inline-start: 10px;
-  line-height: 40px;
+    list-style-type: none;
+    padding-inline-start: 10px;
+    line-height: 40px;
 }
 
 textarea {
-  width: 100%;
-  height: 150px;
+    width: 100%;
+    height: 150px;
 }
 
 a:-webkit-any-link {
-  color: dodgerblue;
-  text-decoration: none;
+    color: dodgerblue;
+    text-decoration: none;
 }
 
 a:hover {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 /* #################################################
@@ -63,32 +77,35 @@ Special class definitions
 --> General & special Settings
 ################################################# */
 .special-span {
-  color: white !important;
-  background-color: dodgerblue;
+    color: white !important;
+    background-color: dodgerblue;
 }
 
 .special-fieldset {
-  border: 1px dashed #bfbfbf;
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-style: solid !important;
+    border: 1px dashed #bfbfbf;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-style: solid !important;
+    overflow-y: scroll;
+    max-height: 60vh;
+    border-radius: 5px;
 }
 
 .special-img {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto 0px auto;
-  border-radius: 100%;
-  display: block;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto 0px auto;
+    border-radius: 100%;
+    display: block;
 }
 
 .special-h {
-  text-align: center;
+    text-align: center;
 }
 
 .logout-col {
-  text-align: center;
+    text-align: center;
 }
 
 /* #################################################
@@ -96,16 +113,16 @@ Special class definitions
 --> Labels
 ################################################# */
 .label-link {
-  color: black !important;
-  text-align: left;
-  width: 89%;
-  display: inline-block;
+    color: black !important;
+    text-align: left;
+    width: 89%;
+    display: inline-block;
 }
 
 .label-counter {
-  text-align: right;
-  width: 9%;
-  display: inline-block;
+    text-align: right;
+    width: 9%;
+    display: inline-block;
 }
 
 /* #################################################
@@ -113,11 +130,11 @@ Special class definitions
 --> Links
 ################################################# */
 .special-link {
-  color: red !important;
+    color: red !important;
 }
 
 .top-links {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 /* #################################################
@@ -125,28 +142,65 @@ Special class definitions
 --> Inputs
 ################################################# */
 .button-div {
-  text-align: center;
+    text-align: center;
 }
 
 .blue-button {
-  background-color: dodgerblue;
+    background-color: dodgerblue;
 }
 
 .long-button {
-  background-color: gray;
-  width: 19%;
-  text-align: center;
-  float: right;
+    background-color: gray;
+    width: 19%;
+    text-align: center;
+    float: right;
 }
 
 .radio-buttons {
-  margin: 5px;
+    margin: 5px;
 }
 
 .long-input {
-  width: 75%;
-  margin-right: 3%;
-  height: 25px;
+    width: 75%;
+    margin-right: 3%;
+    height: 25px;
+    text-indent: 2%;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+}
+
+/* #################################################
+Special class definitions
+--> Chat
+################################################# */
+.chat-message {
+    display: flex;
+    justify-content: space-between;
+    max-width: 850px;
+    margin-bottom: 10px;
+}
+
+.chat-message-name {
+    display: inline-flex;
+    text-align: start;
+    width: 5%;
+}
+
+.chat-message-text {
+    display: inline-flex;
+    text-align: start;
+    width: 70%;
+    max-width: 70%;
+}
+
+.chat-message-date {
+    color: lightgray;
+    display: inline-flex;
+    text-align: end;
+    width: 20%;
 }
 
 /* #################################################
@@ -154,21 +208,21 @@ Special class definitions
 --> Forms
 ################################################# */
 .form-row {
-  width: 100%;
-  margin-bottom: 10px;
-  text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .form-col-left {
-  display: inline-block;
-  text-align: right;
-  width: 49%;
+    display: inline-block;
+    text-align: right;
+    width: 49%;
 }
 
 .form-col-right {
-  display: inline-block;
-  text-align: left;
-  width: 49%;
+    display: inline-block;
+    text-align: left;
+    width: 49%;
 }
 
 /* #################################################
@@ -176,26 +230,44 @@ Special class definitions
 --> Profile
 ################################################# */
 .profile-col-right {
-  vertical-align: top;
-  width: 55%;
-  display: inline-block;
-  border: 1px dashed #bfbfbf;
-  background-color: white;
-  border-style: solid !important;
-  padding: 0.8%;
+    vertical-align: top;
+    width: 55%;
+    display: inline-block;
+    border: 1px dashed #bfbfbf;
+    background-color: white;
+    border-style: solid !important;
+    padding: 0.8%;
 }
 
 .profile-col-left {
-  vertical-align: top;
-  width: 35%;
-  display: inline-block;
-  margin-right: 4%;
+    vertical-align: top;
+    width: 35%;
+    display: inline-block;
+    margin-right: 4%;
 }
 
 .profile-picture {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* #################################################
+Special class definitions
+--> List
+################################################# */
+
+.suggestion-list {
+    margin-top: 5px;
+    list-style: none;
+}
+
+.suggestion-item:hover {
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+
 }
 
 /* #################################################
@@ -203,8 +275,8 @@ Special class definitions
 --> Responsiveness for froms
 ################################################# */
 @media only screen and (max-width: 600px) {
-  [class*="form-col-"] {
-    text-align: center;
-    width: 100%;
-  }
+    [class*="form-col-"] {
+        text-align: center;
+        width: 100%;
+    }
 }
