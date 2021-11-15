@@ -1,5 +1,4 @@
 var inputField = null;
-var autocompleteDiv = null;
 var data = null;
 
 /**
@@ -13,41 +12,56 @@ function getPossibleFriends() {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            data = JSON.parse(xmlhttp.responseText);
-            if (inputField.value) {
-                let suggestions = [];
-                data.forEach(name => {
-                    if (name.startsWith(inputField.value)) {
-                        suggestions.push(name);
-                    }
-                });
-                showSuggestions(suggestions);
-                autocompleteDiv.style.display = "inline-block";
-            } else {
-                autocompleteDiv.style.display = "none";
-            }
+            data = JSON.parse(xmlhttp.responseText)
+            extractFriends(inputField.value) 
         }
     };
+
     xmlhttp.open("GET", url, true);
     xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
     xmlhttp.send();
 }
 
 /**
+ * Function to extract possible users into a list
+ */
+function extractFriends(input) {
+    if (input) {
+        let suggestions = [];
+        data.forEach(name => {
+            if (name.startsWith(input)) {
+                suggestions.push(name);
+            }
+        });
+        showSuggestions(suggestions);
+        setAutocompleteDiv("inline-block");
+    } else {
+        setAutocompleteDiv("none");
+    }
+}
+
+/**
  * Function to show suggestions under input field
  */
 function showSuggestions(suggestions) {
-    autocompleteDiv.innerText = "";
     let sugggestionList = document.createElement("ul");
     sugggestionList.classList.add("suggestion-list");
+    
+    autocompleteDiv.innerText = "";
     autocompleteDiv.appendChild(sugggestionList);
-    suggestions.forEach(item => {
-        let listItem = document.createElement("li");
-        listItem.classList.add("suggestion-item");
-        listItem.innerText = item;
-        listItem.setAttribute("onclick", "selectSuggestion(this)");
-        sugggestionList.appendChild(listItem);
-    })
+    
+    suggestions.forEach(item => {sugggestionList.appendChild(createAutocompleteListItem(item))})
+}
+
+/**
+ * Function to create suggestion list elements
+ */
+function createAutocompleteListItem(suggestion) {
+    let listItem = document.createElement("li");
+    listItem.classList.add("suggestion-item");
+    listItem.innerText = suggestion;
+    listItem.setAttribute("onclick", "selectSuggestion(this)");
+    return listItem
 }
 
 /**
@@ -55,7 +69,7 @@ function showSuggestions(suggestions) {
  */
 function selectSuggestion(item) {
     inputField.value = item.innerText;
-    autocompleteDiv.style.display = "none";
+    setAutocompleteDiv("none");
 }
 
 /**
@@ -70,3 +84,9 @@ function checkForm() {
     }
 }
 
+/**
+ * Function so set the autosuggestion visability 
+ */
+function setAutocompleteDiv(display) {
+    autocompleteDiv.style.display = display
+}
