@@ -1,1 +1,68 @@
-<h1>FriendsComponent works!</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./friends.component.css" />
+    <script src="../js/friends.js"></script>
+    <script src="../js/constants.js"></script>
+    <title>Friends</title>
+  </head>
+
+  <body>
+    <h1>Friends</h1>
+
+    <div class="top-links">
+      <a href="./logout.html"> &lt Logout</a> |
+      <a href="./settings.html">Settings</a>
+    </div>
+
+    <hr />
+
+    <fieldset class="special-fieldset">
+      <ul>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Tom </a>
+          </div>
+          <div class="label-counter"><span class="special-span">3</span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Marvin </a>
+          </div>
+          <div class="label-counter"><span class="special-span">1</span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Tick </a>
+          </div>
+          <div class="label-counter"><span class="special-span"></span></div>
+        </li>
+        <li>
+          <div class="label-link">
+            <a class="label-link" href="./chat.html">Trick </a>
+          </div>
+          <div class="label-counter"><span class="special-span"></span></div>
+        </li>
+      </ul>
+    </fieldset>
+    <hr />
+
+    <h3>New Request</h3>
+
+    <ol>
+      <li>
+        <a href="">Friend request from <b>Track</b></a>
+      </li>
+    </ol>
+
+    <hr />
+
+    <form action="#" method="post" onsubmit="return checkForm()">
+      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
+      <button class="long-button" type="submit">Add</button>
+    </form>
+    <div id="autocomplete-div"></div>
+  </body>
+</html>
