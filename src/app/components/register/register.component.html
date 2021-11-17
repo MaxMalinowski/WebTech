@@ -13,41 +13,72 @@
     <img class="special-img" src="../../../assets/images/user.png" alt="" />
 
     <h1 class="special-h">Register yourself</h1>
-    
-    <form action="./friends.html" methode="post" onsubmit="return checkForm()">
+
+    <form class="form-horizontal login-form" role="form" #loginForm="ngForm">
       <fieldset class="form_fieldset">
         <legend>Register</legend>
 
         <div class="form-row">
-          <div class="form-col-left">
-            <label for="username">Username</label>
-          </div>
+          <label class="form-col-left" for="benutzername">Benutzername</label>
           <div class="form-col-right">
-            <input type="text" id="username" name="username" placeholder="Username" required (keyup)="checkUsername()"/>
+            <input
+              type="text"
+              id="benutzername"
+              name="benutzername"
+              placeholder="Benutzername"
+              [(ngModel)]="benutzername"
+              #username="ngModel"
+              required
+            />
+          </div>
+          <div [hidden]= "hiddenUN" class="warning">
+            {{ messageUser }}
           </div>
         </div>
 
         <div class="form-row">
-          <div class="form-col-left">
-            <label for="password">Password</label>
-          </div>
+          <label class="form-col-left" for="passwort">Password</label>
           <div class="form-col-right">
-            <input type="password" id="password" name="password" placeholder="Password" required (keyup)="checkPassword()"/>
+            <input
+              type="password"
+              id="passwort"
+              name="passwort"
+              placeholder="Password"
+              [(ngModel)]="passwort"
+              #password="ngModel"
+              required
+            />
+          </div>
+          <div [hidden]= "hiddenPW" class="warning">
+            {{ messagePassword }}
           </div>
         </div>
 
         <div class="form-row">
-          <div class="form-col-left">
-            <label for="confirm">Confirm Password</label>
-          </div>
+          <label class="form-col-left" for="bestatigtPW"
+            >Confirme Password</label
+          >
           <div class="form-col-right">
-            <input type="password" id="confirm" name="confirm" placeholder="Password" required (keyup)="checkConfirmedPassword()"/>
+            <input
+              type="password"
+              id="bestatigtPW"
+              name="bestatigtPW"
+              placeholder="confirme Password"
+              [(ngModel)]="bestatigtPW"
+              #confirmedPW="ngModel"
+              required
+            />
+          </div>
+          <div [hidden]= "hiddenCPW" class="warning">
+            {{ messageConfirmedPW }}
           </div>
         </div>
       </fieldset>
 
       <div class="button-div">
-        <button type="submit" formaction="./login.html" formnovalidate>Cancel</button>
+        <button type="submit" formaction="./login.html" formnovalidate>
+          Cancel
+        </button>
         <button class="blue-button" type="submit">Create Account</button>
       </div>
     </form>
