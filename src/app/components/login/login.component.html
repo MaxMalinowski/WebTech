@@ -2,8 +2,14 @@
 
 <h1 class="special-h">Please sign in</h1>
 
+<div class="form-row">
+  <div [hidden]="validLogin" class="login-message">
+    {{ message }}
+  </div>
+</div>
+
 <form #loginForm="ngForm">
-  <fieldset class="form_fieldset">
+  <fieldset>
     <legend>Login</legend>
 
     <div class="form-row">
@@ -35,10 +41,6 @@
           [(ngModel)]="password"
           required
         />
-      </div>
-
-      <div [hidden]="validLogin" class="login-message">
-        {{ message }}
       </div>
     </div>
   </fieldset>

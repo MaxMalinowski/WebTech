@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   public login(form: Form): void {
     if (this.username === '' || this.password === '') {
       this.validLogin = false;
-      this.message = 'Please enter username and password!';
+      this.message = 'Please login in with a username and password!';
       return;
     } else {
       this.backendService
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/friends']);
           } else {
             this.validLogin = false;
-            this.message = 'Authentication failed!';
+            this.message = 'Authentication failed! Either the username or the password are incorrect!';
           }
         });
     }
