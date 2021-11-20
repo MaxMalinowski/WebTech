@@ -1,68 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./friends.component.css" />
-    <script src="../js/friends.js"></script>
-    <script src="../js/constants.js"></script>
-    <title>Friends</title>
-  </head>
+<h1>Friends</h1>
 
-  <body>
-    <h1>Friends</h1>
+<div class="top-links">
+  <a [routerLink]="['/logout']"> &larr; Logout</a> |
+  <a [routerLink]="['/settings']">Settings</a>
+</div>
 
-    <div class="top-links">
-      <a href="./logout.html"> &lt Logout</a> |
-      <a href="./settings.html">Settings</a>
-    </div>
+<hr />
 
-    <hr />
+<fieldset class="special-fieldset">
+  <!-- 
+    TODO: !!- 3 -!! show friends of current users 
+     - create layout and elements for friends 
+     - get friends and outstanding messages from server
+     - link to chat if clicked on div
+     - (highlight on hover over div?)
+  -->
+  <!-- <ul>
+    <li>
+      <div class="label-link">
+        <a class="label-link" href="./chat.html">Tom </a>
+      </div>
+      <div class="label-counter"><span class="special-span">3</span></div>
+    </li>
+    <li>
+      <div class="label-link">
+        <a class="label-link" href="./chat.html">Marvin </a>
+      </div>
+      <div class="label-counter"><span class="special-span">1</span></div>
+    </li>
+    <li>
+      <div class="label-link">
+        <a class="label-link" href="./chat.html">Tick </a>
+      </div>
+      <div class="label-counter"><span class="special-span"></span></div>
+    </li>
+    <li>
+      <div class="label-link">
+        <a class="label-link" href="./chat.html">Trick </a>
+      </div>
+      <div class="label-counter"><span class="special-span"></span></div>
+    </li>
+  </ul> -->
+</fieldset>
+<hr />
 
-    <fieldset class="special-fieldset">
-      <ul>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Tom </a>
-          </div>
-          <div class="label-counter"><span class="special-span">3</span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Marvin </a>
-          </div>
-          <div class="label-counter"><span class="special-span">1</span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Tick </a>
-          </div>
-          <div class="label-counter"><span class="special-span"></span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Trick </a>
-          </div>
-          <div class="label-counter"><span class="special-span"></span></div>
-        </li>
-      </ul>
-    </fieldset>
-    <hr />
+<h3>New Request</h3>
 
-    <h3>New Request</h3>
+<!-- 
+  TODO: !!- 2 -!! show current friends requests 
+   - create layout and elements in html/css
+   - get request from server
+   - execute acceptence / dissmisal request to server
+-->
+<!-- <ol>
+  <li>
+    <a href="">Friend request from <b>Track</b></a>
+  </li>
+</ol> -->
 
-    <ol>
-      <li>
-        <a href="">Friend request from <b>Track</b></a>
-      </li>
-    </ol>
+<hr />
 
-    <hr />
-
-    <form action="#" method="post" onsubmit="return checkForm()">
-      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
-      <button class="long-button" type="submit">Add</button>
-    </form>
-    <div id="autocomplete-div"></div>
-  </body>
-</html>
+<!-- 
+  TODO: !!- 1 -!! show suggestion and send friends requests out 
+   - copy code from ex. 3 solution
+   - get data from ts class and server
+   - execute request on submission
+-->
+<form action="#" method="post" onsubmit="return checkForm()">
+  <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
+  <button class="long-button" type="submit">Add</button>
+</form>
+<div id="autocomplete-div"></div>
