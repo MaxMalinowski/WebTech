@@ -1,6 +1,6 @@
 @import url("../../../styles.css");
 
-.message {
+/* .message {
     color: red;
 }
 
@@ -13,8 +13,8 @@
 
 .login-button {
     width: 140px;
-}
+} */
 
-.error-message {
+.login-message {
     color: red;
 }

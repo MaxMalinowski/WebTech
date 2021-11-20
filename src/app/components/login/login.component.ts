@@ -1,42 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
-import { Router }            from '@angular/router';
-import {BackendService } from '../../services/backend.service'
+import { Router } from '@angular/router';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    public benutzername: string = "";
-    public passwort: string = "";
-    public message: string = "";
-    public farbe: string = "";
+  public username: string = '';
+  public password: string = '';
+  public message: string = '';
+  public validLogin: boolean = false;
 
-    public constructor(
-        private router: Router,
-        private backendService: BackendService) { }
+  public constructor(
+    private router: Router,
+    private backendService: BackendService
+  ) {}
 
-    public ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-    public register(): void {
-        this.router.navigate(['/register'])
-    }
+  public register(): void {
+    this.router.navigate(['/register']);
+  }
 
-    public login(form: Form): void {
-        this.backendService.login(this.benutzername, this.passwort) .then((ok: boolean) => {
-            if (ok) {
-                console.log('login successful!'); 
-                this.router.navigate([ '/friends' ]);
-            } else {
-                this.message = 'Authentication failed!';
-            } });
+  public login(form: Form): void {
+    if (this.username === '' || this.password === '') {
+      this.validLogin = false;
+      this.message = 'Please enter username and password!';
+      return;
+    } else {
+      this.backendService
+        .login(this.username, this.password)
+        .then((ok: boolean) => {
+          if (ok) {
+            this.router.navigate(['/friends']);
+          } else {
+            this.validLogin = false;
+            this.message = 'Authentication failed!';
+          }
+        });
     }
-    username(username: any, password: any) {
-        throw new Error('Method not implemented.');
-    }
-    password(username: any, password: any) {
-        throw new Error('Method not implemented.');
-    }
+  }
 }
