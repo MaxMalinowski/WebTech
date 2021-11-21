@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       this.timer = setTimeout(() => {
         if (usernameElement) {
           this.isUsernameValid(usernameElement);
-          this.doesUserExist(usernameElement);
+        
           this.messageUser = this.messageUserExists + this.messageUserNameWrong;
           if (this.messageUser !== '') {
             this.hiddenUN = false;
@@ -141,6 +141,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.messageUserNameWrong = '';
       this.setStatus(this.usernameLengthStatus, usernameElement, 'green');
+      this.doesUserExist(usernameElement);
     }
   }
 
