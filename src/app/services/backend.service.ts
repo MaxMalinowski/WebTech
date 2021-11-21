@@ -51,6 +51,13 @@ export class BackendService {
         .catch(() => Promise.resolve(false));
     }
 
+    public listUsers(): Promise<string[]> {
+        return this.httpClient.get(this.restServerURL + 'user', this.headers)
+        .toPromise()
+        .then((users: any) => Promise.resolve(users))
+        .catch(() => Promise.resolve([]));
+    }
+
     public loadCurrentUser(): Promise<User | null> {
         return this.loadUser(this.context.loggedInUsername);
     }
@@ -62,7 +69,6 @@ export class BackendService {
         .toPromise()
         .then((buffer: any) => {
             const user = buffer as User;
-
             return Promise.resolve(user);
         })
         .catch(() => Promise.resolve(null));

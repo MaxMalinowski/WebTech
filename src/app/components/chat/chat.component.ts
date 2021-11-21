@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { ContextService } from 'src/app/services/context.service';
 
 @Component({
   selector: 'app-chat',
@@ -11,7 +12,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // DIV für Nachrichten (s. Template) als Kind-Element für Aufrufe (s. scrollToBottom()) nutzen
     @ViewChild('messagesDiv') private myScrollContainer: ElementRef;
 
-     public constructor() { 
+    // Access chat username from context
+    // public chatUsername = console.log(this.context.currentChatUsername)
+
+     public constructor(
+        // For usage of the context service
+        // private context: ContextService
+     ) { 
         this.myScrollContainer = new ElementRef(null);
     }
 

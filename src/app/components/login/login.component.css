@@ -1,20 +1,6 @@
 @import url("../../../styles.css");
 
-.message {
+.login-message {
     color: red;
-}
-
-.login-form {
-    border: 1px solid black;
-    width: 500px;
-    text-align: center;
-    padding: 20px 20px;
-}
-
-.login-button {
-    width: 140px;
-}
-
-.error-message {
-    color: red;
+    margin-top: -20px;
 }

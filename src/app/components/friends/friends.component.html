@@ -1,68 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./friends.component.css" />
-    <script src="../js/friends.js"></script>
-    <script src="../js/constants.js"></script>
-    <title>Friends</title>
-  </head>
+<h1>Friends</h1>
 
-  <body>
-    <h1>Friends</h1>
+<div class="top-links">
+  <a [routerLink]="['/logout']"> &larr; Logout</a> |
+  <a [routerLink]="['/settings']">Settings</a>
+</div>
 
-    <div class="top-links">
-      <a href="./logout.html"> &lt Logout</a> |
-      <a href="./settings.html">Settings</a>
+<hr />
+
+<fieldset class="special-fieldset">
+  <!-- 
+    TODO: !!- 3 -!! show friends of current users 
+     - create layout and elements for friends 
+     - get friends and outstanding messages from server
+     - link to chat if clicked on div
+     - (highlight on hover over div?)
+  -->
+  <ul>
+    <li *ngFor="let item of myFriends">
+      <div #friendsName class="label-link" (click)="chat(friendsName)">
+        {{ item.username }}
+      </div>
+      <div class="label-counter">
+        <span class="special-span"> 
+          {{ item.unreadMessages }}
+        </span>
+      </div>
+    </li>
+  </ul>
+</fieldset>
+
+<hr />
+
+<h3>New Request</h3>
+
+<!-- 
+  TODO: !!- 2 -!! show current friends requests 
+   - create layout and elements in html/css
+   - get request from server
+   - execute acceptence / dissmisal request to server
+-->
+<ol>
+  <li *ngFor="let item of myFriendsRequests" class="request">
+    <div class="request-text">
+      Friend request from <b> {{ item }} </b>
     </div>
+    <div class="request-buttons">
+      <div class="request-buttons">
+        <button type="button" (click)="acceptRequest(item)">Accept</button>
+        <button type="button" (click)="rejectRequest(item)">Reject</button>
+      </div>
+    </div>
+  </li>
+</ol>
 
-    <hr />
+<hr />
 
-    <fieldset class="special-fieldset">
-      <ul>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Tom </a>
-          </div>
-          <div class="label-counter"><span class="special-span">3</span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Marvin </a>
-          </div>
-          <div class="label-counter"><span class="special-span">1</span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Tick </a>
-          </div>
-          <div class="label-counter"><span class="special-span"></span></div>
-        </li>
-        <li>
-          <div class="label-link">
-            <a class="label-link" href="./chat.html">Trick </a>
-          </div>
-          <div class="label-counter"><span class="special-span"></span></div>
-        </li>
-      </ul>
-    </fieldset>
-    <hr />
+<!-- 
+  TODO: !!- 1 -!! show suggestion and send friends requests out 
+   - copy code from ex. 3 solution
+   - get data from ts class and server
+   - execute request on submission
+   - (keyup)="showSuggestions()"
+-->
+<form>
+  <input
+    id="friend-add-input"
+    class="long-input"
+    type="text"
+    name="new-friend"
+    placeholder="Add Friend to List"
+    [(ngModel)]="newFriend"
+    required
+  />
+  <button class="long-button" type="submit" (click)="addFriend()">Add</button>
+</form>
 
-    <h3>New Request</h3>
-
-    <ol>
-      <li>
-        <a href="">Friend request from <b>Track</b></a>
-      </li>
-    </ol>
-
-    <hr />
-
-    <form action="#" method="post" onsubmit="return checkForm()">
-      <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
-      <button class="long-button" type="submit">Add</button>
-    </form>
-    <div id="autocomplete-div"></div>
-  </body>
-</html>
+<div id="autocomplete-div"></div>

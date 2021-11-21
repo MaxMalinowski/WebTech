@@ -1,1 +1,33 @@
 @import url("../../../styles.css");
+
+h3 {
+    margin-bottom: 0px;
+}
+
+.label-link {
+    color: black !important;
+    text-align: left;
+    width: 89%;
+    display: inline-block;
+    cursor:pointer;
+}
+
+.label-counter {
+    text-align: right;
+    width: 9%;
+    display: inline-block;
+}
+
+.request {
+    padding: 0px;
+}
+
+.request-text {
+    display: inline-block;
+    width: 40%;
+}
+
+.request-buttons {
+    display: inline-block;
+}
+

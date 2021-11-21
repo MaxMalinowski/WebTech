@@ -16,7 +16,8 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },    
     { path: 'settings', component: SettingsComponent },    
     { path: 'chat', component: ChatComponent },    
-    { path: 'friends', component: FriendsComponent }    
+    { path: 'friends', component: FriendsComponent },
+    { path: '**',   redirectTo: '/login', pathMatch: 'full' }, 
 ];
 
 @NgModule({
