@@ -8,11 +8,13 @@ import { BackendService } from 'src/app/services/backend.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  benutzername: HTMLElement | null = null;
-  passwort: HTMLElement | null = null;
+  benutzername: string = '';
+  passwort: string = '';
   bestatigtPW: string = '';
 
   messageUser: string = '';
+  messageUserNameWrong: string = '';
+  messageUserExists: string = '';
   messagePassword: string = '';
   messageConfirmedPW: string = '';
 
@@ -38,11 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public create(): void {
-    if (
-      !this.messageUser &&
-      !this.messagePassword &&
-      !this.messageConfirmedPW
-    ) {
+    if (!this.hiddenUN && !this.hiddenPW && !this.hiddenCPW) {
       this.router.navigate(['/friends']);
     }
   }
@@ -54,13 +52,20 @@ export class RegisterComponent implements OnInit {
    * --> used in HTML files
    */
   public checkUsername(): void {
-    this.benutzername = document.getElementById('benutzername');
-    if (this.benutzername) {
-      this.setStatus(this.usernameLengthStatus, this.benutzername, 'grey');
+    var usernameElement = document.getElementById('benutzername');
+    if (usernameElement) {
+      this.setStatus(this.usernameLengthStatus, usernameElement, 'grey');
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        if (this.benutzername) {
-          this.isUsernameValid(this.benutzername);
+        if (usernameElement) {
+          this.isUsernameValid(usernameElement);
+          this.doesUserExist(usernameElement);
+          this.messageUser = this.messageUserExists + this.messageUserNameWrong;
+          if (this.messageUser !== '') {
+            this.hiddenUN = false;
+          } else {
+            this.hiddenUN = true;
+          }
         }
       }, 1000);
     }
@@ -72,11 +77,14 @@ export class RegisterComponent implements OnInit {
    */
   public checkPassword(): void {
     var passwordElement = document.getElementById('passwort');
-
-    if (passwordElement?.nodeValue && passwordElement.nodeValue.length < 8) {
+    if (passwordElement && this.passwort.length < 8) {
       this.setStatus(this.passwordLengthStatus, passwordElement, 'red');
+      this.messagePassword = '\nPassword must consist of at least 8 characters';
+      this.hiddenPW = false;
     } else if (passwordElement) {
       this.setStatus(this.passwordLengthStatus, passwordElement, 'green');
+      this.messagePassword = '';
+      this.hiddenPW = true;
     }
   }
 
@@ -85,44 +93,23 @@ export class RegisterComponent implements OnInit {
    * --> used in HTML files
    */
   public checkConfirmedPassword(): void {
-    var passwordElement = document.getElementById('passwort');
-    var confirmationElement = document.getElementById('bestatigtPW');
-
-    if (
-      passwordElement?.nodeValue &&
-      confirmationElement?.nodeValue &&
-      passwordElement.nodeValue === confirmationElement.nodeValue
-    ) {
+    var confiremdPasswordElement = document.getElementById('bestatigtPW');
+    if (confiremdPasswordElement && this.passwort === this.bestatigtPW) {
       this.setStatus(
         this.passwordConfirmationStatus,
-        confirmationElement,
+        confiremdPasswordElement,
         'green'
       );
-    } else if (confirmationElement) {
+      this.messageConfirmedPW = '';
+      this.hiddenCPW = true;
+    } else if (confiremdPasswordElement) {
       this.setStatus(
         this.passwordConfirmationStatus,
-        confirmationElement,
+        confiremdPasswordElement,
         'red'
       );
-    }
-  }
-
-  /**
-   * Function to check, whether the supplied values for username and password are ok
-   * --> used in HTML files
-   */
-  public checkForm(): void {
-    let valid = new Set([
-      this.usernameLengthStatus.Value,
-      this.usernameExistencyStatus.Value,
-      this.passwordLengthStatus.Value,
-      this.passwordConfirmationStatus.Value,
-    ]);
-
-    if (valid.size === 1 && valid.has(true)) {
-      return;
-    } else {
-      this.writeAlert();
+      this.messageConfirmedPW = '\nPasswords do not match';
+      this.hiddenCPW = false;
     }
   }
 
@@ -147,11 +134,13 @@ export class RegisterComponent implements OnInit {
    * Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
    */
   public isUsernameValid(usernameElement: HTMLElement): void {
-    if (usernameElement.nodeValue && usernameElement.nodeValue.length < 3) {
+    if (this.benutzername.length < 3) {
       this.setStatus(this.usernameLengthStatus, usernameElement, 'red');
+      this.messageUserNameWrong =
+        '\nUsername must consist of at least 3 characters';
     } else {
+      this.messageUserNameWrong = '';
       this.setStatus(this.usernameLengthStatus, usernameElement, 'green');
-      this.doesUserExist(usernameElement);
     }
   }
 
@@ -161,47 +150,13 @@ export class RegisterComponent implements OnInit {
   public async doesUserExist(usernameElement: HTMLElement): Promise<void> {
     const userlist: Promise<string[]> = this.backendService.listUsers();
     (await userlist).forEach((element) => {
-      if (this.benutzername?.nodeValue === element) {
+      if (this.benutzername === element) {
         this.setStatus(this.usernameExistencyStatus, usernameElement, 'red');
+        this.messageUserExists = '\nUsername already exists';
       } else {
         this.setStatus(this.usernameExistencyStatus, usernameElement, 'green');
+        this.messageUserExists = '';
       }
     });
-  }
-
-  /**
-   * Function for Alerts
-   */
-  public writeAlert(): void {
-    if (!this.usernameExistencyStatus.Value) {
-      this.messageUser = this.messageUser + '\nUsername already exists';
-    }
-
-    if (!this.usernameLengthStatus.Value) {
-      this.messageUser =
-        this.messageUser + '\nUsername must consist of at least 3 characters';
-    }
-
-    if (!this.passwordLengthStatus.Value) {
-      this.messagePassword =
-        this.messagePassword +
-        '\nPassword must consist of at least 8 characters';
-    }
-
-    if (!this.passwordConfirmationStatus.Value) {
-      this.messageConfirmedPW =
-        this.messageConfirmedPW + '\nPasswords do not match';
-    }
-
-    if (this.messageUser) {
-      this.hiddenUN = false;
-    }
-    if (this.messagePassword) {
-      this.hiddenPW = false;
-    }
-
-    if (this.messageConfirmedPW) {
-      this.hiddenCPW = false;
-    }
   }
 }
