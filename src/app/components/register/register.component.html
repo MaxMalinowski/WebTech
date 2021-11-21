@@ -29,6 +29,7 @@
               [(ngModel)]="benutzername"
               #username="ngModel"
               required
+              (keyup) = "checkUsername()"
             />
           </div>
           <div [hidden]="hiddenUN" class="warning">
@@ -47,6 +48,7 @@
               [(ngModel)]="passwort"
               #password="ngModel"
               required
+              (keyup) = "checkPassword()"
             />
           </div>
           <div [hidden]="hiddenPW" class="warning">
@@ -67,6 +69,7 @@
               [(ngModel)]="bestatigtPW"
               #confirmedPW="ngModel"
               required
+              (keyup) = "checkConfirmedPassword()"
             />
           </div>
           <div [hidden]="hiddenCPW" class="warning">
@@ -76,10 +79,10 @@
       </fieldset>
 
       <div class="button-div">
-        <button type="submit" formaction="./login.html" formnovalidate>
-          Cancel
+        <button type="submit" (click)="cancel()" formnovalidate>Cancel</button>
+        <button class="blue-button" type="submit" (click)="create()">
+          Create Account
         </button>
-        <button class="blue-button" type="submit">Create Account</button>
       </div>
     </form>
   </body>
