@@ -69,7 +69,6 @@ export class BackendService {
         .toPromise()
         .then((buffer: any) => {
             const user = buffer as User;
-
             return Promise.resolve(user);
         })
         .catch(() => Promise.resolve(null));

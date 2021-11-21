@@ -15,33 +15,20 @@
      - link to chat if clicked on div
      - (highlight on hover over div?)
   -->
-  <!-- <ul>
-    <li>
-      <div class="label-link">
-        <a class="label-link" href="./chat.html">Tom </a>
+  <ul>
+    <li *ngFor="let item of myFriends">
+      <div #friendsName class="label-link" (click)="chat(friendsName)">
+        {{ item.username }}
       </div>
-      <div class="label-counter"><span class="special-span">3</span></div>
-    </li>
-    <li>
-      <div class="label-link">
-        <a class="label-link" href="./chat.html">Marvin </a>
+      <div class="label-counter">
+        <span class="special-span"> 
+          {{ item.unreadMessages }}
+        </span>
       </div>
-      <div class="label-counter"><span class="special-span">1</span></div>
     </li>
-    <li>
-      <div class="label-link">
-        <a class="label-link" href="./chat.html">Tick </a>
-      </div>
-      <div class="label-counter"><span class="special-span"></span></div>
-    </li>
-    <li>
-      <div class="label-link">
-        <a class="label-link" href="./chat.html">Trick </a>
-      </div>
-      <div class="label-counter"><span class="special-span"></span></div>
-    </li>
-  </ul> -->
+  </ul>
 </fieldset>
+
 <hr />
 
 <h3>New Request</h3>
@@ -52,11 +39,19 @@
    - get request from server
    - execute acceptence / dissmisal request to server
 -->
-<!-- <ol>
-  <li>
-    <a href="">Friend request from <b>Track</b></a>
+<ol>
+  <li *ngFor="let item of myFriendsRequests" class="request">
+    <div class="request-text">
+      Friend request from <b> {{ item }} </b>
+    </div>
+    <div class="request-buttons">
+      <div class="request-buttons">
+        <button type="button" (click)="acceptRequest(item)">Accept</button>
+        <button type="button" (click)="rejectRequest(item)">Reject</button>
+      </div>
+    </div>
   </li>
-</ol> -->
+</ol>
 
 <hr />
 
@@ -65,9 +60,19 @@
    - copy code from ex. 3 solution
    - get data from ts class and server
    - execute request on submission
+   - (keyup)="showSuggestions()"
 -->
-<form action="#" method="post" onsubmit="return checkForm()">
-  <input id="friend-add-input" class="long-input" type="text" placeholder="Add Friend to List" oninput="getPossibleFriends()" required />
-  <button class="long-button" type="submit">Add</button>
+<form>
+  <input
+    id="friend-add-input"
+    class="long-input"
+    type="text"
+    name="new-friend"
+    placeholder="Add Friend to List"
+    [(ngModel)]="newFriend"
+    required
+  />
+  <button class="long-button" type="submit" (click)="addFriend()">Add</button>
 </form>
+
 <div id="autocomplete-div"></div>

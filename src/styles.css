@@ -52,8 +52,16 @@ legend {
 
 ul {
     list-style-type: none;
-    padding-inline-start: 10px;
-    line-height: 40px;
+    padding: 10px;
+    margin: 0px;
+    line-height: 30px;
+}
+
+ol {
+    padding: 10px;
+    padding-left: 40px;
+    margin: 0px;
+    line-height: 30px;
 }
 
 textarea {
@@ -106,23 +114,6 @@ Special class definitions
 
 .logout-col {
     text-align: center;
-}
-
-/* #################################################
-Special class definitions
---> Labels
-################################################# */
-.label-link {
-    color: black !important;
-    text-align: left;
-    width: 89%;
-    display: inline-block;
-}
-
-.label-counter {
-    text-align: right;
-    width: 9%;
-    display: inline-block;
 }
 
 /* #################################################
