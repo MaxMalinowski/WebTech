@@ -1,8 +1,6 @@
 import { Component, ComponentFactoryResolver, Input, OnInit } from '@angular/core';
-import { Form } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Friend } from 'src/app/models/Friend';
-import { User } from 'src/app/models/User';
 import { BackendService } from 'src/app/services/backend.service';
 import { ContextService } from 'src/app/services/context.service';
 
@@ -28,16 +26,16 @@ export class FriendsComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.getUser()
-        this.getUsers()
+        this.getFriends()
+        this.getUnreadMessages()
+        this.getAllUsers()
     }
 
-    private getUser(): void {
+    private getFriends(): void {
         this.backendService.loadFriends()
         .then((friends: Friend[]) => {
             friends.forEach(friend => {
                 if (friend.status === 'accepted') {
-                    friend.unreadMessages = 0
                     this.myFriends.push(friend)
                 } else if (friend.status === "requested") {
                     this.myFriendsRequests.push(friend.username)
@@ -46,7 +44,20 @@ export class FriendsComponent implements OnInit {
           });
     }
 
-    private getUsers(): void {
+    private getUnreadMessages(): void {
+        this.backendService.unreadMessageCounts()
+        .then((messages: Map<string, number>) => {
+            messages.forEach((count: number, username: string) => {
+                this.myFriends.forEach((friend) => {
+                    if (friend.username === username) {
+                        friend.unreadMessages = count
+                    }
+                })
+            });
+        })
+    }
+
+    private getAllUsers(): void {
         this.backendService.listUsers()
         .then((users: string[]) => {
             this.allUsers = users

@@ -8,22 +8,13 @@
 <hr />
 
 <fieldset class="special-fieldset">
-  <!-- 
-    TODO: !!- 3 -!! show friends of current users 
-     - create layout and elements for friends 
-     - get friends and outstanding messages from server
-     - link to chat if clicked on div
-     - (highlight on hover over div?)
-  -->
   <ul>
-    <li *ngFor="let item of myFriends">
-      <div #friendsName class="label-link" (click)="chat(friendsName)">
+    <li class="friend-list-item" *ngFor="let item of myFriends" (click)="chat(friendsName)">
+      <div class="friend-list-text" #friendsName>
         {{ item.username }}
       </div>
-      <div class="label-counter">
-        <span class="special-span"> 
-          {{ item.unreadMessages }}
-        </span>
+      <div [hidden]="item.unreadMessages == null" class="friend-list-counter">
+        {{ item.unreadMessages }}
       </div>
     </li>
   </ul>
