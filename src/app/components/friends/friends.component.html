@@ -13,7 +13,7 @@
       <div class="friend-list-text" #friendsName>
         {{ item.username }}
       </div>
-      <div [hidden]="item.unreadMessages == null" class="friend-list-counter">
+      <div [hidden]="item.unreadMessages == null || item.unreadMessages == 0" class="friend-list-counter">
         {{ item.unreadMessages }}
       </div>
     </li>
@@ -24,23 +24,16 @@
 
 <h3>New Request</h3>
 
-<!-- 
-  TODO: !!- 2 -!! show current friends requests 
-   - create layout and elements in html/css
-   - get request from server
-   - execute acceptence / dissmisal request to server
--->
 <ol>
-  <li *ngFor="let item of myFriendsRequests" class="request">
-    <div class="request-text">
+  <li class="request-list-item" *ngFor="let item of myFriendsRequests;index as i;">
+    <div class="request-list-text">
       Friend request from <b> {{ item }} </b>
     </div>
-    <div class="request-buttons">
-      <div class="request-buttons">
-        <button type="button" (click)="acceptRequest(item)">Accept</button>
-        <button type="button" (click)="rejectRequest(item)">Reject</button>
-      </div>
+    <div class="request-list-buttons">
+        <button class="request-button-accept" type="button" (click)="acceptRequest(item)">Accept</button>
+        <button class="request-button-dismis" type="button" (click)="rejectRequest(item)">Reject</button>
     </div>
+    <hr [hidden]="i == myFriendsRequests.length - 1" class="request-list-seperator"/>
   </li>
 </ol>
 
