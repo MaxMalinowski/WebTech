@@ -30,16 +30,27 @@ h3 {
     height: 30px;
 }
 
-.request {
+.request-list-item {
     padding: 0px;
 }
 
-.request-text {
+.request-list-text {
     display: inline-block;
-    width: 40%;
 }
 
-.request-buttons {
-    display: inline-block;
+.request-list-buttons {
+    float: right;
+}
+
+.request-button-accept:hover {
+    background-color: lightgreen;
+}
+
+.request-button-dismis:hover {
+    background-color: lightsalmon;
+}
+
+.request-list-seperator {
+    border: 0.25px dotted lightgrey;
 }
 

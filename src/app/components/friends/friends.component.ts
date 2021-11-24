@@ -34,6 +34,7 @@ export class FriendsComponent implements OnInit {
     private getFriends(): void {
         this.backendService.loadFriends()
         .then((friends: Friend[]) => {
+            console.log(friends)
             friends.forEach(friend => {
                 if (friend.status === 'accepted') {
                     this.myFriends.push(friend)
@@ -41,7 +42,8 @@ export class FriendsComponent implements OnInit {
                     this.myFriendsRequests.push(friend.username)
                 }
             })
-          });
+          })
+
     }
 
     private getUnreadMessages(): void {
@@ -67,7 +69,7 @@ export class FriendsComponent implements OnInit {
 
     public addFriend(): void {
         this.backendService.friendRequest(this.newFriend)
-        this.myFriends.push(new Friend(this.newFriend, 'accepted', 0))
+        this.myFriends.push(new Friend(this.newFriend, 'requested', 0))
         this.newFriend = ''
     }
 
@@ -77,6 +79,7 @@ export class FriendsComponent implements OnInit {
     }
 
     public acceptRequest(username: string) {
+        console.log("accept")
         this.backendService.acceptFriendRequest(username)
         
         this.myFriendsRequests.forEach((element,index)=>{
@@ -86,8 +89,14 @@ export class FriendsComponent implements OnInit {
         this.myFriends.push(new Friend(username, 'accepted', 0))
     }
 
+    // TODO: something is wrong when rejecting request ...
     public rejectRequest(username: string) {
+        console.log("reject")
         this.backendService.dismissFriendRequest(username)
+
+        this.myFriendsRequests.forEach((element,index)=>{
+            if(element==username) this.myFriendsRequests.splice(index,1);
+         });
     }
 }
 
