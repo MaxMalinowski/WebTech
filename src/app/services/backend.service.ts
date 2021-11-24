@@ -216,4 +216,15 @@ export class BackendService {
         this.headers = { 'headers': headers };
         console.log(`Set user from local storage: user ${username} - token: ${JSON.stringify(token)}`);
     }
+
+    /**
+     * Remove stored username and token from local storage and variables.
+     * Function has to be public to be called from outside in case of a logout or error.
+     */
+    public unsetUser(): void {
+        this.context.loggedInUsername = ''
+        localStorage.removeItem('username')
+        localStorage.removeItem('token')
+        this.headers = null
+    }
 }
