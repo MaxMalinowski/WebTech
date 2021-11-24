@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
 
+//Decorator
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -44,8 +45,6 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/friends']);
     }
   }
-
-  //*********************************************************************copied*************************** */
 
   /**
    * Function to check to verify the username after 1 sec of no input
