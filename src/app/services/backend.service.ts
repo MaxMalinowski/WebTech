@@ -16,6 +16,12 @@ export class BackendService {
     private headers: any; // header for token
 
     public constructor(private httpClient: HttpClient, private context: ContextService) { 
+        let storedUsername: string | null = localStorage.getItem("username")
+        let storedToken: string | null = localStorage.getItem("token")
+        
+        if (storedToken !== null && storedUsername !== null) {
+            this.setUserFromLocalStorage(storedUsername, storedToken)
+        }
     }
 
     public login(username: string, password: string): Promise<boolean> {
@@ -24,7 +30,7 @@ export class BackendService {
         return this.httpClient.post(this.restServerURL + 'login', body)
         .toPromise()
         .then(token => {
-            this.setUser(username, token);
+            this.setUserFromResponse(username, token);
             return Promise.resolve(true);
         })
         .catch(() => Promise.resolve(false));
@@ -38,7 +44,7 @@ export class BackendService {
         return this.httpClient.post(this.restServerURL + 'register', body)
         .toPromise()
         .then(token => {
-            this.setUser(username, token);
+            this.setUserFromResponse(username, token);
             return Promise.resolve(true);
         })
         .catch(() => Promise.resolve(false));
@@ -185,12 +191,29 @@ export class BackendService {
      * @param username name of logged in user
      * @param token security token for subsequent calls
      */
-    private setUser(username: string, token: any): void {
+    private setUserFromResponse(username: string, token: any): void {
         this.context.loggedInUsername = username;
+        localStorage.setItem("username", username)
+        localStorage.setItem("token", token.token)
         const headers = new HttpHeaders()
             .set('content-type', 'application/json')
             .set('Authorization', 'Bearer ' + token.token);
         this.headers = { 'headers': headers };
-        console.log(`user ${username} - token: ${JSON.stringify(token)}`);
+        console.log(`Set user from response: user ${username} - token: ${JSON.stringify(token)}`);
+    }
+
+    /**
+     * Store username and token (from local storage) for further reference.
+     * The token is embedded in a http header value.
+     * @param username name of logged in user
+     * @param token security token for subsequent calls
+     */
+    private setUserFromLocalStorage(username: string, token: string): void {
+        this.context.loggedInUsername = username;
+        const headers = new HttpHeaders()
+            .set('content-type', 'application/json')
+            .set('Authorization', 'Bearer ' + token);
+        this.headers = { 'headers': headers };
+        console.log(`Set user from local storage: user ${username} - token: ${JSON.stringify(token)}`);
     }
 }
