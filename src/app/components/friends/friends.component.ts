@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 import { Friend } from 'src/app/models/Friend';
 import { BackendService } from 'src/app/services/backend.service';
 import { ContextService } from 'src/app/services/context.service';
@@ -17,6 +18,8 @@ export class FriendsComponent implements OnInit {
 
     public allUsers: string[] = []
     public suggestUsers: string[] = []
+
+    public typeahead: FormControl = new FormControl();
 
     public constructor(
         private router: Router,
@@ -68,6 +71,10 @@ export class FriendsComponent implements OnInit {
     }
 
     public addFriend(): void {
+        if (!this.allUsers.includes(this.newFriend)) {
+            alert("user no known")
+            return
+        }
         this.backendService.friendRequest(this.newFriend)
         this.myFriends.push(new Friend(this.newFriend, 'requested', 0))
         this.newFriend = ''
@@ -90,6 +97,7 @@ export class FriendsComponent implements OnInit {
     }
 
     // TODO: something is wrong when rejecting request ...
+    // API seams to create an accepted friend when request is send - to be clarified
     public rejectRequest(username: string) {
         console.log("reject")
         this.backendService.dismissFriendRequest(username)
@@ -98,43 +106,19 @@ export class FriendsComponent implements OnInit {
             if(element==username) this.myFriendsRequests.splice(index,1);
          });
     }
+
+    public suggest(): void {
+        if (this.typeahead.value === '') {
+            this.suggestUsers = []
+            return
+        }
+        this.suggestUsers = this.allUsers
+        .filter(c => c.startsWith(this.typeahead.value))
+        .slice(0, 5);
+    }
+
+    public select(name: string): void {
+        this.newFriend = name
+        this.suggestUsers = []
+    }
 }
-
-    // public showSuggestions(): void {
-    //     this.suggestUsers = []
-    //     this.allUsers.forEach((user) => {
-    //         if (user.startsWith(this.newFriend)) {
-    //             this.suggestUsers.push(user)
-    //         }
-    //     })
-    //     this.createSuggestions()
-    // }
-
-    // public createSuggestions() {
-    //     let sugggestionList = document.createElement("ul");
-    //     sugggestionList.classList.add("suggestion-list");
-
-    //     let autocompleteDiv = document.getElementById("autocomplete-div")
-    //     if (autocompleteDiv !== null) {
-    //         autocompleteDiv.innerText = "";
-    //         autocompleteDiv.appendChild(sugggestionList);
-    //     } else {
-    //         console.log("should no be here ...")
-    //     }
-
-    //     this.suggestUsers.forEach((item) => {
-    //         sugggestionList.appendChild(this.createAutocompleteListItem(item));
-    // });
-
-    // }
-    // public createAutocompleteListItem(suggestion: string) {
-    //     let listItem = document.createElement("li");
-    //     listItem.classList.add("suggestion-item");
-    //     listItem.innerText = suggestion;
-    //     //listItem.setAttribute("(onclick)", "selectSuggestion(this)");
-    //     return listItem;
-    // }
-
-    // public selectSuggestion(item: any) {
-    //     this.newFriend = item.value
-    // }

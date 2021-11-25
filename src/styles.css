@@ -245,24 +245,6 @@ Special class definitions
 
 /* #################################################
 Special class definitions
---> List
-################################################# */
-
-.suggestion-list {
-    margin-top: 5px;
-    list-style: none;
-}
-
-.suggestion-item:hover {
-    cursor: pointer;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-
-}
-
-/* #################################################
-Special class definitions
 --> Responsiveness for froms
 ################################################# */
 @media only screen and (max-width: 600px) {

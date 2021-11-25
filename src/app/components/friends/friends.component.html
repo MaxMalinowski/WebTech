@@ -39,13 +39,6 @@
 
 <hr />
 
-<!-- 
-  TODO: !!- 1 -!! show suggestion and send friends requests out 
-   - copy code from ex. 3 solution
-   - get data from ts class and server
-   - execute request on submission
-   - (keyup)="showSuggestions()"
--->
 <form>
   <input
     id="friend-add-input"
@@ -53,10 +46,15 @@
     type="text"
     name="new-friend"
     placeholder="Add Friend to List"
+    [formControl]="typeahead"
     [(ngModel)]="newFriend"
+    (input)="suggest()"
     required
   />
   <button class="long-button" type="submit" (click)="addFriend()">Add</button>
+    <ul class="suggestion-list" *ngIf="suggestUsers.length">
+      <li class="suggestion-item" *ngFor="let user of suggestUsers" (click)="select(user)">
+        {{ user }}
+      </li>
+    </ul>
 </form>
-
-<div id="autocomplete-div"></div>
