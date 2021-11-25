@@ -1,9 +1,6 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-
-
 import { BackendService } from 'src/app/services/backend.service';
 import { ContextService } from 'src/app/services/context.service';
 
@@ -19,20 +16,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('messagesDiv') private myScrollContainer: ElementRef;
 
   // Access chat username from context
-  public chatUsername:string = this.context.currentChatUsername;
-  public messageToSend:string =''
+  public chatUsername: string = this.context.currentChatUsername;
+  public messageToSend: string = '';
 
   messagesDisplayed: number = 0;
   messagesOnServer: Array<Message> = [];
 
-
   public constructor(
-    private router: Router,
     private backendService: BackendService,
     private context: ContextService
-  ) // For usage of the context service
- 
-  {
+  ) {
     this.myScrollContainer = new ElementRef(null);
   }
 
@@ -55,10 +48,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.scrollToBottom();
   }
 
-  /***;
-   * Copied
-   */
-  
   /**
    * Update every second to check if new messages available
    * --> Function not called explicitly, but continously every 1 second
@@ -75,43 +64,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
    * --> Function used in HTML files
    */
   public sendMessage(): void {
-    this.backendService.sendMessage(this.chatUsername,this.messageToSend)
+    this.backendService.sendMessage(this.chatUsername, this.messageToSend);
     this.insertLoadingIndicator();
     this.scrollToBottom();
-    //  return false;
   }
 
-  public showMessages():void{
-     messages : Array<Message>= this.backendService.listMessages(this.chatUsername)
-  }
-
-  /**
-   * Retrieve messages from the server
-   */
-  public recieveMessages(): void {
-    //  let url = window.chatServer + window.chatCollectionId + "/message/Tom";
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        const messagesOnServer = JSON.parse(xmlhttp.responseText);
-      }
-    };
-
-    //  xmlhttp.open("GET", url, true);
-    //  xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
-    xmlhttp.send();
-  }
-
-  /**
-   * Create new message elements in chat if not yet displayed
-   */
-  public appendMessages(messagesToAppend: Message[]): void {
+  public async showMessages(): Promise<void> {
     var fieldsetElement = document.getElementById('chat');
-    messagesToAppend.forEach((msg: Message) => {
+    var messages = await this.backendService.listMessages(this.chatUsername);
+    for (const msg of messages) {
       const newElement = this.buildMessage(msg);
       fieldsetElement?.appendChild(newElement);
-      this.messagesDisplayed++;
-    });
+    }
 
     this.removeLoadingIndicator();
     this.scrollToBottom();
@@ -131,9 +95,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     newMsgText.classList.add('chat-message-text');
     newMsgDate.classList.add('chat-message-date');
 
-    //  newMsgName.innerText = msg.from + ":";
-    //  newMsgText.innerText = msg.msg;
-    //  newMsgDate.innerText = new Date(msg.time).toLocaleString("en-DE");
+    newMsgName.innerText = msg.from + ":";
+    newMsgText.innerText = msg.msg;
+    newMsgDate.innerText = new Date(msg.time).toLocaleString("en-DE");
 
     newElement.appendChild(newMsgName);
     newElement.appendChild(newMsgText);
