@@ -4,14 +4,18 @@ h3 {
     margin-bottom: 0px;
 }
 
+/* #################################################
+Special class definitions
+--> Fiends List
+################################################# */
 .friend-list-item {
     display: flex;
     padding: 3px;
-    cursor: pointer;
     border-radius: 5px;
 }
 
 .friend-list-item:hover {
+    cursor: pointer;
     background-color: lightgray;
 }
 
@@ -30,6 +34,10 @@ h3 {
     height: 30px;
 }
 
+/* #################################################
+Special class definitions
+--> Friend Requests
+################################################# */
 .request-list-item {
     padding: 0px;
 }
@@ -54,3 +62,25 @@ h3 {
     border: 0.25px dotted lightgrey;
 }
 
+/* #################################################
+Special class definitions
+--> Add New Friend
+################################################# */
+.suggestion-list {
+    width: 75%;
+    text-indent: 2%;
+    list-style: none;
+    background-color: white;
+    border: 2px;
+    padding: 3px;
+}
+
+.suggestion-item {
+    font-size: smaller;
+    border-bottom: 1px dotted lightgray;
+}
+
+.suggestion-item:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
