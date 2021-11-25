@@ -21,7 +21,7 @@
         <hr />
 
         <fieldset id="chat" class="special-fieldset">
-            <div id="dot-container" class="dot-container">
+            <div id="dot-container" class="dot-container"  [(ngModel)]="dotContainer">
                 <div class="dot-flashing"></div>
             </div>
         </fieldset>
@@ -37,8 +37,9 @@
                 placeholder="New Message"
                 autofocus
                 required
+                [(ngModel)]="messageToSend"
             />
-            <button class="long-button" type="submit">Send</button>
+            <button class="long-button" type="submit" (click)= "sendMessage()" >Send</button>
         </form>
     </body>
 </html>

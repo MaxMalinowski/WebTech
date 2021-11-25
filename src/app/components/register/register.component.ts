@@ -42,7 +42,9 @@ export class RegisterComponent implements OnInit {
 
   public create(): void {
     if (!this.hiddenUN && !this.hiddenPW && !this.hiddenCPW) {
-      this.router.navigate(['/friends']);
+      if (this.backendService.register(this.benutzername, this.passwort)) {
+        this.router.navigate(['/friends']);
+      }
     }
   }
 
@@ -58,7 +60,7 @@ export class RegisterComponent implements OnInit {
       this.timer = setTimeout(() => {
         if (usernameElement) {
           this.isUsernameValid(usernameElement);
-        
+
           this.messageUser = this.messageUserExists + this.messageUserNameWrong;
           if (this.messageUser !== '') {
             this.hiddenUN = false;
@@ -140,23 +142,14 @@ export class RegisterComponent implements OnInit {
     } else {
       this.messageUserNameWrong = '';
       this.setStatus(this.usernameLengthStatus, usernameElement, 'green');
-      this.doesUserExist(usernameElement);
-    }
-  }
-
-  /**
-   * Function to execute a server request to check whether a username already exists or not
-   */
-  public async doesUserExist(usernameElement: HTMLElement): Promise<void> {
-    const userlist: Promise<string[]> = this.backendService.listUsers();
-    (await userlist).forEach((element) => {
-      if (this.benutzername === element) {
+      console.log(this.backendService.userExists(this.benutzername))
+      if (this.backendService.userExists(this.benutzername)) {
         this.setStatus(this.usernameExistencyStatus, usernameElement, 'red');
         this.messageUserExists = '\nUsername already exists';
       } else {
         this.setStatus(this.usernameExistencyStatus, usernameElement, 'green');
         this.messageUserExists = '';
       }
-    });
+    }
   }
 }
