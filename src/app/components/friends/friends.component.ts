@@ -1,124 +1,123 @@
-import { Component, ComponentFactoryResolver, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Friend } from 'src/app/models/Friend';
 import { BackendService } from 'src/app/services/backend.service';
 import { ContextService } from 'src/app/services/context.service';
+import { IntervalService } from 'src/app/services/interval.service';
 
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
-    styleUrls: ['./friends.component.css']
+    styleUrls: ['./friends.component.css'],
 })
 export class FriendsComponent implements OnInit {
-    public newFriend: string = ''
-
-    public myFriends: Friend[] = []
-    public myFriendsRequests: string[] = []
-
-    public allUsers: string[] = []
-    public suggestUsers: string[] = []
-
-    public typeahead: FormControl = new FormControl();
+    public userFriends: Friend[] = [];
+    public userFriendRequests: string[] = [];
+    public newFriendToAdd: string = '';
+    public allAvailableUsers: string[] = [];
+    public allUsersToSuggest: string[] = [];
+    public typeaheadSuggestions: FormControl = new FormControl();
 
     public constructor(
         private router: Router,
         private backendService: BackendService,
-        private context: ContextService
-    ) {
-    }
+        private context: ContextService,
+        private interval: IntervalService
+    ) {}
 
     public ngOnInit(): void {
-        this.getFriends()
-        this.getUnreadMessages()
-        this.getAllUsers()
+        this.getFriends();
+        this.getUnreadMessages();
+        this.getAllUsers();
+    }
+
+    public ngOnDestroy(): void {
+        this.interval.clearIntervals()
     }
 
     private getFriends(): void {
-        this.backendService.loadFriends()
-        .then((friends: Friend[]) => {
-            console.log(friends)
-            friends.forEach(friend => {
-                if (friend.status === 'accepted') {
-                    this.myFriends.push(friend)
-                } else if (friend.status === "requested") {
-                    this.myFriendsRequests.push(friend.username)
-                }
-            })
-          })
-
+        const _this = this;
+        this.interval.setInterval('getFriends', () => {
+            _this.backendService.loadFriends().then((friends: Friend[]) => {
+                _this.userFriends = [];
+                _this.userFriendRequests = [];
+                friends.forEach((friend) => {
+                    if (friend.status === 'accepted') {
+                        _this.userFriends.push(friend);
+                    } else if (friend.status === 'requested') {
+                        _this.userFriendRequests.push(friend.username);
+                    }
+                });
+            });
+        } )
     }
 
     private getUnreadMessages(): void {
-        this.backendService.unreadMessageCounts()
-        .then((messages: Map<string, number>) => {
-            messages.forEach((count: number, username: string) => {
-                this.myFriends.forEach((friend) => {
-                    if (friend.username === username) {
-                        friend.unreadMessages = count
-                    }
-                })
+        const _this = this;
+        this.interval.setInterval('getUnreadMessages', () => {
+            _this.backendService.unreadMessageCounts().then((messages: Map<string, number>) => {
+                messages.forEach((count: number, username: string) => {
+                    _this.userFriends.forEach((friend) => {
+                        if (friend.username === username) {
+                            friend.unreadMessages = count;
+                        }
+                    });
+                });
             });
-        })
+        });
     }
 
     private getAllUsers(): void {
-        this.backendService.listUsers()
-        .then((users: string[]) => {
-            this.allUsers = users
-            console.log(users)
-          });
+        this.backendService.listUsers().then((users: string[]) => {
+            this.allAvailableUsers = users;
+        });
     }
 
-    public addFriend(): void {
-        if (!this.allUsers.includes(this.newFriend)) {
-            alert("user no known")
-            return
-        }
-        this.backendService.friendRequest(this.newFriend)
-        this.myFriends.push(new Friend(this.newFriend, 'requested', 0))
-        this.newFriend = ''
-    }
-
-    public chat(element: any): void {
+    public startChatWithSelectedUsers(element: any): void {
         this.context.currentChatUsername = element.innerHTML;
         this.router.navigate(['/chat']);
     }
 
-    public acceptRequest(username: string) {
-        console.log("accept")
-        this.backendService.acceptFriendRequest(username)
-        
-        this.myFriendsRequests.forEach((element,index)=>{
-            if(element==username) this.myFriendsRequests.splice(index,1);
-         });
-
-        this.myFriends.push(new Friend(username, 'accepted', 0))
+    public acceptFriendRequest(username: string) {
+        this.backendService.acceptFriendRequest(username);
+        this.userFriendRequests.forEach((element, index) => {
+            if (element == username) this.userFriendRequests.splice(index, 1);
+        });
     }
 
-    // TODO: something is wrong when rejecting request ...
-    // API seams to create an accepted friend when request is send - to be clarified
-    public rejectRequest(username: string) {
-        console.log("reject")
-        this.backendService.dismissFriendRequest(username)
-
-        this.myFriendsRequests.forEach((element,index)=>{
-            if(element==username) this.myFriendsRequests.splice(index,1);
-         });
+    // TODO: something is wrong when rejecting request ... - to be clarified
+    public rejectFriendRequest(username: string) {
+        this.backendService.dismissFriendRequest(username);
+        this.userFriendRequests.forEach((element, index) => {
+            if (element == username) this.userFriendRequests.splice(index, 1);
+        });
     }
 
-    public suggest(): void {
-        if (this.typeahead.value === '') {
-            this.suggestUsers = []
-            return
+    public suggestKnownusers(): void {
+        if (this.typeaheadSuggestions.value !== '') {
+            this.allUsersToSuggest = this.allAvailableUsers
+            .filter((c) => c.startsWith(this.typeaheadSuggestions.value))
+            .slice(0, 5);
+        } else {
+            this.allUsersToSuggest = [];
         }
-        this.suggestUsers = this.allUsers
-        .filter(c => c.startsWith(this.typeahead.value))
-        .slice(0, 5);
     }
 
-    public select(name: string): void {
-        this.newFriend = name
-        this.suggestUsers = []
+    public selectUserFromSuggestions(name: string): void {
+        this.newFriendToAdd = name;
+        this.allUsersToSuggest = [];
+    }
+
+    public createNewFriendRequest(): void {
+        if (this.allAvailableUsers.includes(this.newFriendToAdd)) {
+            this.backendService.friendRequest(this.newFriendToAdd);
+            this.userFriends.push(new Friend(this.newFriendToAdd, 'requested', 0));
+            this.newFriendToAdd = '';
+            this.allUsersToSuggest = [];
+        } else {
+            alert('Sorry, but the user you wish to add is not known :(');
+            return;
+        }        
     }
 }

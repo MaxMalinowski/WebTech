@@ -9,12 +9,12 @@
 
 <fieldset class="special-fieldset">
   <ul>
-    <li class="friend-list-item" *ngFor="let item of myFriends" (click)="chat(friendsName)">
+    <li class="friend-list-item" *ngFor="let friend of userFriends" (click)="startChatWithSelectedUsers(friendsName)">
       <div class="friend-list-text" #friendsName>
-        {{ item.username }}
+        {{ friend.username }}
       </div>
-      <div [hidden]="item.unreadMessages == null || item.unreadMessages == 0" class="friend-list-counter">
-        {{ item.unreadMessages }}
+      <div [hidden]="friend.unreadMessages == null || friend.unreadMessages == 0" class="friend-list-counter">
+        {{ friend.unreadMessages }}
       </div>
     </li>
   </ul>
@@ -25,15 +25,19 @@
 <h3>New Request</h3>
 
 <ol>
-  <li class="request-list-item" *ngFor="let item of myFriendsRequests;index as i;">
+  <li class="request-list-item" *ngFor="let requestedFriend of userFriendRequests; index as i">
     <div class="request-list-text">
-      Friend request from <b> {{ item }} </b>
+      Friend request from <b> {{ requestedFriend }} </b>
     </div>
     <div class="request-list-buttons">
-        <button class="request-button-accept" type="button" (click)="acceptRequest(item)">Accept</button>
-        <button class="request-button-dismis" type="button" (click)="rejectRequest(item)">Reject</button>
+      <button class="request-button-accept" type="button" (click)="acceptFriendRequest(requestedFriend)">
+        Accept
+      </button>
+      <button class="request-button-dismis" type="button" (click)="rejectFriendRequest(requestedFriend)">
+        Reject
+      </button>
     </div>
-    <hr [hidden]="i == myFriendsRequests.length - 1" class="request-list-seperator"/>
+    <hr [hidden]="i == userFriendRequests.length - 1" class="request-list-seperator"/>
   </li>
 </ol>
 
@@ -46,15 +50,15 @@
     type="text"
     name="new-friend"
     placeholder="Add Friend to List"
-    [formControl]="typeahead"
-    [(ngModel)]="newFriend"
-    (input)="suggest()"
+    [formControl]="typeaheadSuggestions"
+    [(ngModel)]="newFriendToAdd"
+    (input)="suggestKnownusers()"
     required
   />
-  <button class="long-button" type="submit" (click)="addFriend()">Add</button>
-    <ul class="suggestion-list" *ngIf="suggestUsers.length">
-      <li class="suggestion-item" *ngFor="let user of suggestUsers" (click)="select(user)">
-        {{ user }}
-      </li>
-    </ul>
+  <button class="long-button" type="submit" (click)="createNewFriendRequest()">Add</button>
+  <ul class="suggestion-list" *ngIf="allUsersToSuggest.length">
+    <li class="suggestion-item" *ngFor="let user of allUsersToSuggest" (click)="selectUserFromSuggestions(user)">
+      {{ user }}
+    </li>
+  </ul>
 </form>
