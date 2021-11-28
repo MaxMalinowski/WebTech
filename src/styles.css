@@ -122,6 +122,7 @@ Special class definitions
 ################################################# */
 .special-link {
     color: red !important;
+    cursor: pointer;
 }
 
 .top-links {
@@ -161,37 +162,6 @@ Special class definitions
 input[type="text"]:focus,
 input[type="password"]:focus {
     outline: none;
-}
-
-/* #################################################
-Special class definitions
---> Chat
-################################################# */
-.chat-message {
-    display: flex;
-    justify-content: space-between;
-    max-width: 850px;
-    margin-bottom: 10px;
-}
-
-.chat-message-name {
-    display: inline-flex;
-    text-align: start;
-    width: 5%;
-}
-
-.chat-message-text {
-    display: inline-flex;
-    text-align: start;
-    width: 70%;
-    max-width: 70%;
-}
-
-.chat-message-date {
-    color: lightgray;
-    display: inline-flex;
-    text-align: end;
-    width: 20%;
 }
 
 /* #################################################

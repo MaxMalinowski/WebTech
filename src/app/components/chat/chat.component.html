@@ -1,45 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-        <link rel="stylesheet" href="./chat.component.css" />
-        <script src="../js/constants.js"></script>
-        <script src="../js/chats.js"></script>
-        <title>Chat</title>
-    </head>
+<h1>Chat with {{chatUsername}}</h1>
 
-    <body>
-        <h1>Chat with Tom</h1>
+<div class="top-links">
+  <a [routerLink]="['/friends']"> &larr; Friends</a> |
+  <a [routerLink]="['/profile']"> Profile</a> |
+  <a class="special-link" (click)="removeFriend()"> Remove Friend</a>
+</div>
 
-        <div class="top-links">
-            <a href="./friends.html"> &lt Back</a> | <a href="./profile.html">Profile</a> |
-            <a href="./friends.html" class="special-link">Remove Friend</a>
-        </div>
+<hr />
 
-        <hr />
+<fieldset id="chat" class="special-fieldset" #messagesDiv>
+  <table class="chat-message" *ngIf="allMessages.length == 0">
+    <td class="chat-message-placeholder">You have no messages from {{chatUsername}} yet. Write your first message ...</td>
+  </table>
 
-        <fieldset id="chat" class="special-fieldset">
-            <div id="dot-container" class="dot-container"  [(ngModel)]="dotContainer">
-                <div class="dot-flashing"></div>
-            </div>
-        </fieldset>
+  <table class="chat-message" *ngFor="let message of allMessages">
+    <ng-container *ngIf="showSingleLined; then singleLined; else doubleLined"></ng-container>
+    
+    <ng-template #singleLined>
+      <td class="chat-message-name">{{message.from}}:</td>
+      <td class="chat-message-text">{{message.msg}}</td>
+    </ng-template>
+    
+    <ng-template #doubleLined>
+      <td class="chat-message-double-lined">{{message.from}}:<br>{{message.msg}}</td>
+    </ng-template>
 
-        <hr />
+    <td class="chat-message-date">{{message.time | date:'dd.MM.Y mm:HH:ss':'CET'}}</td>
+  </table>
+  
+  <div id="dot-container" class="dot-container" *ngIf="allMessages.length == 0 || showLoadingIndicator">
+    <div class="dot-flashing"></div>
+  </div>
+</fieldset>
 
-        <form onsubmit="return sendMessage()">
-            <input
-                class="long-input"
-                id="message"
-                type="text"
-                name="message"
-                placeholder="New Message"
-                autofocus
-                required
-                [(ngModel)]="messageToSend"
-            />
-            <button class="long-button" type="submit" (click)= "sendMessage()" >Send</button>
-        </form>
-    </body>
-</html>
+<hr />
+
+<form>
+  <input class="long-input" id="message" type="text" name="message" placeholder="New Message" [(ngModel)]="newMessage" autofocus required/>
+  <button class="long-button" type="submit" (click)="sendMessage()">Send</button>
+</form>
