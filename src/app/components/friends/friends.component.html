@@ -11,10 +11,10 @@
   <ul>
     <li class="friend-list-item" *ngFor="let friend of userFriends" (click)="startChatWithSelectedUsers(friendsName)">
       <div class="friend-list-text" #friendsName>
-        {{ friend.username }}
+        {{friend.username}}
       </div>
       <div [hidden]="friend.unreadMessages == null || friend.unreadMessages == 0" class="friend-list-counter">
-        {{ friend.unreadMessages }}
+        {{friend.unreadMessages}}
       </div>
     </li>
   </ul>
@@ -27,7 +27,7 @@
 <ol>
   <li class="request-list-item" *ngFor="let requestedFriend of userFriendRequests; index as i">
     <div class="request-list-text">
-      Friend request from <b> {{ requestedFriend }} </b>
+      Friend request from <b> {{requestedFriend}} </b>
     </div>
     <div class="request-list-buttons">
       <button class="request-button-accept" type="button" (click)="acceptFriendRequest(requestedFriend)">
@@ -58,7 +58,7 @@
   <button class="long-button" type="submit" (click)="createNewFriendRequest()">Add</button>
   <ul class="suggestion-list" *ngIf="allUsersToSuggest.length">
     <li class="suggestion-item" *ngFor="let user of allUsersToSuggest" (click)="selectUserFromSuggestions(user)">
-      {{ user }}
+      {{user}}
     </li>
   </ul>
 </form>

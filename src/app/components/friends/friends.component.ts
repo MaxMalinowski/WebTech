@@ -75,7 +75,7 @@ export class FriendsComponent implements OnInit {
     }
 
     public startChatWithSelectedUsers(element: any): void {
-        this.context.currentChatUsername = element.innerHTML;
+        this.context.currentChatUsername = element.innerHTML.trim();
         this.router.navigate(['/chat']);
     }
 
@@ -86,7 +86,7 @@ export class FriendsComponent implements OnInit {
         });
     }
 
-    // TODO: something is wrong when rejecting request ... - to be clarified
+    // FIXME: something is wrong when rejecting request ... - to be clarified
     public rejectFriendRequest(username: string) {
         this.backendService.dismissFriendRequest(username);
         this.userFriendRequests.forEach((element, index) => {
