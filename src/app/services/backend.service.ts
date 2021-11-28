@@ -193,6 +193,7 @@ export class BackendService {
      */
     private setUserFromResponse(username: string, token: any): void {
         this.context.loggedInUsername = username;
+        this.context.currentChatUsername = ''
         localStorage.setItem("username", username)
         localStorage.setItem("token", token.token)
         const headers = new HttpHeaders()

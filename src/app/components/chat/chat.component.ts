@@ -28,10 +28,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   ) {
     
     this.myScrollContainer = new ElementRef(null);
-    if (this.context.currentChatUsername != '') {
-      localStorage.setItem("chatUsername", this.context.currentChatUsername)
-    }
-    this.chatUsername = (localStorage.getItem('chatUsername') || '').toString()
+    this.chatUsername = this.context.currentChatUsername
   }
 
   public ngOnInit(): void {
@@ -45,7 +42,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   public ngOnDestroy(): void {
     this.interval.clearIntervals()
-    localStorage.removeItem('chatUsername')
+    this.context.currentChatUsername = ''
 }
 
   private getAllMessages(): void {
