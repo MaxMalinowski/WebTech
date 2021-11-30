@@ -36,7 +36,7 @@ export class BackendService {
         .catch(() => Promise.resolve(false));
     }
 
-    public register(username: string, password: string): Promise<boolean> {
+    public async register(username: string, password: string): Promise<boolean> {
         const body = {
             "username": username, 
             "password": password 

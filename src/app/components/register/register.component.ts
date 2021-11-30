@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   hiddenUN: boolean = true;
   hiddenPW: boolean = true;
   hiddenCPW: boolean = true;
+  disabledRegister: boolean = true;
 
   usernameLengthStatus: any = { Value: false };
   usernameExistencyStatus: any = { Value: false };
@@ -34,18 +35,65 @@ export class RegisterComponent implements OnInit {
     private backendService: BackendService
   ) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.setRegisterButton();
+  }
 
   public cancel(): void {
     this.router.navigate(['/login']);
   }
 
-  public create(): void {
-    if (!this.hiddenUN && !this.hiddenPW && !this.hiddenCPW) {
-      if (this.backendService.register(this.benutzername, this.passwort)) {
+  public async create(): Promise<void> {
+    alert('create');
+    if (this.checkStates()) {
+      if (
+        await this.backendService.register(this.benutzername, this.passwort)
+      ) {
         this.router.navigate(['/friends']);
+      } else {
+        this.messageUser = 'username already exists';
+        this.hiddenUN = false;
+        this.resetInputs();
       }
     }
+  }
+
+  /**reset all inputs */
+  public resetInputs(): void {
+    this.benutzername = '';
+    this.passwort = '';
+    this.bestatigtPW = '';
+    this.usernameLengthStatus = { Value: false };
+    this.passwordLengthStatus = { Value: false };
+    this.passwordConfirmationStatus = { Value: false };
+    var password = document.getElementById('passwort');
+    var username = document.getElementById('benutzername');
+    var bestatigtPW = document.getElementById('bestatigtPW');
+    if (username) {
+      this.setStatus(this.usernameLengthStatus, username, 'grey');
+    }
+    if (password) {
+      this.setStatus(this.passwordLengthStatus, password, 'grey');
+    }
+    if (bestatigtPW) {
+      this.setStatus(this.passwordConfirmationStatus, bestatigtPW, 'grey');
+    }
+    this.setRegisterButton();
+  }
+
+  /**
+   * check all States
+   */
+  public checkStates(): boolean {
+    if (
+      this.usernameLengthStatus &&
+      this.usernameExistencyStatus &&
+      this.passwordConfirmationStatus &&
+      this.passwordLengthStatus
+    ) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -87,6 +135,7 @@ export class RegisterComponent implements OnInit {
       this.messagePassword = '';
       this.hiddenPW = true;
     }
+    this.setRegisterButton();
   }
 
   /**
@@ -112,6 +161,7 @@ export class RegisterComponent implements OnInit {
       this.messageConfirmedPW = '\nPasswords do not match';
       this.hiddenCPW = false;
     }
+    this.setRegisterButton();
   }
 
   /**
@@ -132,6 +182,22 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
+   * set register button
+   */
+  public setRegisterButton() {
+    var button = document.getElementById('register');
+    if (button) {
+      if (this.checkStates()) {
+        this.disabledRegister = false;
+        button.style.background = 'dodgerblue';
+      } else {
+        this.disabledRegister = true;
+        button.style.background = 'lightblue';
+      }
+    }
+  }
+
+  /**
    * Fucntion to check whether the supplied username is at least 3 characters long and doesn't already exist
    */
   public isUsernameValid(usernameElement: HTMLElement): void {
@@ -142,14 +208,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.messageUserNameWrong = '';
       this.setStatus(this.usernameLengthStatus, usernameElement, 'green');
-      console.log(this.backendService.userExists(this.benutzername))
-      if (this.backendService.userExists(this.benutzername)) {
-        this.setStatus(this.usernameExistencyStatus, usernameElement, 'red');
-        this.messageUserExists = '\nUsername already exists';
-      } else {
-        this.setStatus(this.usernameExistencyStatus, usernameElement, 'green');
-        this.messageUserExists = '';
-      }
     }
+    this.setRegisterButton();
   }
 }
