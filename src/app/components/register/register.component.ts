@@ -86,10 +86,10 @@ export class RegisterComponent implements OnInit {
    */
   public checkStates(): boolean {
     if (
-      this.usernameLengthStatus &&
-      this.usernameExistencyStatus &&
-      this.passwordConfirmationStatus &&
-      this.passwordLengthStatus
+      this.usernameLengthStatus.Value ===true &&
+      this.usernameExistencyStatus.Value ===true &&
+      this.passwordConfirmationStatus.Value ===true &&
+      this.passwordLengthStatus.Value ===true
     ) {
       return true;
     }
