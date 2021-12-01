@@ -1,4 +1,11 @@
 @import url("../../../styles.css");
+
 .warning {
+  font-size: small;
   color: red;
+}
+
+.register-message {
+  color: red;
+  margin-top: -20px;
 }

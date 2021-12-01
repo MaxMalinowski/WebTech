@@ -1,89 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./register.component.css" />
-    <script src="./register.component.ts"></script>
-    <!-- <script src="../js/constants.js"></script> -->
-    <title>Register</title>
-  </head>
+<img class="special-img" src="../../../assets/images/user.png" alt="" />
 
-  <body>
-    <img class="special-img" src="../../../assets/images/user.png" alt="" />
+<h1 class="special-h">Register yourself</h1>
 
-    <h1 class="special-h">Register yourself</h1>
+<div class="form-row">
+  <div *ngIf="generalMessage !== ''" class="register-message">
+    {{generalMessage}}
+  </div>
+</div>
 
-    <form class="form-horizontal login-form" role="form" #loginForm="ngForm">
-      <fieldset class="form_fieldset">
-        <legend>Register</legend>
+<form>
+  <fieldset>
+    <legend>Register</legend>
 
-        <div class="form-row">
-          <label class="form-col-left" for="benutzername">Benutzername</label>
-          <div class="form-col-right">
-            <input
-              type="text"
-              id="benutzername"
-              name="benutzername"
-              placeholder="Benutzername"
-              [(ngModel)]="benutzername"
-              #username="ngModel"
-              required
-              (keyup) = "checkUsername()"
-            />
-          </div>
-          <div [hidden]="hiddenUN" class="warning">
-            {{ messageUser }}
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label class="form-col-left" for="passwort">Password</label>
-          <div class="form-col-right">
-            <input
-              type="password"
-              id="passwort"
-              name="passwort"
-              placeholder="Password"
-              [(ngModel)]="passwort"
-              #password="ngModel"
-              required
-              (keyup) = "checkPassword()"
-            />
-          </div>
-          <div [hidden]="hiddenPW" class="warning">
-            {{ messagePassword }}
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label class="form-col-left" for="bestatigtPW"
-            >Confirme Password</label
-          >
-          <div class="form-col-right">
-            <input
-              type="password"
-              id="bestatigtPW"
-              name="bestatigtPW"
-              placeholder="confirme Password"
-              [(ngModel)]="bestatigtPW"
-              #confirmedPW="ngModel"
-              required
-              (keyup) = "checkConfirmedPassword()"
-            />
-          </div>
-          <div [hidden]="hiddenCPW" class="warning">
-            {{ messageConfirmedPW }}
-          </div>
-        </div>
-      </fieldset>
-
-      <div class="button-div">
-        <button type="submit" (click)="cancel()" formnovalidate>Cancel</button>
-        <button class="blue-button"id="register" type="submit" (click)="create()" disabled="disabledRegister">
-          Create Account
-        </button>
+    <div class="form-row">
+      <label class="form-col-left" for="username">Username</label>
+      <div class="form-col-right">
+        <div *ngIf="!(usernameExistencyStatus && usernameLengthStatus)" class="warning">{{usernameMessage}}</div>
+        <input
+          [ngStyle]="{'border': (usernameExistencyStatus && usernameLengthStatus) ? '2px solid green' : '2px solid red' }"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          [(ngModel)]="username"
+          (keyup)="checkUsername()"
+          autofocus
+          required
+        />
       </div>
-    </form>
-  </body>
-</html>
+    </div>
+
+    <div class="form-row">
+      <label class="form-col-left" for="passwort">Password</label>
+      <div class="form-col-right">
+        <div *ngIf="!passwordLengthStatus" class="warning">{{passwordMessage}}</div>
+        <input
+          [ngStyle]="{'border': (passwordLengthStatus) ? '2px solid green' : '2px solid red' }"
+          type="password"
+          id="passwort"
+          name="passwort"
+          placeholder="Password"
+          [(ngModel)]="password"
+          (keyup)="checkPassword()"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-col-left" for="confirmPassword">Confirme Password</label>
+      <div class="form-col-right">
+        <div *ngIf="!passwordConfirmationStatus" class="warning">{{confirmMessage}}</div>
+        <input
+          [ngStyle]="{'border': (passwordConfirmationStatus) ? '2px solid green' : '2px solid red' }"
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirme Password"
+          [(ngModel)]="confirmedPassword"
+          (keyup)="checkConfirmedPassword()"
+          required
+        />
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="button-div">
+    <button type="submit" (click)="cancel()" formnovalidate>Cancel</button>
+    <button class="blue-button" id="register" type="submit" (click)="register()" [disabled]="disableRegister()">Create Account</button>
+  </div>
+</form>
