@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
 
   public ngOnInit(): void {
     this.disabledRegister = this.disableRegister();
-    this.initial();
   }
 
   public cancel(): void {
@@ -55,7 +54,6 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/friends']);
         } else {
           this.generalMessage = RegisterComponent.messages.msgError;
-          this.initial();
         }
       });
   }
@@ -119,21 +117,6 @@ export class RegisterComponent implements OnInit {
         button.style.background = 'lightblue';
       }
       return true;
-    }
-  }
-
-  public initial():void {
-    var userNameElement = document.getElementById('username');
-    var passwordElement = document.getElementById('passwort');
-    var confirmedElement = document.getElementById('confirmPassword');
-    if (userNameElement) {
-      userNameElement.style.borderColor = 'gray';
-    }
-    if (passwordElement) {
-      passwordElement.style.borderColor = 'gray';
-    }
-    if (confirmedElement) {
-      confirmedElement.style.borderColor = 'gray';
     }
   }
 }
