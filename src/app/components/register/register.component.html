@@ -3,9 +3,7 @@
 <h1 class="special-h">Register yourself</h1>
 
 <div class="form-row">
-  <div *ngIf="generalMessage !== ''" class="register-message">
-    {{generalMessage}}
-  </div>
+  <div *ngIf="generalMessage !== ''" class="register-message">{{ generalMessage }}</div>
 </div>
 
 <form>
@@ -15,14 +13,14 @@
     <div class="form-row">
       <label class="form-col-left" for="username">Username</label>
       <div class="form-col-right">
-        <div *ngIf="!(usernameExistencyStatus && usernameLengthStatus)" class="warning">{{usernameMessage}}</div>
+        <div *ngIf="!usernameState.ok" class="warning">{{ usernameState.msg }}</div>
         <input
-          [ngStyle]="{'border': (usernameExistencyStatus && usernameLengthStatus) ? '2px solid green' : '2px solid red' }"
+          [ngStyle]="{ border: usernameState.border }"
           type="text"
           id="username"
           name="username"
           placeholder="Username"
-          [(ngModel)]="username"
+          [(ngModel)]="usernameState.value"
           (keyup)="checkUsername()"
           autofocus
           required
@@ -33,14 +31,14 @@
     <div class="form-row">
       <label class="form-col-left" for="passwort">Password</label>
       <div class="form-col-right">
-        <div *ngIf="!passwordLengthStatus" class="warning">{{passwordMessage}}</div>
+        <div *ngIf="!passwordState.ok" class="warning">{{ passwordState.msg }}</div>
         <input
-          [ngStyle]="{'border': (passwordLengthStatus) ? '2px solid green' : '2px solid red' }"
+          [ngStyle]="{ border: passwordState.border }"
           type="password"
           id="passwort"
           name="passwort"
           placeholder="Password"
-          [(ngModel)]="password"
+          [(ngModel)]="passwordState.value"
           (keyup)="checkPassword()"
           required
         />
@@ -50,14 +48,14 @@
     <div class="form-row">
       <label class="form-col-left" for="confirmPassword">Confirme Password</label>
       <div class="form-col-right">
-        <div *ngIf="!passwordConfirmationStatus" class="warning">{{confirmMessage}}</div>
+        <div *ngIf="!confirmState.ok" class="warning">{{ confirmState.msg }}</div>
         <input
-          [ngStyle]="{'border': (passwordConfirmationStatus) ? '2px solid green' : '2px solid red' }"
+          [ngStyle]="{ border: confirmState.border }"
           type="password"
           id="confirmPassword"
           name="confirmPassword"
           placeholder="Confirme Password"
-          [(ngModel)]="confirmedPassword"
+          [(ngModel)]="confirmState.value"
           (keyup)="checkConfirmedPassword()"
           required
         />
@@ -67,6 +65,13 @@
 
   <div class="button-div">
     <button type="submit" (click)="cancel()" formnovalidate>Cancel</button>
-    <button class="blue-button" id="register" type="submit" (click)="register()" [disabled]="disabledRegister">Create Account</button>
+    <button
+      type="submit"
+      (click)="register()"
+      [disabled]="!validRegister"
+      [ngStyle]="{ background: validRegister ? 'dodgerblue' : 'lightblue' }"
+    >
+      Create Account
+    </button>
   </div>
 </form>

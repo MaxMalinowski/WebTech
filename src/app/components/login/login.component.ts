@@ -14,10 +14,7 @@ export class LoginComponent implements OnInit {
   public message: string = '';
   public validLogin: boolean = false;
 
-  public constructor(
-    private router: Router,
-    private backendService: BackendService
-  ) {}
+  public constructor(private router: Router, private backendService: BackendService) {}
 
   public ngOnInit(): void {}
 
@@ -25,22 +22,20 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  public login(form: Form): void {
+  public login(): void {
     if (this.username === '' || this.password === '') {
       this.validLogin = false;
       this.message = 'Please login in with a username and password!';
       return;
     } else {
-      this.backendService
-        .login(this.username, this.password)
-        .then((ok: boolean) => {
-          if (ok) {
-            this.router.navigate(['/friends']);
-          } else {
-            this.validLogin = false;
-            this.message = 'Authentication failed! Either the username or the password are incorrect!';
-          }
-        });
+      this.backendService.login(this.username, this.password).then((ok: boolean) => {
+        if (ok) {
+          this.router.navigate(['/friends']);
+        } else {
+          this.validLogin = false;
+          this.message = 'Authentication failed! Either the username or the password is incorrect!';
+        }
+      });
     }
   }
 }

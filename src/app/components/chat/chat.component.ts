@@ -86,8 +86,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   public removeFriend(): void {
-    let remove = confirm(`Do you really want to remove ${this.chatUsername} as friend?`)
-    if (remove) {
+    if (confirm(`Do you really want to remove ${this.chatUsername} as friend?`)) {
       this.backendService.removeFriend(this.chatUsername)
       this.router.navigate(['/friends'])
     }
