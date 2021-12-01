@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   public username: string = '';
   public password: string = '';
   public confirmedPassword: string = '';
+  public disabledRegister: boolean = true;
 
   public usernameLengthStatus: boolean = false;
   public usernameExistencyStatus: boolean = false;
@@ -37,14 +38,17 @@ export class RegisterComponent implements OnInit {
     private backendService: BackendService
   ) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.disabledRegister = this.disableRegister();
+  }
 
   public cancel(): void {
     this.router.navigate(['/login']);
   }
 
   public register(): void {
-    this.backendService.register(this.username, this.password)
+    this.backendService
+      .register(this.username, this.password)
       .then((ok: boolean) => {
         if (ok) {
           this.router.navigate(['/friends']);
@@ -70,6 +74,7 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
+    this.disabledRegister = this.disableRegister();
   }
 
   public checkPassword(): void {
@@ -80,6 +85,7 @@ export class RegisterComponent implements OnInit {
       this.passwordLengthStatus = true;
       this.passwordMessage = '';
     }
+    this.disabledRegister = this.disableRegister();
   }
 
   public checkConfirmedPassword(): void {
@@ -92,17 +98,24 @@ export class RegisterComponent implements OnInit {
         this.confirmMessage = RegisterComponent.messages.msgPasswordsMatch;
       }
     }
+    this.disabledRegister = this.disableRegister();
   }
 
   public disableRegister(): boolean {
+    var button = document.getElementById('register');
     if (
-      (((this.usernameLengthStatus === this.usernameExistencyStatus) ===
-        this.passwordLengthStatus) ===
-        this.passwordConfirmationStatus) ===
-      true
+      (((this.usernameLengthStatus === true && this.usernameExistencyStatus) ===
+        true && this.passwordLengthStatus) === true &&
+        this.passwordConfirmationStatus) === true
     ) {
+      if (button) {
+        button.style.background = 'dodgerblue';
+      }
       return false;
     } else {
+      if (button) {
+        button.style.background = 'lightblue';
+      }
       return true;
     }
   }
