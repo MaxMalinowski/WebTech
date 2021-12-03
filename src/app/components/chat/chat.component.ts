@@ -14,8 +14,8 @@ import { IntervalService } from 'src/app/services/interval.service';
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
   public chatUsername: string;
-  public showLoadingIndicator: boolean = false
-  public allMessages: Message[] = []
+  public showLoadingIndicator: boolean = false;
+  public allMessages: Message[] = [];
   public newMessage: string = '';
   public showSingleLined: boolean = true;
   @ViewChild('messagesDiv') private myScrollContainer: ElementRef;
@@ -26,9 +26,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     private context: ContextService,
     private interval: IntervalService
   ) {
-    
     this.myScrollContainer = new ElementRef(null);
-    this.chatUsername = this.context.currentChatUsername
+    this.chatUsername = this.context.currentChatUsername;
   }
 
   public ngOnInit(): void {
@@ -41,35 +40,28 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   public ngOnDestroy(): void {
-    this.interval.clearIntervals()
-    this.context.currentChatUsername = ''
-}
+    this.interval.clearIntervals();
+    this.context.currentChatUsername = '';
+  }
 
   private getAllMessages(): void {
-    const _this = this
+    const _this = this;
     this.interval.setInterval('getMessages', () => {
-      _this.backendService.listMessages(_this.chatUsername)
-      .then((messages: Message[]) => {
-        this.allMessages = []
+      _this.backendService.listMessages(_this.chatUsername).then((messages: Message[]) => {
+        this.allMessages = [];
         messages.forEach((msg) => {
-          this.allMessages.push(new Message(msg.msg, msg.from, new Date((msg.time as any))))
-        })
+          this.allMessages.push(new Message(msg.msg, msg.from, new Date(msg.time as any)));
+        });
         this.showLoadingIndicator = false;
         this.scrollToBottom();
-      })
-    })
+      });
+    });
   }
 
   private getUserProfile(): void {
-    this.backendService.loadUser(this.context.loggedInUsername)
-    .then((user: any) => {
-      let userProfile = user as Profile
-      if (userProfile.layout === 'double') {
-        this.showSingleLined = false;
-      } else {
-        this.showSingleLined = true;
-      }
-    })
+    this.backendService.loadUser(this.context.loggedInUsername).then((user: any) => {
+      (user as Profile).layout === 'double' ? (this.showSingleLined = false) : (this.showSingleLined = true);
+    });
   }
 
   private scrollToBottom(): void {
@@ -87,8 +79,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   public removeFriend(): void {
     if (confirm(`Do you really want to remove ${this.chatUsername} as friend?`)) {
-      this.backendService.removeFriend(this.chatUsername)
-      this.router.navigate(['/friends'])
+      this.backendService.removeFriend(this.chatUsername);
+      this.router.navigate(['/friends']);
     }
   }
 }
