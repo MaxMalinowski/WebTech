@@ -14,7 +14,7 @@
 
     <div class="logout-col">
       <p>See u!</p>
-      <a href="./login.html">Login again</a>
+      <a href="./login.php">Login again</a>
     </div>
   </body>
 </html>

@@ -13,8 +13,8 @@
     <h1>Friends</h1>
 
     <div class="top-links">
-      <a href="./logout.html"> &lt Logout</a> |
-      <a href="./settings.html">Settings</a>
+      <a href="./logout.php"> &lt; Logout</a> |
+      <a href="./settings.php">Settings</a>
     </div>
 
     <hr />

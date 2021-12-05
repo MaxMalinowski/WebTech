@@ -14,8 +14,8 @@
         <h1>Chat with Tom</h1>
 
         <div class="top-links">
-            <a href="./friends.html"> &lt Back</a> | <a href="./profile.html">Profile</a> |
-            <a href="./friends.html" class="special-link">Remove Friend</a>
+            <a href="./friends.php"> &lt Back</a> | <a href="./profile.php">Profile</a> |
+            <a href="./friends.php" class="special-link">Remove Friend</a>
         </div>
 
         <hr />

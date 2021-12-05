@@ -12,8 +12,8 @@
 
     <!--two hyperlinks to navigate back to chat/remove the friend-->
     <div class="top-links">
-      <a href="chat.html" target="_self">&lt Back to Chat</a> |
-      <a href="friends.html" class="special-link" target="_self"> Remove Friend</a>
+      <a href="chat.php" target="_self">&lt; Back to Chat</a> |
+      <a href="friends.php" class="special-link" target="_self"> Remove Friend</a>
     </div>
 
     <div>
