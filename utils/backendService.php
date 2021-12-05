@@ -6,8 +6,8 @@ class BackendService {
     private $token;
 
     public function __construct($base, $id) {
-        $this->baseURL = $base . $id;
-        $this->token = $_SESSION['chat_token'] != '' ? $_SESSION['chat_token'] : null;
+        $this->baseURL = $base . '/' . $id;
+        $this->token = $_SESSION['chat_token'] ?: null;
     }
 
     private function setToken($token) {
