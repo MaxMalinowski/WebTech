@@ -3,16 +3,17 @@ namespace utils;
 
 class BackendService { 
     private $baseURL;
-    private $token;
 
     public function __construct($base, $id) {
         $this->baseURL = $base . '/' . $id;
-        $this->token = $_SESSION['chat_token'] ?: null;
     }
 
     private function setToken($token) {
         $_SESSION['chat_token'] = $token;
-        $this->token = $token;
+    }
+
+    private function getToken() {
+        return isset($_SESSION['chat_token']) ? $_SESSION['chat_token'] : '';
     }
 
     public function login($username, $password) {
@@ -54,7 +55,7 @@ class BackendService {
     public function loadUser($username) {
         $url = $this->baseURL . '/user/' . $username;
         try {
-            $response = HttpClient::get($url, $this->token);
+            $response = HttpClient::get($url, $this->getToken());
             return \model\User::fromJson($response);
         } catch (\Exception $e) {
             error_log($e);
@@ -65,7 +66,7 @@ class BackendService {
     public function saveUser($user) {
         $url = $this->baseURL . '/user';
         try {
-            return HttpClient::post($url, $user, $this->token);
+            return HttpClient::post($url, $user, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -75,7 +76,7 @@ class BackendService {
     public function listUsers() {
         $url = $this->baseURL . '/user';
         try {
-            return HttpClient::get($url, $this->token);
+            return HttpClient::get($url, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -85,7 +86,7 @@ class BackendService {
     public function listMessages($username) {
         $url = $this->baseURL . '/message/' . $username;
         try {
-            return HttpClient::get($url, $this->token);
+            return HttpClient::get($url, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -96,7 +97,7 @@ class BackendService {
         $url = $this->baseURL . '/message';
         $data = array('message' => $message, 'to' => $username);
         try {
-            return HttpClient::post($url, $data, $this->token);
+            return HttpClient::post($url, $data, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -106,7 +107,7 @@ class BackendService {
     public function getUnread() {
         $url = $this->baseURL . '/unread';
         try {
-            return HttpClient::get($url, $this->token);
+            return HttpClient::get($url, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -116,7 +117,7 @@ class BackendService {
     public function listFriends() {
         $url = $this->baseURL . '/friend';
         try {
-            $response = HttpClient::get($url, $this->token);
+            $response = HttpClient::get($url, $this->getToken());
             $friendList = array();
             foreach($response as $friend) {
                 $jsonFriend = \model\Friend::fromJson($friend);
@@ -133,7 +134,7 @@ class BackendService {
         $url = $this->baseURL . '/friend';
         $data = array('username' => $friend);
         try {
-            return HttpClient::post($url, $data, $this->token);
+            return HttpClient::post($url, $data, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -144,7 +145,7 @@ class BackendService {
         $url = $this->baseURL . '/friend/' . $friend;
         $data = array('status' => $status);
         try {
-            return HttpClient::put($url, $data, $this->token);
+            return HttpClient::put($url, $data, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -162,7 +163,7 @@ class BackendService {
     public function friendRemove($friend) {
         $url = $this->baseURL . '/friend/' . $friend;
         try {
-            return HttpClient::delete($url, $this->token);
+            return HttpClient::delete($url, $this->getToken());
         } catch (\Exception $e) {
             error_log($e);
         }
