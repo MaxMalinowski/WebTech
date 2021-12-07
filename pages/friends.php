@@ -3,10 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <?php require("../php/global.php") ?>
+    <link rel="stylesheet" href="../css/friends.css" />
+    <?php 
+      require("../php/global.php");
+      if (!isset($_SESSION["user"])) {
+        header("Location: login.php"); 
+      } 
+    ?>
     <title>Friends</title>
   </head>
+
+  <!-- 
+    TODO:
+    [x] load global.php and check for user in session
+    [-] copy css from exercise 4
+    [x] load friends and generate friends-list
+    [-] differenciate between accepted / requestet
+    [-] load friend-request and generate request-list
+    [-] if friends-list or request-list empty, show info
+    [-] add-friends functionality (send and process add-friend request)
+    [-] accept-friends functionality (send and process accept-friend request)
+    [-] dismiss-friends functionality (send and process dismiss-friend request)
+    [-] remove-friends functionality (send and process remove-friend request)
+   -->
 
   <body>
     <?php
@@ -23,14 +42,20 @@
 
     <fieldset class="special-fieldset">
       <ul>
-        <li class="friend-list-item" *ngFor="let friend of userFriends" (click)="startChatWithSelectedUsers(friendsName)">
-          <div class="friend-list-text" #friendsName>
-            {{friend.username}}
+      <?php foreach ($friendsList as $friend) { ?> 
+        <li class="friend-list-item">
+          <div class="friend-list-text">
+            <a class="friend-list-link" href= <?php echo './chat.php?' . $friend->getUsername() ?>>
+              <?= $friend->getUsername() ?>
+            </a>
           </div>
-          <div [hidden]="friend.unreadMessages == null || friend.unreadMessages == 0" class="friend-list-counter">
-            {{friend.unreadMessages}}
+          <div class="friend-list-counter" <?php if ($friend->getUnreadMessages() != 0) { ?> hidden <?php } ?>>
+            <a class="friend-list-link" href= <?php echo './chat.php?' . $friend->getUsername() ?>>  
+              <?= $friend->getUnreadMessages() ?>
+            </a>
           </div>
         </li>
+      <?php } ?>
       </ul>
     </fieldset>
 
@@ -64,9 +89,6 @@
         type="text"
         name="new-friend"
         placeholder="Add Friend to List"
-        [formControl]="typeaheadSuggestions"
-        [(ngModel)]="newFriendToAdd"
-        (input)="suggestKnownusers()"
         required
       />
       <button class="long-button" type="submit" (click)="createNewFriendRequest()">Add</button>

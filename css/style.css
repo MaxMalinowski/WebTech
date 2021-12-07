@@ -52,8 +52,9 @@ legend {
 
 ul {
     list-style-type: none;
-    padding-inline-start: 10px;
-    line-height: 40px;
+    padding: 10px;
+    margin: 0px;
+    line-height: 30px;
 }
 
 textarea {

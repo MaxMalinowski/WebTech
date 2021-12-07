@@ -5,22 +5,33 @@ use JsonSerializable;
 
 class Friend implements JsonSerializable {
     private $username;
+    private $unreadMessages;
     private $status;
  
-    public function __construct($username=null) {
+    public function __construct($username=null, $unreadMessages=0, $status=null) {
         $this->username = $username;
+        $this->unreadMessages = $unreadMessages;
+        $this->status = $status;
     }
 
     public function getUsername() {
         return $this->username;
     }
 
+    public function getUnreadMessages() {
+        return $this->unreadMessages;
+    }
+
     public function getStatus() {
         return $this->status;
     }
 
-    private function setStatus($status) {
+    public function setStatus($status) {
         $this->status = $status;
+    }
+    
+    public function setUnreadMessages($unreadeMessages) {
+        $this->unreadMessages = $unreadeMessages;
     }
 
     public function acceptFriend() {
