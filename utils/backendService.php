@@ -1,6 +1,6 @@
 <?php
-// This file contains the backend service, which is used to abstract the actual backend calls.
-namespace Utils;
+namespace utils;
+
 class BackendService { 
     private $baseURL;
     private $token;
@@ -55,7 +55,7 @@ class BackendService {
         $url = $this->baseURL . '/user/' . $username;
         try {
             $response = HttpClient::get($url, $this->token);
-            return model\User::fromJson($response);
+            return \model\User::fromJson($response);
         } catch (\Exception $e) {
             error_log($e);
         }
@@ -119,7 +119,7 @@ class BackendService {
             $response = HttpClient::get($url, $this->token);
             $friendList = array();
             foreach($response as $friend) {
-                $jsonFriend = model\Friend::fromJson($friend);
+                $jsonFriend = \model\Friend::fromJson($friend);
                 array_push($friendList, $jsonFriend);
             }
             return $friendList;

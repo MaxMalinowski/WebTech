@@ -8,15 +8,13 @@
 </head>
 <body>
     <?php
-        // require("./php/start.php");
+        require("./start.php");
         // $user = new model\User("Test"); 
         // $json = json_encode($user);
         // echo $json . "<br>";
         // $jsonObject = json_decode($json);
         // $newUser = model\User::fromJson($jsonObject); var_dump($newUser);
-
-        require("./php/start.php");
-        var_dump($service->login('', ''));
+        // var_dump($service->login('', ''));
     ?>
 </body>
 </html>
