@@ -1,6 +1,8 @@
 <?php
+    namespace php;
+
     spl_autoload_register(function($class) {
-        include str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+        include '..' . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
     });
 
     session_start();

@@ -5,8 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../css/animations.css" />
-        <script src="../js/constants.js"></script>
-        <script src="../js/chats.js"></script>
+        <?php require("../php/global.php") ?>
         <title>Chat</title>
     </head>
 

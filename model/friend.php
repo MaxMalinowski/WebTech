@@ -1,6 +1,8 @@
 <?php
 namespace model;
+
 use JsonSerializable;
+
 class Friend implements JsonSerializable {
     private $username;
     private $status;

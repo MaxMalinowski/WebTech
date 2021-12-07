@@ -1,8 +1,18 @@
 <?php
 namespace utils;
 
+// Source: https://thisinterestsme.com/sending-json-via-post-php/
 class HttpClient {
-    // Source: https://thisinterestsme.com/sending-json-via-post-php/
+    
+    /**
+     * Execute a POST-Request
+     *
+     * @param string $url url-string against which the request should be executed
+     * @param string $data json-formatted data to be sent along
+     * @param string $token token-string to be sent along for authentication
+     * @return object decoded json-response (status 200) or true (status 204)
+     * @throws Exception on every other status code
+     */
     public static function post($url, $data, $token = null) {
         //Initiate cURL.
         $ch = curl_init();
@@ -46,6 +56,15 @@ class HttpClient {
         throw new \Exception('Http status is ' . $status . ': ' . $result);
     }
 
+    /**
+     * Execute a PUT-Request
+     *
+     * @param string $url url-string against which the request should be executed
+     * @param string $data json-formatted data to be sent along
+     * @param string $token token-string to be sent along for authentication
+     * @return object decoded json-response (status 200) or true (status 204)
+     * @throws Exception on every other status code
+     */
     public static function put($url, $data, $token = null) {
         //Initiate cURL.
         $ch = curl_init();
@@ -89,6 +108,14 @@ class HttpClient {
         throw new \Exception('Http status is ' . $status);
     }
 
+    /**
+     * Execute a GET-Request
+     *
+     * @param string $url url-string against which the request should be executed
+     * @param string $token token-string to be sent along for authentication
+     * @return object decoded json-response (status 200) or true (status 204)
+     * @throws Exception on every other status code
+     */
     public static function get($url, $token = null) {
         //Initiate cURL.
         $ch = curl_init();
@@ -121,6 +148,14 @@ class HttpClient {
         throw new \Exception('Http status is ' . $status . ': ' . $result);
     }
 
+    /**
+     * Execute a DELETE-Request
+     *
+     * @param string $url url-string against which the request should be executed
+     * @param string $token token-string to be sent along for authentication
+     * @return object decoded json-response (status 200) or true (status 204)
+     * @throws Exception on every other status code
+     */
     public static function delete($url, $token = null) {
         //Initiate cURL.
         $ch = curl_init();
