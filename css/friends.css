@@ -24,6 +24,12 @@ Special class definitions
     text-align: left;  
 }
 
+.friend-list-placeholder {
+    flex: 1;
+    text-align: center;
+    color: grey;
+}
+
 .friend-list-counter {
     float: right;
     text-align: right;
@@ -66,21 +72,10 @@ Special class definitions
 Special class definitions
 --> Add New Friend
 ################################################# */
-.suggestion-list {
-    width: 75%;
-    text-indent: 2%;
-    list-style: none;
-    background-color: white;
-    border: 2px;
-    padding: 3px;
+.invalid {
+    border: 2px solid red;
 }
 
-.suggestion-item {
-    font-size: smaller;
-    border-bottom: 1px dotted lightgray;
-}
-
-.suggestion-item:hover {
-    cursor: pointer;
-    background-color: lightgray;
+.invalid::placeholder {
+    color: lightcoral;
 }

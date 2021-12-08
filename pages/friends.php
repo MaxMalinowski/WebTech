@@ -21,16 +21,53 @@
     [x] differenciate between accepted / requestet
     [x] load friend-request and generate request-list
     [x] if friends-list empty, show info
-    [-] add-friends functionality (send and process add-friend request)
-    [-] accept-friends functionality (send and process accept-friend request)
-    [-] dismiss-friends functionality (send and process dismiss-friend request)
-    [-] remove-friends functionality (send and process remove-friend request)
-    [-] check and polish ui/ux
-    [-] user suggestions
+    [x] add-friends functionality (send and process add-friend request)
+    [x] accept-friends functionality (send and process accept-friend request)
+    [x] dismiss-friends functionality (send and process dismiss-friend request)
+    [x] remove-friends functionality (send and process remove-friend request)
+    [x] check and polish ui/ux
+    [-] code cleanup & improvements
+    [-] form resubmission
    -->
 
   <body>
+
     <?php
+      ## Process POST-Requests
+      $valid = true;
+      if (isset($_POST['action'])) {
+        $action = $_POST['action'];
+        $username = $_POST['username'];
+          
+        switch ($_POST['action']) {
+          case 'add-friend':
+              $allUsers = $service->listUsers();
+              $valid = $service->userExists($username);
+              if ($valid) {
+                $result = $service->friendRequest($username);
+              }
+              break;
+          
+            case 'accept-friend':
+              $result = $service->friendAccept($username);
+              break;
+          
+            case 'dismiss-friend':
+              $result = $service->friendDismiss($username);
+              break;
+            
+            case 'REMOVE-friend':
+              $result = $service->friendRemove($username);
+              break;
+          
+            default:
+              break;
+        }    
+      }
+    ?>
+
+    <?php
+      ## Prepare arrays for HTML document
       $allFriends = $service->listFriends();
       $allUsers = $service->listUsers();
       $friendsList = [];
@@ -54,17 +91,22 @@
 
     <fieldset class="special-fieldset">
       <?php if (count($friendsList) == 0) { ?>
-        <div class="friend-list-text">
-          No Friends - add someone
+        <div class="friend-list-placeholder">
+          You have not added any friends yet. Add or accept your first friend ...
         </div>
       <?php } else { ?>
         <ul>
         <?php foreach ($friendsList as $friend) { ?> 
+          <!-- Solution with JavaScript -->
           <li class="friend-list-item" onclick="location.href=<?php echo '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
             <div class="friend-list-text">
               <?= $friend->getUsername() ?>
+              <!-- Solution without JavaScript 
+              <a href=".chat.php?<?php echo '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+                <?= $friend->getUsername() ?>
+              </a> -->
             </div>
-            <div class="friend-list-counter" <?php if ($friend->getUnreadMessages() == 0) { ?> hidden <?php } ?>>
+            <div class="friend-list-counter">
               <?= $friend->getUnreadMessages() ?>
             </div>
           </li>
@@ -78,7 +120,7 @@
     <h3>New Request</h3>
 
     <ol>
-      <?php foreach ($friendsList as $i => $friend) { ?>
+      <?php foreach ($requestsList as $i => $friend) { ?>
         <li class="request-list-item">
           <form method="post">
             <div class="request-list-text">
@@ -89,7 +131,7 @@
                 <button class="request-button-accept" type="submit" name="action" value="accept-friend">Accept</button>
                 <button class="request-button-dismis" type="submit" name="action" value="dismiss-friend">Reject</button>
               </div>
-              <hr class="request-list-seperator" <?php if ($i == count($friendsList) - 1) { ?> hidden <?php } ?> />
+              <hr class="request-list-seperator" <?php if ($i == count($requestsList) - 1) { ?> hidden <?php } ?> />
           </form>
           </li>
         <?php } ?>
@@ -97,19 +139,8 @@
     <hr />
 
     <form method="post">
-      <input class="long-input" type="text" name="username" placeholder="Add Friend to List" required/>
+      <input class="long-input <?php if (!$valid) { ?> invalid <?php } ?>" type="text" name="username" placeholder="<?php if (!$valid) { ?> The user you enterd is not known... <?php } else { ?> Add new friend...<?php } ?>" required/>
       <button class="long-button" type="submit" name="action" value="add-friend">Add</button>
-      <!-- To Be Done ... 
-      // <?php if (count($userList) > 0) { ?>
-      //   <ul class="suggestion-list">
-      //     <?php foreach ($userList as $user) { ?> 
-      //       <li class="suggestion-item">
-      //         <?= $user->getUsername() ?>
-      //       </li>
-      //     <?php } ?>
-      //   </ul>
-      // <?php } ?> 
-      -->
     </form>
   </body>
 </html>
