@@ -16,21 +16,33 @@
   <!-- 
     TODO:
     [x] load global.php and check for user in session
-    [-] copy css from exercise 4
+    [x] copy css from exercise 4
     [x] load friends and generate friends-list
-    [-] differenciate between accepted / requestet
-    [-] load friend-request and generate request-list
-    [-] if friends-list or request-list empty, show info
+    [x] differenciate between accepted / requestet
+    [x] load friend-request and generate request-list
+    [x] if friends-list empty, show info
     [-] add-friends functionality (send and process add-friend request)
     [-] accept-friends functionality (send and process accept-friend request)
     [-] dismiss-friends functionality (send and process dismiss-friend request)
     [-] remove-friends functionality (send and process remove-friend request)
+    [-] check and polish ui/ux
+    [-] user suggestions
    -->
 
   <body>
     <?php
-      $friendsList = $service->listFriends();
-      var_dump($friendsList);
+      $allFriends = $service->listFriends();
+      $allUsers = $service->listUsers();
+      $friendsList = [];
+      $requestsList = [];
+      
+      foreach($allFriends as $friend) {
+        if ($friend->getStatus() == 'accepted') {
+          array_push($friendsList, $friend);
+        } elseif ($friend->getStatus() == 'requested') {
+          array_push($requestsList, $friend);
+        }
+      }
     ?>
 
     <h1>Friends</h1>
@@ -41,22 +53,24 @@
     </div>
 
     <fieldset class="special-fieldset">
-      <ul>
-      <?php foreach ($friendsList as $friend) { ?> 
-        <li class="friend-list-item">
-          <div class="friend-list-text">
-            <a class="friend-list-link" href= <?php echo './chat.php?' . $friend->getUsername() ?>>
+      <?php if (count($friendsList) == 0) { ?>
+        <div class="friend-list-text">
+          No Friends - add someone
+        </div>
+      <?php } else { ?>
+        <ul>
+        <?php foreach ($friendsList as $friend) { ?> 
+          <li class="friend-list-item" onclick="location.href=<?php echo '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+            <div class="friend-list-text">
               <?= $friend->getUsername() ?>
-            </a>
-          </div>
-          <div class="friend-list-counter" <?php if ($friend->getUnreadMessages() != 0) { ?> hidden <?php } ?>>
-            <a class="friend-list-link" href= <?php echo './chat.php?' . $friend->getUsername() ?>>  
+            </div>
+            <div class="friend-list-counter" <?php if ($friend->getUnreadMessages() == 0) { ?> hidden <?php } ?>>
               <?= $friend->getUnreadMessages() ?>
-            </a>
-          </div>
-        </li>
+            </div>
+          </li>
+        <?php } ?>
+        </ul>
       <?php } ?>
-      </ul>
     </fieldset>
 
     <hr />
@@ -64,39 +78,38 @@
     <h3>New Request</h3>
 
     <ol>
-      <li class="request-list-item" *ngFor="let requestedFriend of userFriendRequests; index as i">
-        <div class="request-list-text">
-          Friend request from <b> {{requestedFriend}} </b>
-        </div>
-        <div class="request-list-buttons">
-          <button class="request-button-accept" type="button" (click)="acceptFriendRequest(requestedFriend)">
-            Accept
-          </button>
-          <button class="request-button-dismis" type="button" (click)="rejectFriendRequest(requestedFriend)">
-            Reject
-          </button>
-        </div>
-        <hr [hidden]="i == userFriendRequests.length - 1" class="request-list-seperator"/>
-      </li>
-    </ol>
-
+      <?php foreach ($friendsList as $i => $friend) { ?>
+        <li class="request-list-item">
+          <form method="post">
+            <div class="request-list-text">
+                Friend request from <b> <?= $friend->getUsername() ?> </b>
+              </div>
+              <div class="request-list-buttons">
+                <input type="hidden" name="username" value="<?= $friend->getUsername() ?>"/>
+                <button class="request-button-accept" type="submit" name="action" value="accept-friend">Accept</button>
+                <button class="request-button-dismis" type="submit" name="action" value="dismiss-friend">Reject</button>
+              </div>
+              <hr class="request-list-seperator" <?php if ($i == count($friendsList) - 1) { ?> hidden <?php } ?> />
+          </form>
+          </li>
+        <?php } ?>
+      </ol>
     <hr />
 
-    <form>
-      <input
-        id="friend-add-input"
-        class="long-input"
-        type="text"
-        name="new-friend"
-        placeholder="Add Friend to List"
-        required
-      />
-      <button class="long-button" type="submit" (click)="createNewFriendRequest()">Add</button>
-      <ul class="suggestion-list" *ngIf="allUsersToSuggest.length">
-        <li class="suggestion-item" *ngFor="let user of allUsersToSuggest" (click)="selectUserFromSuggestions(user)">
-          {{user}}
-        </li>
-      </ul>
+    <form method="post">
+      <input class="long-input" type="text" name="username" placeholder="Add Friend to List" required/>
+      <button class="long-button" type="submit" name="action" value="add-friend">Add</button>
+      <!-- To Be Done ... 
+      // <?php if (count($userList) > 0) { ?>
+      //   <ul class="suggestion-list">
+      //     <?php foreach ($userList as $user) { ?> 
+      //       <li class="suggestion-item">
+      //         <?= $user->getUsername() ?>
+      //       </li>
+      //     <?php } ?>
+      //   </ul>
+      // <?php } ?> 
+      -->
     </form>
   </body>
 </html>
