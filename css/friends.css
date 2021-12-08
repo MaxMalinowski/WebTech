@@ -15,21 +15,13 @@ Special class definitions
 }
 
 .friend-list-item:hover {
+    cursor: pointer;
     background-color: lightgray;
 }
 
 .friend-list-text {
     flex: 1;
     text-align: left;  
-}
-
-.friend-list-link {
-    color: black !important;
-}
-
-.friend-list-link:hover {
-    font-weight: inherit;
-    font-size: inherit;
 }
 
 .friend-list-counter {

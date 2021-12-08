@@ -1,0 +1,44 @@
+@import url("./style.css");
+
+/* #################################################
+Special class definitions
+--> Chat
+################################################# */
+.chat-message {
+    display: flex;
+    justify-content: space-between;
+    max-width: 850px;
+    margin-bottom: 10px;
+}
+
+.chat-message-double-lined {
+    display: inline-flex;
+    text-align: start;
+    width: 80%;
+}
+
+.chat-message-name {
+    display: inline-flex;
+    text-align: start;
+    max-width: 10%;
+}
+
+.chat-message-text {
+    display: inline-flex;
+    text-align: start;
+    width: 70%;
+    max-width: 70%;
+}
+
+.chat-message-placeholder {
+    text-align: center;
+    width: 100%;
+}
+
+.chat-message-date {
+    color: lightgray;
+    display: inline-flex;
+    text-align: end;
+    width: 18%;
+    max-width: 20%;
+}
