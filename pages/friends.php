@@ -4,83 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/friends.css" />
-    <?php 
-      require("../php/global.php");
-      if (!isset($_SESSION["user"])) {
-        header("Location: login.php"); 
-      } 
-    ?>
+    <?php require('../controllers/friendsController.php') ?>
     <title>Friends</title>
   </head>
 
-  <!-- 
-    TODO:
-    [x] load global.php and check for user in session
-    [x] copy css from exercise 4
-    [x] load friends and generate friends-list
-    [x] differenciate between accepted / requestet
-    [x] load friend-request and generate request-list
-    [x] if friends-list empty, show info
-    [x] add-friends functionality (send and process add-friend request)
-    [x] accept-friends functionality (send and process accept-friend request)
-    [x] dismiss-friends functionality (send and process dismiss-friend request)
-    [x] remove-friends functionality (send and process remove-friend request)
-    [x] check and polish ui/ux
-    [-] code cleanup & improvements
-    [-] form resubmission
-   -->
-
   <body>
-
-    <?php
-      ## Process POST-Requests
-      $valid = true;
-      if (isset($_POST['action'])) {
-        $action = $_POST['action'];
-        $username = $_POST['username'];
-          
-        switch ($_POST['action']) {
-          case 'add-friend':
-              $allUsers = $service->listUsers();
-              $valid = $service->userExists($username);
-              if ($valid) {
-                $result = $service->friendRequest($username);
-              }
-              break;
-          
-            case 'accept-friend':
-              $result = $service->friendAccept($username);
-              break;
-          
-            case 'dismiss-friend':
-              $result = $service->friendDismiss($username);
-              break;
-            
-            case 'REMOVE-friend':
-              $result = $service->friendRemove($username);
-              break;
-          
-            default:
-              break;
-        }    
-      }
-    ?>
-
-    <?php
-      ## Prepare arrays for HTML document
-      $allFriends = $service->listFriends();
-      $allUsers = $service->listUsers();
-      $friendsList = [];
-      $requestsList = [];
-      
-      foreach($allFriends as $friend) {
-        if ($friend->getStatus() == 'accepted') {
-          array_push($friendsList, $friend);
-        } elseif ($friend->getStatus() == 'requested') {
-          array_push($requestsList, $friend);
-        }
-      }
-    ?>
+    <?php processFriendRequests() ?>
+    <?php list($friendsList, $requestsList) = getFriendsInformation() ?>
 
     <h1>Friends</h1>
 
@@ -98,11 +28,11 @@
         <ul>
         <?php foreach ($friendsList as $friend) { ?> 
           <!-- Solution with JavaScript -->
-          <li class="friend-list-item" onclick="location.href=<?php echo '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+          <li class="friend-list-item" onclick="location.href=<?='\'./chat.php?' . $friend->getUsername() . '\'' ?>">
             <div class="friend-list-text">
               <?= $friend->getUsername() ?>
               <!-- Solution without JavaScript 
-              <a href=".chat.php?<?php echo '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+              <a href=".chat.php?<?= '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
                 <?= $friend->getUsername() ?>
               </a> -->
             </div>
@@ -139,7 +69,11 @@
     <hr />
 
     <form method="post">
-      <input class="long-input <?php if (!$valid) { ?> invalid <?php } ?>" type="text" name="username" placeholder="<?php if (!$valid) { ?> The user you enterd is not known... <?php } else { ?> Add new friend...<?php } ?>" required/>
+      <?php if (http_response_code() == 404) { ?>
+          <input class="long-input invalid" type="text" name="username" placeholder="The user you enterd is not known..." required/>
+        <?php } else { ?>
+          <input class="long-input" type="text" name="username" placeholder="Add new friend..." required/>
+        <?php } ?>
       <button class="long-button" type="submit" name="action" value="add-friend">Add</button>
     </form>
   </body>
