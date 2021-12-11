@@ -1,48 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./profile.component.css" />
-    <title>Profile</title>
-  </head>
 
-  <body>
-    <h1>Profile of Tom</h1>
+  <h1>Profile of {{ userProfile.firstName }} </h1>
+  {{ this.currentChatUsername }}
 
-    <!--two hyperlinks to navigate back to chat/remove the friend-->
-    <div class="top-links">
-      <a href="chat.html" target="_self">&lt Back to Chat</a> |
-      <a href="friends.html" class="special-link" target="_self"> Remove Friend</a>
+  <!--two hyperlinks to navigate back to chat/remove the friend-->
+  <div class="top-links">
+    <a [routerLink]="['/chat']"> &larr; Back to Chat</a> |
+    <a (click)="removeFriend()" class="special-link"> Remove Friend</a>
+  </div>
+
+  <div>
+    <div class="profile-col-left">
+      <img class="profile-picture" src="..\assets\images\profile.png" alt="A profile picture"/>
     </div>
 
-    <div>
-      <div class="profile-col-left">
-        <img class="profile-picture" src="..\assets\images\profile.png" alt="A profile picture"/>
-      </div>
+    <div  class="profile-col-right">
+      <p *ngIf="userProfile.description">
+        {{ userProfile.description }}
+      </p> 
 
-      <div class="profile-col-right">
-        <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-            rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-            ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea
-            rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-            ipsum dolor sit amet.
-        </p> 
+      <dl>
+        <dt>Coffee or Tea?</dt>
+        <dd *ngIf="userProfile.coffeeOrTea === '1'"> Neither nor </dd>
+        <dd *ngIf="userProfile.coffeeOrTea === '2'"> Coffee </dd>
+        <dd *ngIf="userProfile.coffeeOrTea === '3'"> Tea </dd>
 
-        <dl>
-          <dt>Coffee or Tea?</dt>
-          <dd>Tea</dd>
-          <dt>Name</dt>
-          <dd>Thomas</dd>
-        </dl>
-      </div>
+        <dt *ngIf="userProfile.firstName">Name</dt>
+        <dd *ngIf="userProfile.firstName">
+          {{ userProfile.firstName }}
+        </dd>
+      </dl>
     </div>
-  </body>
-</html>
+  </div>

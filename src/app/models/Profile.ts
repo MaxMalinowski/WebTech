@@ -5,8 +5,8 @@ export class Profile {
     public description: string;
     public layout: string;
 
-    public constructor(firstName: string, lastName: string, coffeeOrTea: string, 
-            description: string, chatLayout: string) {
+    public constructor(firstName: string='', lastName: string='', coffeeOrTea: string='1', 
+            description: string='', chatLayout: string='1') {
         this.firstName = firstName;
         this.lastName = lastName;
         this.coffeeOrTea = coffeeOrTea;
