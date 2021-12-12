@@ -41,7 +41,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   public ngOnDestroy(): void {
     this.interval.clearIntervals();
-    this.context.currentChatUsername = '';
   }
 
   private getAllMessages(): void {
