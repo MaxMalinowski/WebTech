@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./logout.component.css" />
-    <title>Logout</title>
-  </head>
+<img class="special-img" src="../assets/images/logout.png" alt="A logout-icon" />
 
-  <body>
-    <img class="special-img" src="../assets/images/logout.png" alt="A logout-icon"/>
+<h1 class="special-h">Logged out...</h1>
 
-    <h1 class="special-h">Logged out...</h1>
-
-    <div class="logout-col">
-      <p>See u!</p>
-      <a [routerLink]="['/login']">Login again</a>
-    </div>
-  </body>
-</html>
+<div class="logout-col">
+  <p>See u!</p>
+  <a [routerLink]="['/login']">Login again</a>
+</div>

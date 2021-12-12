@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
+import { ContextService } from 'src/app/services/context.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,9 +10,10 @@ import { BackendService } from 'src/app/services/backend.service';
 
 export class LogoutComponent implements OnInit {
 
-  constructor( private backendService: BackendService,) {}
+  constructor( private backendService: BackendService, private context: ContextService) {}
 
   ngOnInit(): void {
-    this.backendService.unsetUser()
+    this.context.clearContext();
+    this.backendService.unsetUser();
   }
 }

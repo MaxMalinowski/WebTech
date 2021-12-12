@@ -45,4 +45,9 @@ export class ContextService {
         }
         this._currentChatUsername = username
     }
+
+    public clearContext(): void {
+        this.currentChatUsername = '';
+        this.loggedInUsername = '';
+    } 
 }

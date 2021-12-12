@@ -223,7 +223,6 @@ export class BackendService {
      * Function has to be public to be called from outside in case of a logout or error.
      */
     public unsetUser(): void {
-        this.context.loggedInUsername = ''
         localStorage.removeItem('username')
         localStorage.removeItem('token')
         this.headers = null
