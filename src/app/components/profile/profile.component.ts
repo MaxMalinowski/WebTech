@@ -35,8 +35,8 @@ export class ProfileComponent implements OnInit {
     }
 
     public removeFriend(): void {
-        if (confirm(`Do you really want to remove ${this.context.currentChatUsername} as friend?`)) {
-            this.backendService.removeFriend(this.context.currentChatUsername);
+        if (confirm(`Do you really want to remove ${this.currentChatUsername} as friend?`)) {
+            this.backendService.removeFriend(this.currentChatUsername);
             this.router.navigate(['/friends']);
         } 
     }
