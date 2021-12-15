@@ -10,12 +10,16 @@
 </head>
 
 <body>
+  <script>
+    window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+    window.chatServer = "<?= CHAT_SERVER_URL ?>";
+  </script>
   <?php registerUser() ?>
   <img class="special-img" src="../assets/images/user.png" alt="" />
 
   <h1 class="special-h">Register yourself</h1>
 
-  <form action="register.php" methode="post" onsubmit="return checkForm()">
+  <form action="register.php" methode="post" >
     <fieldset class="form_fieldset">
       <legend>Register</legend>
 
