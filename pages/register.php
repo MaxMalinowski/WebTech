@@ -10,10 +10,7 @@
 </head>
 
 <body>
-  <script>
-    window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
-    window.chatServer = "<?= CHAT_SERVER_URL ?>";
-  </script>
+ 
   <?php registerUser() ?>
   <img class="special-img" src="../assets/images/user.png" alt="" />
 
@@ -55,7 +52,7 @@
     </fieldset>
 
     <div class="button-div">
-      <button type="submit" formaction="./login.html" formnovalidate>Cancel</button>
+      <button type="submit" formaction="./login.php" formnovalidate>Cancel</button>
       <button class="blue-button" type="submit" <?php if ($disable) { ?> disabled <?php   } ?>>Create Account</button>
     </div>
 

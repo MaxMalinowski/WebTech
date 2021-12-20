@@ -4,6 +4,10 @@ require("../utils/global.php");
 if (isset($_SESSION["user"])) {
   header("Location: friends.php");
 }
+$fehlermeldungen = array();
+$username = $_POST['username'];
+$password = $_POST['password'];
+$confirm = $_POST['confirm'];
 
 function registerUser()
 {
@@ -13,8 +17,8 @@ function registerUser()
   $password = $_POST['password'];
   $confirm = $_POST['confirm'];
   $disable = true;
-  if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm'])) {
-    if ($service->userExists($username)) {
+  if (isset($username) && isset($password) && isset($confirm)) {
+    if (!$service->userExists($username)) {
       if (strlen($username) < 3) {
         $fehlermeldungen[] = 'This username is too short.';
       }
