@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (!isset($_GET["friend"])) {
-    header("Location: chat.php");
+    header("Location: friends.php");
 }
 
 function loadUserInfo() {
