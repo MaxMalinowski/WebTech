@@ -1,5 +1,4 @@
 <?php
-session_start();
 require("../utils/global.php");
 
 if (isset($_SESSION["user"])) {
@@ -12,6 +11,7 @@ function registerUser()
   $username = '';
   $password = '';
   $confirm = '';
+  $disable = true;
   if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm'])) {
     if (strlen($username) < 3) {
       $fehlermeldungen[] = 'This username is too short.';
@@ -23,6 +23,7 @@ function registerUser()
       $fehlermeldungen[] = 'The passwords do not match.';
     }
     if (count($fehlermeldungen) == 0) {
+      $$disable = false;
       global $service;
       $username = $_POST['username'];
       $password = $_POST['password'];
