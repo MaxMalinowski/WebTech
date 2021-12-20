@@ -15,4 +15,10 @@ function loadUserInfo() {
     return $friend;
 }
 
+function removeFriend() {
+    global $service;
+    $result = $service->friendRemove($_GET["friend"]);
+   
+}
+
 ?>
