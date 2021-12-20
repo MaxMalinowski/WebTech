@@ -9,11 +9,12 @@
   </head>
 
   <body>
-    <h1>Profile of Tom</h1>
+    <?php $friend = loadUserInfo() ?>
+    <h1>Profile of <?=$friend->getUsername()?> </h1>
 
     <!--two hyperlinks to navigate back to chat/remove the friend-->
     <div class="top-links">
-      <a href="chat.php" target="_self">&lt; Back to Chat</a> |
+      <a onclick="location.href=<?='\'./chat.php?friend=' . $friend->getUsername() . '\'' ?>" target="_self">&lt; Back to Chat</a> |
       <a href="friends.php" class="special-link" target="_self"> Remove Friend</a>
     </div>
 
@@ -24,24 +25,14 @@
 
       <div class="profile-col-right">
         <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-            rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-            ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea
-            rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-            ipsum dolor sit amet.
+          <?=$friend->getDescription()?>
         </p> 
 
         <dl>
           <dt>Coffee or Tea?</dt>
-          <dd>Tea</dd>
+          <dd><?=$friend->getCoffeeOrTea()?></dd>
           <dt>Name</dt>
-          <dd>Thomas</dd>
+          <dd><?=$friend->getFirstName()?></dd>
         </dl>
       </div>
     </div>
