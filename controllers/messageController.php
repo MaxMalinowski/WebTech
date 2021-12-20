@@ -9,7 +9,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (!isset($_POST['friend'])) {
-    header(("Location : friends.php"));
+    header(("Location: friends.php"));
 }
 
 function getAllMessages()
