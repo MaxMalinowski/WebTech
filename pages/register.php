@@ -10,7 +10,7 @@
 </head>
 
 <body>
- 
+
   <?php registerUser() ?>
   <img class="special-img" src="../assets/images/user.png" alt="" />
 
@@ -25,10 +25,7 @@
           <label for="username">Username</label>
         </div>
         <div class="form-col-right">
-          <input type="text" id="username" name="username" placeholder="Username" required />
-        </div>
-        <div class="login-message" <?php if (http_response_code() == 200) { ?> hidden <?php } ?>>
-          Username already exists.
+          <input type="text" id="username" name="username" placeholder="Username" (keyup)="<?= $username->checkUsername() ?>" required />
         </div>
       </div>
 
@@ -37,7 +34,10 @@
           <label for="password">Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="password" name="password" placeholder="Password" required />
+          <input type="password" id="password" name="password" placeholder="Password" (keyup)="<?= $password->checkPassword() ?>" required />
+          <div class="register-message" <?php if ($password->checkPassword()) { ?> hidden <?php } ?>>
+            This password is too short.
+          </div>
         </div>
       </div>
 
@@ -46,7 +46,10 @@
           <label for="confirm">Confirm Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="confirm" name="confirm" placeholder="Password" required />
+          <input type="password" id="confirm" name="confirm" placeholder="Password" (keyup)="<?= $confirm->checkConfirmed() ?>" required />
+          <div class="register-message" <?php if ($confirm->checkConfirmed()) { ?> hidden <?php } ?>>
+            The passwords do not match.
+          </div>
         </div>
       </div>
     </fieldset>
