@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])) {
     header("Location: login.php");
 }
 
-if (!isset($_POST['friend'])) {
+if (!isset($_GET['friend'])) {
     header(("Location: friends.php"));
 }
 
