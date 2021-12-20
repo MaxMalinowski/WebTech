@@ -12,45 +12,44 @@ if (!isset($_POST['friend'])) {
     header(("Location : friends.php"));
 }
 
-function getAllMessages()
-{
+function getAllMessages(){
     global $service;
     $chatUsername = "name"; //tbd
     $allMessages = [];
 
-    $service . listMessages($chatUsername);
+    $service->listMessages($chatUsername);
     $allMessages = array();
     foreach ($allMessages as $msg => $value) {
         $allMessages[] = new Message($msg . new DateTime('now'));
     }
 }
 
-function getUserProfile()
-{
+function getUserProfile(){
     global $service;
     $chatUsername = "name"; //tbd
-    $service . loadUser($chatUsername);
+    $service->loadUser($chatUsername);
     // (user as Profile).layout === 'double' ? (this.showSingleLined = false) : (this.showSingleLined = true);
 
 }
-function sendMessage()
-{
+function sendMessage(){
     global $service;
     $username = "name"; //tbd
-    $message = "text"; //tbd
+    $message = $_POST['message'];
     $service->sendMessage($username, $message);
     $message = '';
     //  this.showLoadingIndicator = true;
     // this.scrollToBottom();
 }
 
-function removeFriend()
-{
+function removeFriend(){
     $chatUsername = "name"; //tbd
-    if (confirm(`Do you really want to remove $chatUsername as friend?`)) {
-        global $service;
-        $service->friendRemove($chatUsername);
-        header("Location: friends.php");
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_POST['confirm'] == 'Yes') {
+            //confirm(`Do you really want to remove $chatUsername as friend?`)) {
+            global $service;
+            $service->friendRemove($chatUsername);
+            header("Location: friends.php");
+        }
     }
 }
    //scrollToBottom(){
