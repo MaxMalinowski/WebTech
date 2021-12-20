@@ -32,7 +32,7 @@
             <div class="friend-list-text">
               <?= $friend->getUsername() ?>
               <!-- Solution without JavaScript 
-              <a href=".chat.php?<?= '\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+              <a href=".chat.php?<?= '\'./chat.php?friend=' .$friend->getUsername() . '\'' ?>">
                 <?= $friend->getUsername() ?>
               </a> -->
             </div>

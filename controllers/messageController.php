@@ -12,9 +12,10 @@ if (!isset($_POST['friend'])) {
     header(("Location : friends.php"));
 }
 
-function getAllMessages(){
+function getAllMessages()
+{
     global $service;
-    $chatUsername = "name"; //tbd
+    $chatUsername = $_GET['friend'];
     $allMessages = [];
 
     $service->listMessages($chatUsername);
@@ -24,16 +25,18 @@ function getAllMessages(){
     }
 }
 
-function getUserProfile(){
+function getUserProfile()
+{
     global $service;
-    $chatUsername = "name"; //tbd
+    $chatUsername = $_GET['friend'];
     $service->loadUser($chatUsername);
     // (user as Profile).layout === 'double' ? (this.showSingleLined = false) : (this.showSingleLined = true);
 
 }
-function sendMessage(){
+function sendMessage()
+{
     global $service;
-    $username = "name"; //tbd
+    $username = $_GET['friend'];
     $message = $_POST['message'];
     $service->sendMessage($username, $message);
     $message = '';
@@ -41,8 +44,9 @@ function sendMessage(){
     // this.scrollToBottom();
 }
 
-function removeFriend(){
-    $chatUsername = "name"; //tbd
+function removeFriend()
+{
+    $chatUsername = $_GET['friend'];
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['confirm'] == 'Yes') {
             //confirm(`Do you really want to remove $chatUsername as friend?`)) {
