@@ -28,7 +28,7 @@
         <ul>
         <?php foreach ($friendsList as $friend) { ?> 
           <!-- Solution with JavaScript -->
-          <li class="friend-list-item" onclick="location.href=<?='\'./chat.php?' . $friend->getUsername() . '\'' ?>">
+          <li class="friend-list-item" onclick="location.href=<?='\'./chat.php?friend=' . $friend->getUsername() . '\'' ?>">
             <div class="friend-list-text">
               <?= $friend->getUsername() ?>
               <!-- Solution without JavaScript 
