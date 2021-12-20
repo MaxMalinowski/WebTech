@@ -11,15 +11,15 @@ class User implements JsonSerializable {
     private $description;
     private $layout;
  
-    public function __construct($username=null, $firstName='', $lastName='', $coffeeOrTea='1',
-                                 $description='', $layout='1') {
+    public function __construct($username=null, $firstName='', $lastName='', $coffeeOrTea='neither_nor',
+                                 $description='', $layout='oneLine') {
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->coffeeOrTea = $coffeeOrTea;
         $this->description = $description;
         $this->layout = $layout;
-        
+
     }
 
     public function getUsername() {
