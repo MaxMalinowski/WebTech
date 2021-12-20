@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../css/animations.css" />
-        <?php require("../utils/global.php") ?>
+        <?php require('../controllers/messageController.php') ?>
         <title>Chat</title>
     </head>
 
@@ -14,7 +14,7 @@
 
         <div class="top-links">
             <a href="./friends.php"> &lt Back</a> | <a href="./profile.php">Profile</a> |
-            <a href="./friends.php" class="special-link">Remove Friend</a>
+            <a href="./friends.php" class="special-link" onsubmit="removeFriend()">Remove Friend</a>
         </div>
 
         <hr />

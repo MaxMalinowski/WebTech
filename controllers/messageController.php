@@ -4,6 +4,14 @@ use model\Message;
 
 require("../utils/global.php");
 
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+}
+
+if (!isset($_POST['friend'])) {
+    header(("Location : friends.php"));
+}
+
 function getAllMessages()
 {
     global $service;
