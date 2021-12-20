@@ -14,11 +14,9 @@
     <h1>Chat with <?= $friend ?></h1>
 
     <div class="top-links">
-
         <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?= '\'./profile.php?friend=' . $friend->getUsername() . '\'' ?>">"Profile</a> |
         <a href="./friends.php" class="special-link" onsubmit="<?= $friend->removeFriend() ?>">Remove Friend</a>
     </div>
-
     <hr />
 
     <fieldset id="chat" class="special-fieldset">
@@ -26,7 +24,6 @@
             <div class="dot-flashing"></div>
         </div>
     </fieldset>
-
     <hr />
 
     <form onsubmit="return <?= $friend->sendMessage() ?>">

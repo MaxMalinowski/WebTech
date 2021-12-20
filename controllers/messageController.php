@@ -11,6 +11,7 @@ if (!isset($_SESSION["user"])) {
 if (!isset($_GET['friend'])) {
     header(("Location: friends.php"));
 }
+$friend = $_GET['friend'];
 
 function getAllMessages()
 {
@@ -36,7 +37,7 @@ function sendMessage()
 {
     global $service;
     $username = $_GET['friend'];
-    $message = $_POST['message'];
+    $message = $_GET['message'];
     $service->sendMessage($username, $message);
     $message = '';
     //  this.showLoadingIndicator = true;
