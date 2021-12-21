@@ -21,7 +21,7 @@ function getAllMessages()
     $service->listMessages($friend);
     $allMessages = array();
     foreach ($allMessages as $msg => $value) {
-        $allMessages[] = new Message($msg . new DateTime('now'));
+        $allMessages[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getDate());
     }
 }
 

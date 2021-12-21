@@ -5,18 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/style.css" />
-  <?php require('../controllers/registerController.php') ?>
+  <script src="../javascript/register.js"></script>
   <title>Register</title>
 </head>
 
 <body>
 
-  <?php registerUser() ?>
+
   <img class="special-img" src="../assets/images/user.png" alt="" />
 
   <h1 class="special-h">Register yourself</h1>
 
-  <form action="register.php" methode="post">
+  <form action="./register.php" methode="post">
     <fieldset class="form_fieldset">
       <legend>Register</legend>
 
@@ -25,7 +25,7 @@
           <label for="username">Username</label>
         </div>
         <div class="form-col-right">
-          <input type="text" id="username" name="username" placeholder="Username" (keyup)="<?= $username->checkUsername() ?>" required />
+          <input type="text" id="username" name="username" placeholder="Username" (keyup)="checkUsername()" required />
         </div>
       </div>
 
@@ -34,10 +34,8 @@
           <label for="password">Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="password" name="password" placeholder="Password" (keyup)="<?= $password->checkPassword() ?>" required />
-          <div class="register-message" <?php if ($password->checkPassword()) { ?> hidden <?php } ?>>
-            This password is too short.
-          </div>
+          <input type="password" id="password" name="password" placeholder="Password" keyup="checkPassword()" required />
+
         </div>
       </div>
 
@@ -46,30 +44,19 @@
           <label for="confirm">Confirm Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="confirm" name="confirm" placeholder="Password" (keyup)="<?= $confirm->checkConfirmed() ?>" required />
-          <div class="register-message" <?php if ($confirm->checkConfirmed()) { ?> hidden <?php } ?>>
-            The passwords do not match.
-          </div>
+          <input type="password" id="confirm" name="confirm" placeholder="Password" keyup="checkConfirmedPassword()" required />
+
         </div>
       </div>
     </fieldset>
 
     <div class="button-div">
       <button type="submit" formaction="./login.php" formnovalidate>Cancel</button>
-      <button class="blue-button" type="submit" <?php if ($disable) { ?> disabled <?php   } ?>>Create Account</button>
+      <button class="blue-button" type="submit" disabled="checkForm()" >Create Account</button>
     </div>
 
-    <div class="register-message">
-      <ul>
-        <?php
-        if (count($fehlermeldungen) != 0) {
-          foreach ($fehlermeldungen as $fehlermeldung) {
-            echo "<li>" . $fehlermeldung . "</li>";
-          }
-        }
-        ?>
-      </ul>
-    </div>
+
+
 
 
 

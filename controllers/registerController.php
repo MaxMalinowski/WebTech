@@ -4,6 +4,7 @@ require("../utils/global.php");
 if (isset($_SESSION["user"])) {
   header("Location: friends.php");
 }
+$$disable = true;
 $fehlermeldungen = array();
 $username = '';
 $password = '';
