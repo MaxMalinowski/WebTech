@@ -7,13 +7,13 @@ class Message implements JsonSerializable {
     private $from;
     private $type;
     private $msg;
-    private $date;
+    private $time;
  
-    public function __construct($from=null, $type=null,$msg=null, $date=null) {
+    public function __construct($from=null,$msg=null, $time=null, $type=null) {
         $this->from = $from;
+               $this->msg = $msg;
+        $this->time = $time;
         $this->type= $type;
-        $this->msg = $msg;
-        $this->date = $date;
     }
 
     public function getFrom() {
@@ -22,8 +22,8 @@ class Message implements JsonSerializable {
     public function getMsg() {
         return $this->msg;
     }
-    public function getDate() {
-        return  $this->date;
+    public function getTime() {
+        return  $this->time;
     }
 
     public function jsonSerialize() { 

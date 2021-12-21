@@ -48,7 +48,7 @@
     </fieldset>
 
     <div class="button-div">
-      <button type="submit" formaction="./login.php" formnovalidate >Cancel</button>
+    <a href="./login.php"> <button type="button" > Cancel</button></a>
       <button class="blue-button" type="submit">Create Account</button>
     </div>
   </form>

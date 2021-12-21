@@ -19,16 +19,20 @@ function checkForChatPartner()
     return $service->loadUser($_GET['friend']);
 }
 
+
+
 function getAllMessages()
 {
     $friend = $_GET['friend'];
     $allMessages = [];
     global $service;
     $allMessages = $service->listMessages($friend);
+
+    var_dump($allMessages);
     foreach ($allMessages as $i => $msg) {
-        $allMessages[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getDate());
+        $allMessagesSeparated[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getTime());
     }
-    return $allMessages;
+    return $allMessagesSeparated;
 }
 
 function getUserProfile()
@@ -38,15 +42,16 @@ function getUserProfile()
     $layout = $user->getLayout();
     return $layout;
 }
+
+
 function sendMessage()
 {
-    $message = 'leer';
-    var_dump($_POST['message']);
+    $message = '';
     if (isset($_POST['message'])) {
         $username = $_GET['friend'];
         $message = $_POST['message'];
         global $service;
-        if ($message !== "") {
+        if (!empty($message )) {
             $service->sendMessage($username, $message);
         }
     }

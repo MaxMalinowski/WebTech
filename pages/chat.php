@@ -13,6 +13,15 @@
 <body>
     <?php $friend = checkForChatPartner() ?>
     <?php $messages = getAllMessages() ?>
+    <script>
+        window.setInterval(function() {
+            recieveMessages();
+            if (messagesOnServer.length > messagesDisplayed) {
+                appendMessages(messagesOnServer.slice(messagesDisplayed));
+            }
+        }, 1000);
+    </script>
+
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
@@ -29,7 +38,7 @@
                     echo ("<tr>");
                     echo ('<td class="chat-message-name"> ' . $msg->getFrom() . "</td> ");
                     echo ('<td class="chat-message-text"> ' . $msg->getMsg() . "</td>");
-                    echo ('<td class="chat-message-date"> ' . date('d-m-Y H:i:s', $msg->getDate()) . "</td>");
+                    echo ('<td class="chat-message-date"> ' . date('d-m-Y H:i:s', $msg->getTime()) . "</td>");
                     echo ("</tr>");
                 }
             } ?>
@@ -42,7 +51,7 @@
 
     <form action="<?= 'chat.php?friend=' . $friend->getUsername() ?>" method="post" onsubmit=" <?= sendMessage() ?>">
         <input class="long-input" id="message" type="text" name="message" placeholder="New Message" autofocus required />
-        <button class="long-button" type="submit" onclick=" <?= sendMessage() ?>">Send</button>
+        <button class="long-button" type="submit">Send</button>
     </form>
 </body>
 
