@@ -25,8 +25,8 @@
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
-        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?='\'./profile.php?friend=' . $friend->getUsername() . '\''?>">Profile</a> |
-        <a class="special-link" onclick="location.href=<?='\'./friends.php?action=remove-friend&username=' . $friend->getUsername() . '\''?>">Remove Friend</a>
+        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?= '\'./profile.php?friend=' . $friend->getUsername() . '\'' ?>">Profile</a> |
+        <a class="special-link" onclick="location.href=<?= '\'./friends.php?action=remove-friend&username=' . $friend->getUsername() . '\'' ?>">Remove Friend</a>
     </div>
     <hr />
 
@@ -35,10 +35,10 @@
             <?php
             if ($messages) {
                 foreach ($messages as $i => $msg) {
-                    echo ("<tr>");
-                    echo ('<td class="chat-message-name"> ' . $msg->getFrom() . "</td> ");
+                    echo ('<tr class="chat-message-row">');
+                    echo ('<td class="chat-message-name"> ' . $msg->getFrom() . ":" . "</td> ");
                     echo ('<td class="chat-message-text"> ' . $msg->getMsg() . "</td>");
-                    echo ('<td class="chat-message-date"> ' . date('H:i:s d-m-Y', $msg->getTime()/1000) . "</td>");
+                    echo ('<td class="chat-message-date"> ' . date('H:i:s d-m-Y', $msg->getTime() / 1000) . "</td>");
                     echo ("</tr>");
                 }
             } ?>

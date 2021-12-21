@@ -27,8 +27,6 @@ function getAllMessages()
     $allMessages = [];
     global $service;
     $allMessages = $service->listMessages($friend);
-
-    var_dump($allMessages);
     foreach ($allMessages as $i => $msg) {
         $allMessagesSeparated[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getTime());
     }
@@ -51,7 +49,7 @@ function sendMessage()
         $username = $_GET['friend'];
         $message = $_POST['message'];
         global $service;
-        if (!empty($message )) {
+        if (!empty($message)) {
             $service->sendMessage($username, $message);
         }
     }
