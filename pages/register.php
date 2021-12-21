@@ -6,17 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../javascript/register.js"></script>
+  <?php require('../controllers/registerController.php') ?>
   <title>Register</title>
 </head>
 
 <body>
-
-
   <img class="special-img" src="../assets/images/user.png" alt="" />
 
   <h1 class="special-h">Register yourself</h1>
 
-  <form action="./register.php" methode="post">
+  <form action="register.php" method="post" onsubmit="return checkForm()">
     <fieldset class="form_fieldset">
       <legend>Register</legend>
 
@@ -25,7 +24,7 @@
           <label for="username">Username</label>
         </div>
         <div class="form-col-right">
-          <input type="text" id="username" name="username" placeholder="Username" (keyup)="checkUsername()" required />
+          <input type="text" id="username" name="username" placeholder="Username" oninput="checkUsername()" required />
         </div>
       </div>
 
@@ -34,8 +33,7 @@
           <label for="password">Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="password" name="password" placeholder="Password" keyup="checkPassword()" required />
-
+          <input type="password" id="password" name="password" placeholder="Password" oninput="checkPassword()" required />
         </div>
       </div>
 
@@ -44,7 +42,7 @@
           <label for="confirm">Confirm Password</label>
         </div>
         <div class="form-col-right">
-          <input type="password" id="confirm" name="confirm" placeholder="Password" keyup="checkConfirmedPassword()" required />
+          <input type="password" id="confirm" name="confirm" placeholder="Password" oninput="checkConfirmedPassword()" required />
 
         </div>
       </div>
@@ -52,15 +50,8 @@
 
     <div class="button-div">
       <button type="submit" formaction="./login.php" formnovalidate>Cancel</button>
-      <button class="blue-button" type="submit" disabled="checkForm()" >Create Account</button>
+      <button class="blue-button" type="submit">Create Account</button>
     </div>
-
-
-
-
-
-
-
   </form>
 </body>
 

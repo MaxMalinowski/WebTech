@@ -45,7 +45,7 @@
       </fieldset>
 
       <div class="button-div">
-        <button type="button" formaction="./register.php" formnovalidate>Register</button>
+        <button type="submit" formaction="./register.php" formnovalidate>Register</button>
         <button type="submit" class="blue-button">Login</button>
       </div>
     </form>

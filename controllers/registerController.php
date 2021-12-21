@@ -4,7 +4,7 @@ require("../utils/global.php");
 if (isset($_SESSION["user"])) {
   header("Location: friends.php");
 }
-$$disable = true;
+
 $fehlermeldungen = array();
 $username = '';
 $password = '';
@@ -59,20 +59,20 @@ function checkConfirmed()
 
 function  registerUser()
 {
-  global $service;
+
   if (checkUsername() && checkPassword() && checkConfirmed()) {
-    $$disable = false;
+
     global $service;
     $username = $_POST['username'];
     $password = $_POST['password'];
     $result = $service->register($username, $password);
-    if ($result) {
+
+    if ($result !== '') {
       $_SESSION["user"] = $username;
-      header("Location: friends.php");
+      header("Location: ./friends.php");
     } else {
       http_response_code(403);
       $fehlermeldungen[] = 'Something went wrong';
     }
   }
-  exit();
 }
