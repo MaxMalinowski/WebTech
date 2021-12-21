@@ -15,7 +15,7 @@
     <!--two hyperlinks to navigate back to chat/remove the friend-->
     <div class="top-links">
       <a onclick="location.href=<?='\'./chat.php?friend=' . $friend->getUsername() . '\'' ?>" target="_self">&lt; Back to Chat</a> |
-      <a href="friends.php" onclick="<?php removeFriend() ?>" class="special-link" target="_self" > Remove Friend</a>
+      <a class="special-link" onclick="location.href=<?='\'./friends.php?action=remove-friend&username=' . $friend->getUsername() . '\''?>">Remove Friend</a>
     </div>
 
     <div>
