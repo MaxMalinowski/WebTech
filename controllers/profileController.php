@@ -6,13 +6,19 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (!isset($_GET["friend"])) {
-    header("Location: chat.php");
+    header("Location: friends.php");
 }
 
 function loadUserInfo() {
     global $service;
     $friend = $service->loadUser($_GET["friend"]);
     return $friend;
+}
+
+function removeFriend() {
+    global $service;
+    $result = $service->friendRemove($_GET["friend"]);
+   
 }
 
 ?>
