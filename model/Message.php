@@ -5,11 +5,13 @@ use JsonSerializable;
 
 class Message implements JsonSerializable {
     private $from;
+    private $type;
     private $msg;
     private $date;
  
-    public function __construct($from=null, $msg=null, $date=null) {
+    public function __construct($from=null, $type=null,$msg=null, $date=null) {
         $this->from = $from;
+        $this->type= $type;
         $this->msg = $msg;
         $this->date = $date;
     }
@@ -21,7 +23,7 @@ class Message implements JsonSerializable {
         return $this->msg;
     }
     public function getDate() {
-        return $this->date;
+        return  $this->date;
     }
 
     public function jsonSerialize() { 
@@ -36,4 +38,3 @@ class Message implements JsonSerializable {
         return $newMessage;
     }
 }
-?>

@@ -145,7 +145,13 @@ class BackendService {
     public function listMessages($username) {
         $url = $this->baseURL . '/message/' . $username;
         try {
-            return HttpClient::get($url, $this->getToken());
+            $response=HttpClient::get($url, $this->getToken());
+            $messagelist = array();
+            foreach($response as $message) {
+                $jsonMessage = \model\Message::fromJson($message);
+                array_push($messagelist, $jsonMessage);
+            }
+            return $messagelist;
         } catch (\Exception $e) {
             error_log($e);
         }

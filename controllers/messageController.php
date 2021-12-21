@@ -25,9 +25,10 @@ function getAllMessages()
     $allMessages = [];
     global $service;
     $allMessages = $service->listMessages($friend);
-    foreach ($allMessages as $msg => $value) {
+    foreach ($allMessages as $i => $msg) {
         $allMessages[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getDate());
     }
+    return $allMessages;
 }
 
 function getUserProfile()
@@ -39,20 +40,23 @@ function getUserProfile()
 }
 function sendMessage()
 {
-    $message = '';
+    $message = 'leer';
+    var_dump($_POST['message']);
     if (isset($_POST['message'])) {
         $username = $_GET['friend'];
         $message = $_POST['message'];
         global $service;
-        $service->sendMessage($username, $message);
+        if ($message !== "") {
+            $service->sendMessage($username, $message);
+        }
     }
     // this.scrollToBottom();
 }
 
-function removeFriend() {
+function removeFriend()
+{
     global $service;
     $result = $service->friendRemove($_GET["friend"]);
-   
 }
    //scrollToBottom(){
  //   chatElement.scrollTop = chatElement.scrollHeight;
