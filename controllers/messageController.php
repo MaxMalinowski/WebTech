@@ -2,24 +2,32 @@
 
 use model\Message;
 
+
 require("../utils/global.php");
+ini_set("display_errors", 1);
 
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
 }
-
 if (!isset($_GET['friend'])) {
-    header(("Location: friends.php"));
+    header("Location: friends.php");
 }
-$friend = $_GET['friend'];
+
+function checkForChatPartner()
+{
+    global $service;
+    return $service->loadUser($_GET['friend']);
+}
+
+
+
 
 function getAllMessages()
 {
-    global $service;
     $friend = $_GET['friend'];
     $allMessages = [];
-    $service->listMessages($friend);
-    $allMessages = array();
+    global $service;
+    $allMessages = $service->listMessages($friend);
     foreach ($allMessages as $msg => $value) {
         $allMessages[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getDate());
     }
@@ -27,20 +35,24 @@ function getAllMessages()
 
 function getUserProfile()
 {
-    global $service;
-    $friend = $_GET['friend'];
-    $service->loadUser($friend);
-    // (user as Profile).layout === 'double' ? (this.showSingleLined = false) : (this.showSingleLined = true);
 
+    global $service;
+    $user = $service->loadUser($_GET['friend']);
+    $layout = $user->getLayout();
+    return $layout;
 }
 function sendMessage()
 {
-    global $service;
-    $username = $_GET['friend'];
-    $message = $_GET['message'];
-    $service->sendMessage($username, $message);
+
     $message = '';
-    //  this.showLoadingIndicator = true;
+    if (isset($_POST(['message']))) {
+        $username = $_GET['friend'];
+        $message = $_POST['message'];
+        global $service;
+        $service->sendMessage($username, $message);
+    }
+
+
     // this.scrollToBottom();
 }
 

@@ -11,11 +11,12 @@
 </head>
 
 <body>
-    <h1>Chat with <?= $friend ?></h1>
+    <?php $friend = checkForChatPartner() ?>
+    <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
-        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?= '\'./profile.php?friend=' . $friend->getUsername() . '\'' ?>">"Profile</a> |
-        <a href="./friends.php" class="special-link" onsubmit="<?= $friend->removeFriend() ?>">Remove Friend</a>
+        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?= '\'./profile.php?friend=' . $friend->getUsername() . '\'' ?>">Profile</a> |
+        <a href="./friends.php" class="special-link" onclick="<?= removeFriend() ?>">Remove Friend</a>
     </div>
     <hr />
 
@@ -26,10 +27,10 @@
     </fieldset>
     <hr />
 
-    <form onsubmit="return <?= $friend->sendMessage() ?>">
+   <!-- <form action="chat.php" method="post" onsubmit="return <?= sendMessage() ?>" >
         <input class="long-input" id="message" type="text" name="message" placeholder="New Message" autofocus required />
         <button class="long-button" type="submit">Send</button>
-    </form>
+    </form> -->
 </body>
 
 </html>

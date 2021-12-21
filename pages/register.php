@@ -43,13 +43,12 @@
         </div>
         <div class="form-col-right">
           <input type="password" id="confirm" name="confirm" placeholder="Password" oninput="checkConfirmedPassword()" required />
-
         </div>
       </div>
     </fieldset>
 
     <div class="button-div">
-      <button type="submit" formaction="./login.php" formnovalidate>Cancel</button>
+      <button type="submit" formaction="./login.php" formnovalidate >Cancel</button>
       <button class="blue-button" type="submit">Create Account</button>
     </div>
   </form>
