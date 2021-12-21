@@ -57,7 +57,7 @@ function sendMessage()
 }
 
 
-function setInterval($f, $milliseconds)
+/*function setInterval($f, $milliseconds)
 {
     $seconds = (int)$milliseconds / 1000;
     while (true) {

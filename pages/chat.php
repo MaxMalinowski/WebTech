@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/chat.css" />
     <link rel="stylesheet" href="../css/animations.css" />
+    <script src="../javascript/chat.js"></script>
     <?php require('../controllers/messageController.php') ?>
+
     <title>Chat</title>
 </head>
 
 <body>
     <?php $friend = checkForChatPartner() ?>
-    <?php $messages = getallMessagesIntervall() ?>
+   
   
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
@@ -23,9 +25,9 @@
     <hr />
 
     <fieldset id="chat" class="special-fieldset">
-        <table class="chat-message">
+     <!--   <table class="chat-message">
             <?php
-            if (is_iterable($messages)) {
+            if ($messages) {
                 foreach ($messages as $i => $msg) {
                     echo ('<tr class="chat-message-row">');
                     echo ('<td class="chat-message-name"> ' . $msg->getFrom() . ":" . "</td> ");
@@ -34,7 +36,7 @@
                     echo ("</tr>");
                 }
             } ?>
-        </table>
+        </table>-->
         <div id="dot-container" class="dot-container">
             <div class="dot-flashing"></div>
         </div>
