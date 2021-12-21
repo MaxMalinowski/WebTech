@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <?php processFriendRequests() ?>
+    <h1><?= processFriendRequests() ?></h1>
     <?php list($friendsList, $requestsList) = getFriendsInformation() ?>
 
     <h1>Friends</h1>

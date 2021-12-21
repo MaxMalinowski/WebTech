@@ -14,11 +14,4 @@ function loadUserInfo() {
     $friend = $service->loadUser($_GET["friend"]);
     return $friend;
 }
-
-function removeFriend() {
-    global $service;
-    $result = $service->friendRemove($_GET["friend"]);
-   
-}
-
 ?>

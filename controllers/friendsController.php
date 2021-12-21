@@ -8,10 +8,10 @@ function checkForPresentUser() {
 }
 
 function processFriendRequests() {
-    if (isset($_POST['action']) && isset($_POST['username'])) {
+    if ((isset($_POST['action']) && isset($_POST['username'])) || (isset($_GET['action']) && isset($_GET['username']))) {
         global $service;
-        $action = $_POST['action'];
-        $username = $_POST['username'];
+        $action = isset($_POST['action']) ? $_POST['action'] : $_GET['action'];
+        $username = isset($_POST['username']) ? $_POST['username'] : $_GET['username'];
             
         switch ($action) {
             case 'add-friend':
@@ -34,7 +34,7 @@ function processFriendRequests() {
                 : http_response_code(500); 
                 break;
             
-            case 'REMOVE-friend':
+            case 'remove-friend':
                 $service->friendRemove($username)
                 ? header("Location: friends.php")
                 : http_response_code(500); 
@@ -63,4 +63,3 @@ function getFriendsInformation() {
     return array($friendsList, $requestsList);
 }
 ?>
-

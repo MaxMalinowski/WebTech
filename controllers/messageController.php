@@ -57,11 +57,5 @@ function sendMessage()
     }
     // this.scrollToBottom();
 }
-
-function removeFriend()
-{
-    global $service;
-    $result = $service->friendRemove($_GET["friend"]);
-}
    //scrollToBottom(){
  //   chatElement.scrollTop = chatElement.scrollHeight;

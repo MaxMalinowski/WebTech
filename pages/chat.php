@@ -25,8 +25,8 @@
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
-        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?= '\'./profile.php?friend=' . $friend->getUsername() . '\'' ?>">Profile</a> |
-        <a href="./friends.php" class="special-link" onclick="<?= removeFriend() ?>">Remove Friend</a>
+        <a href="./friends.php"> &lt Back</a> | <a onclick="location.href=<?='\'./profile.php?friend=' . $friend->getUsername() . '\''?>">Profile</a> |
+        <a class="special-link" onclick="location.href=<?='\'./friends.php?action=remove-friend&username=' . $friend->getUsername() . '\''?>">Remove Friend</a>
     </div>
     <hr />
 
