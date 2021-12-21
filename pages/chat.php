@@ -12,6 +12,7 @@
 
 <body>
     <?php $friend = checkForChatPartner() ?>
+    <?php $messages = getAllMessages()?>
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
@@ -21,16 +22,23 @@
     <hr />
 
     <fieldset id="chat" class="special-fieldset">
+        <table class="chat-message">
+        <?php foreach ($messages as $i => $msg) { 
+            echo('<td class="chat-message-name"> '. $msg->getFrom(). "</td>");
+            echo('<td class="chat-message-text"> '. $msg->getMsg(). "</td>");
+            echo('<td class="chat-message-date"> '. $msg->getDate(). "</td>");
+            ?>
+                </table>
         <div id="dot-container" class="dot-container">
             <div class="dot-flashing"></div>
         </div>
     </fieldset>
     <hr />
 
-   <!-- <form action="chat.php" method="post" onsubmit="return <?= sendMessage() ?>" >
+   <form action="<?= 'chat.php?friend=' . $friend->getUsername() ?>" method="post" onsubmit="return <?= sendMessage() ?>" >
         <input class="long-input" id="message" type="text" name="message" placeholder="New Message" autofocus required />
         <button class="long-button" type="submit">Send</button>
-    </form> -->
+    </form> 
 </body>
 
 </html>

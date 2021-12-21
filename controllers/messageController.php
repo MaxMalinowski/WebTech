@@ -19,9 +19,6 @@ function checkForChatPartner()
     return $service->loadUser($_GET['friend']);
 }
 
-
-
-
 function getAllMessages()
 {
     $friend = $_GET['friend'];
@@ -35,7 +32,6 @@ function getAllMessages()
 
 function getUserProfile()
 {
-
     global $service;
     $user = $service->loadUser($_GET['friend']);
     $layout = $user->getLayout();
@@ -43,30 +39,20 @@ function getUserProfile()
 }
 function sendMessage()
 {
-
     $message = '';
-    if (isset($_POST(['message']))) {
+    if (isset($_POST['message'])) {
         $username = $_GET['friend'];
         $message = $_POST['message'];
         global $service;
         $service->sendMessage($username, $message);
     }
-
-
     // this.scrollToBottom();
 }
 
-function removeFriend()
-{
-    $friend = $_GET['friend'];
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if ($_POST['confirm'] == 'Yes') {
-            //confirm(`Do you really want to remove $friend as friend?`)) {
-            global $service;
-            $service->friendRemove($friend);
-            header("Location: friends.php");
-        }
-    }
+function removeFriend() {
+    global $service;
+    $result = $service->friendRemove($_GET["friend"]);
+   
 }
    //scrollToBottom(){
  //   chatElement.scrollTop = chatElement.scrollHeight;
