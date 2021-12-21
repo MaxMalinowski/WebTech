@@ -53,7 +53,23 @@ function sendMessage()
             $service->sendMessage($username, $message);
         }
     }
-    // this.scrollToBottom();
+    
 }
-   //scrollToBottom(){
- //   chatElement.scrollTop = chatElement.scrollHeight;
+
+
+function setInterval($f, $milliseconds)
+{
+    $seconds = (int)$milliseconds / 1000;
+    while (true) {
+        $f();
+        sleep($seconds);
+    }
+}
+
+
+function getallMessagesIntervall()
+{
+    setInterval(function () {
+        return getAllMessages();
+    }, 1000);
+}

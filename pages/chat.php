@@ -12,16 +12,8 @@
 
 <body>
     <?php $friend = checkForChatPartner() ?>
-    <?php $messages = getAllMessages() ?>
-    <script>
-        window.setInterval(function() {
-            recieveMessages();
-            if (messagesOnServer.length > messagesDisplayed) {
-                appendMessages(messagesOnServer.slice(messagesDisplayed));
-            }
-        }, 1000);
-    </script>
-
+    <?php $messages = getallMessagesIntervall() ?>
+  
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
@@ -33,7 +25,7 @@
     <fieldset id="chat" class="special-fieldset">
         <table class="chat-message">
             <?php
-            if ($messages) {
+            if (is_iterable($messages)) {
                 foreach ($messages as $i => $msg) {
                     echo ('<tr class="chat-message-row">');
                     echo ('<td class="chat-message-name"> ' . $msg->getFrom() . ":" . "</td> ");
