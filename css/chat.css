@@ -42,3 +42,6 @@ Special class definitions
     width: 18%;
     max-width: 20%;
 }
+.chat-message-row{
+    width: 100%;
+}

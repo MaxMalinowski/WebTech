@@ -48,7 +48,7 @@
     </fieldset>
 
     <div class="button-div">
-    <a href="./login.php"> <button type="button" > Cancel</button></a>
+      <a href="./login.php"> <button type="button"> Cancel</button></a>
       <button class="blue-button" type="submit">Create Account</button>
     </div>
   </form>

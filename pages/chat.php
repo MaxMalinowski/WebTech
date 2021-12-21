@@ -38,7 +38,7 @@
                     echo ("<tr>");
                     echo ('<td class="chat-message-name"> ' . $msg->getFrom() . "</td> ");
                     echo ('<td class="chat-message-text"> ' . $msg->getMsg() . "</td>");
-                    echo ('<td class="chat-message-date"> ' . date('d-m-Y H:i:s', $msg->getTime()) . "</td>");
+                    echo ('<td class="chat-message-date"> ' . date('H:i:s d-m-Y', $msg->getTime()/1000) . "</td>");
                     echo ("</tr>");
                 }
             } ?>
