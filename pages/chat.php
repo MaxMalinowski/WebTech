@@ -8,14 +8,21 @@
     <link rel="stylesheet" href="../css/animations.css" />
     <script src="../javascript/chat.js"></script>
     <?php require('../controllers/messageController.php') ?>
-
+    <script>
+        console.log("hello");
+        window.chatToken = "<?= $_SESSION['chat_token'] ?>";
+        window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+        console.log(window.chatCollectionId);
+        window.chatServer = "<?= CHAT_SERVER_URL ?>";
+        console.log(window.chatServer);
+    </script>
     <title>Chat</title>
 </head>
 
 <body>
     <?php $friend = checkForChatPartner() ?>
-   
-  
+
+
     <h1>Chat with <?= $friend->getUsername() ?></h1>
 
     <div class="top-links">
@@ -25,7 +32,7 @@
     <hr />
 
     <fieldset id="chat" class="special-fieldset">
-     <!--   <table class="chat-message">
+        <!--   <table class="chat-message">
             <?php
             if ($messages) {
                 foreach ($messages as $i => $msg) {
@@ -43,7 +50,7 @@
     </fieldset>
     <hr />
 
-    <form action="<?= 'chat.php?friend=' . $friend->getUsername() ?>" method="post" onsubmit=" <?= sendMessage() ?>">
+    <form action="<?= 'chat.php?friend=' . $friend->getUsername() ?>" method="post" onsubmit="">
         <input class="long-input" id="message" type="text" name="message" placeholder="New Message" autofocus required />
         <button class="long-button" type="submit">Send</button>
     </form>
