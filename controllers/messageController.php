@@ -21,17 +21,7 @@ function checkForChatPartner()
 
 
 
-function getAllMessages()
-{
-    $friend = $_GET['friend'];
-    $allMessages = [];
-    global $service;
-    $allMessages = $service->listMessages($friend);
-    foreach ($allMessages as $i => $msg) {
-        $allMessagesSeparated[] = new Message($msg->getFrom(), $msg->getMsg(), $msg->getTime());
-    }
-    return $allMessagesSeparated;
-}
+
 
 function getUserProfile()
 {
@@ -57,19 +47,3 @@ function sendMessage()
 }
 
 
-/*function setInterval($f, $milliseconds)
-{
-    $seconds = (int)$milliseconds / 1000;
-    while (true) {
-        $f();
-        sleep($seconds);
-    }
-}
-
-
-function getallMessagesIntervall()
-{
-    setInterval(function () {
-        return getAllMessages();
-    }, 1000);
-}

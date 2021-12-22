@@ -4,20 +4,19 @@ var messagesOnServer = [];
 /**
  * Update every second to check if new messages available
  * --> Function not called explicitly, but continously every 1 second
- */
+ 
 window.setInterval(function () {
   recieveMessages();
   if (messagesOnServer.length > messagesDisplayed) {
     appendMessages(messagesOnServer.slice(messagesDisplayed));
   }
-}, 1000);
+}, 1000);*/
 
 /**
  * Retrieve messages from the server
  */
 function recieveMessages(friend) {
- 
-  let url = window.chatServer + window.chatCollectionId + "/message/"+ friend;
+   let url =  window.chatServer + window.chatCollectionId + "/message/"+ friend;
   console.log(url)
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
