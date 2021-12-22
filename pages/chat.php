@@ -20,13 +20,14 @@
 <body>
     <?php $friend = checkForChatPartner() ?>
     <?php sendMessage() ?>
+    <?php getUserProfile()?>
 
     <h1>Chat with <?= $friend->getUsername() ?></h1>
     <script>
         window.setInterval(function() {
             recieveMessages("<?= $friend->getUsername() ?>");
             if (messagesOnServer.length > messagesDisplayed) {
-                appendMessages(messagesOnServer.slice(messagesDisplayed));
+                appendMessages(messagesOnServer.slice(messagesDisplayed), "<?= getUserProfile() ?>");
             }
         }, 1000);
     </script>
@@ -37,7 +38,8 @@
     </div>
     <hr />
 
-    <fieldset id="chat" class="special-fieldset">
+    <fieldset id="chat" class="special-fieldset" > 
+
         <div id="dot-container" class="dot-container">
             <div class="dot-flashing"></div>
         </div>

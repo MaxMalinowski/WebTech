@@ -16,8 +16,8 @@ window.setInterval(function () {
  * Retrieve messages from the server
  */
 function recieveMessages(friend) {
-   let url =  window.chatServer +"/"+ window.chatCollectionId + "/message/"+ friend;
-  console.log(url)
+  let url =
+    window.chatServer + "/" + window.chatCollectionId + "/message/" + friend;
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -33,10 +33,10 @@ function recieveMessages(friend) {
 /**
  * Create new message elements in chat if not yet displayed
  */
-function appendMessages(messagesToAppend) {
+function appendMessages(messagesToAppend, layout) {
   var fieldsetElement = document.getElementById("chat");
   messagesToAppend.forEach((msg) => {
-    newElement = buildMessage(msg["from"], msg["msg"], msg["time"]);
+    newElement = buildMessage(msg["from"], msg["msg"], msg["time"], layout);
     fieldsetElement.appendChild(newElement);
     messagesDisplayed++;
   });
@@ -47,13 +47,18 @@ function appendMessages(messagesToAppend) {
 /**
  * Build a param-element representing a message in the chat
  */
-function buildMessage(msgFrom, msgText, msgDate) {
+function buildMessage(msgFrom, msgText, msgDate, layout) {
   let newElement = document.createElement("table");
   let newMsgName = document.createElement("td");
   let newMsgText = document.createElement("td");
   let newMsgDate = document.createElement("td");
 
-  newElement.classList.add("chat-message");
+  if (layout === "seperatedLines") {
+    newElement.classList.add("chat-message-double-lined");
+  } else {
+    newElement.classList.add("chat-message");
+  }
+
   newMsgName.classList.add("chat-message-name");
   newMsgText.classList.add("chat-message-text");
   newMsgDate.classList.add("chat-message-date");
@@ -76,4 +81,18 @@ function scrollUpdate() {
   console.log("updating scroll ...");
   var chatElement = document.getElementById("chat");
   chatElement.scrollTop = chatElement.scrollHeight;
+}
+
+function getUserProfile() {
+  let url = window.chatServer + window.chatCollectionId + "/profile" + username;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      profilesettings = JSON.parse(xmlhttp.responseText);
+    }
+  };
+
+  xmlhttp.open("GET", url, true);
+  xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
+  xmlhttp.send();
 }
