@@ -24,7 +24,7 @@
       </div>
 
       <div class="profile-col-right">
-        <div>
+        <div <?php if(empty($friend->getDescription())) {?> hidden <?php } ?>>
           <?=$friend->getDescription()?>
         </div>
         <dl>
@@ -32,8 +32,8 @@
           <dd <?php if($friend->getCoffeeOrTea() !== "neither_nor") {?> hidden <?php } ?>> Neither Nor</dd>
           <dd <?php if($friend->getCoffeeOrTea() !== "coffee") {?> hidden <?php } ?>> Coffee</dd>
           <dd <?php if($friend->getCoffeeOrTea() !== "tea") {?> hidden <?php } ?>> Tea</dd>
-          <dt>Name</dt>
-          <dd><?=$friend->getFirstName()?></dd>
+          <dt <?php if(empty($friend->getFirstName())) {?> hidden <?php } ?> >Name</dt>
+          <dd <?php if(empty($friend->getFirstName())) {?> hidden <?php } ?> ><?=$friend->getFirstName()?></dd>
         </dl>
       </div>
     </div>
