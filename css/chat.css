@@ -5,7 +5,7 @@ Special class definitions
 --> Chat
 ################################################# */
 .chat-message {
-  display: table;
+  display: flex;
   justify-content: space-between;
   max-width: 850px;
   margin-bottom: 10px;
@@ -26,8 +26,8 @@ Special class definitions
 .chat-message-text {
   display: inline-flex;
   text-align: start;
-  width: 50%;
-  max-width: 50%;
+  width: 70%;
+  max-width: 70%;
 }
 
 .chat-message-placeholder {
@@ -39,9 +39,7 @@ Special class definitions
   color: lightgray;
   display: inline-flex;
   text-align: end;
-  width: 30%;
-  max-width: 30%;
+  width: 18%;
+  max-width: 20%;
 }
-.chat-message-row {
-  width: 100%;
-}
+
