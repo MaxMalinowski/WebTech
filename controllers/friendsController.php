@@ -66,7 +66,8 @@ function getFriendsInformation()
         }
     }
     $allUnread = $service->getUnread();
-    foreach ($allUnread as $unreadfriend => $unreadCount) {
+    foreach ($allUnread as $index => $unreadCount) {
+        $unreadfriend = $friendsList [$index];
         foreach ($friendsList as $friend) {
             if ($unreadfriend === $friend->getUsername()) {
                 $friendsList[$friend->getUsername()]  = $unreadCount;
