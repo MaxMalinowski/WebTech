@@ -16,7 +16,7 @@ window.setInterval(function () {
  * Retrieve messages from the server
  */
 function recieveMessages(friend) {
-   let url =  window.chatServer + window.chatCollectionId + "/message/"+ friend;
+   let url =  window.chatServer +"/"+ window.chatCollectionId + "/message/"+ friend;
   console.log(url)
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {

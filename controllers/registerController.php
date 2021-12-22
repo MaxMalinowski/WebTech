@@ -1,5 +1,6 @@
 <?php
 require("../utils/global.php");
+ini_set("display_errors", 1);
 
 if (isset($_SESSION["user"])) {
   header("Location: friends.php");
@@ -59,14 +60,15 @@ function checkConfirmed()
 
 function  registerUser()
 {
+  debug_to_console("Register");
 
   if (checkUsername() && checkPassword() && checkConfirmed()) {
-
+    debug_to_console("checked");
     global $service;
     $username = $_POST['username'];
     $password = $_POST['password'];
     $result = $service->register($username, $password);
-
+    debug_to_console($result);
     if ($result !== '') {
       $_SESSION["user"] = $username;
       header("Location: ./friends.php");
@@ -75,6 +77,14 @@ function  registerUser()
       $fehlermeldungen[] = 'Something went wrong';
     }
   }
+}
+
+function debug_to_console($data) {
+  $output = $data;
+  if (is_array($output))
+      $output = implode(',', $output);
+
+  echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 
 
