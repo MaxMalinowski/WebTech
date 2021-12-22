@@ -20,7 +20,7 @@
 <body>
     <?php $friend = checkForChatPartner() ?>
     <?php sendMessage() ?>
-    <?php getUserProfile()?>
+   
 
     <h1>Chat with <?= $friend->getUsername() ?></h1>
     <script>

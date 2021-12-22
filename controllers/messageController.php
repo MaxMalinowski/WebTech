@@ -26,7 +26,7 @@ function checkForChatPartner()
 function getUserProfile()
 {
     global $service;
-    $user = $service->loadUser($_GET['friend']);
+    $user = $service->loadUser($_SESSION['user']);
     $layout = $user->getLayout();
     return $layout;
 }

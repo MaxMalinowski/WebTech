@@ -2,17 +2,6 @@ var messagesDisplayed = 0;
 var messagesOnServer = [];
 
 /**
- * Update every second to check if new messages available
- * --> Function not called explicitly, but continously every 1 second
- 
-window.setInterval(function () {
-  recieveMessages();
-  if (messagesOnServer.length > messagesDisplayed) {
-    appendMessages(messagesOnServer.slice(messagesDisplayed));
-  }
-}, 1000);*/
-
-/**
  * Retrieve messages from the server
  */
 function recieveMessages(friend) {
@@ -40,7 +29,7 @@ function appendMessages(messagesToAppend, layout) {
     fieldsetElement.appendChild(newElement);
     messagesDisplayed++;
   });
-
+  removeLoadingIndicator();
   scrollUpdate();
 }
 
@@ -52,7 +41,7 @@ function buildMessage(msgFrom, msgText, msgDate, layout) {
   let newMsgName = document.createElement("td");
   let newMsgText = document.createElement("td");
   let newMsgDate = document.createElement("td");
-
+console.log(layout)
   if (layout === "seperatedLines") {
     newElement.classList.add("chat-message-double-lined");
   } else {
@@ -83,16 +72,30 @@ function scrollUpdate() {
   chatElement.scrollTop = chatElement.scrollHeight;
 }
 
-function getUserProfile() {
-  let url = window.chatServer + window.chatCollectionId + "/profile" + username;
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      profilesettings = JSON.parse(xmlhttp.responseText);
-    }
-  };
+/**
+ * Insert a loading indicator
+ */
+function insertLoadingIndicator() {
+  var fieldsetElement = document.getElementById("chat");
 
-  xmlhttp.open("GET", url, true);
-  xmlhttp.setRequestHeader("Authorization", "Bearer " + window.authToken);
-  xmlhttp.send();
+  let newDotContainer = document.createElement("div");
+  let newFlashingDots = document.createElement("div");
+
+  newDotContainer.id = "dot-container";
+  newDotContainer.classList.add("dot-container");
+  newFlashingDots.classList.add("dot-flashing");
+
+  newDotContainer.appendChild(newFlashingDots);
+  fieldsetElement.appendChild(newDotContainer);
+}
+
+/**
+ * Remove a loading indicator
+ */
+function removeLoadingIndicator() {
+  console.log("removing dots ...");
+  let exists = document.getElementById("dot-container");
+  if (exists != undefined) {
+    document.getElementById("dot-container").remove();
+  }
 }
