@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../javascript/register.js"></script>
   <?php require('../controllers/registerController.php') ?>
+  <script>
+        window.chatToken = "<?= $_SESSION['chat_token'] ?>";
+        window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+        window.chatServer = "<?= CHAT_SERVER_URL ?>";
+        window.authToken = "<?= $_SESSION['chat_token'] ?>";
+    </script>
   <title>Register</title>
 </head>
 

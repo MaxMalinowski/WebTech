@@ -97,7 +97,7 @@
   * Function to execute a server request to check whether a username already exists or not
   */
  function doesUserExist(usernameElement) {
-     var url = window.chatServer + "/" + window.chatCollectionId + "/user/" + usernameElement.value;
+     var url = window.chatServer + window.chatCollectionId + "/user/" + usernameElement.value;
      var xmlhttp = new XMLHttpRequest();
      xmlhttp.onreadystatechange = function () {
          if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
