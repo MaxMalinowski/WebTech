@@ -29,7 +29,9 @@
         </div>
         <dl>
           <dt>Coffee or Tea?</dt>
-          <dd><?=$friend->getCoffeeOrTea()?></dd>
+          <dd <?php if($friend->getCoffeeOrTea() !== "neither_nor") {?> hidden <?php } ?>> Neither Nor</dd>
+          <dd <?php if($friend->getCoffeeOrTea() !== "coffee") {?> hidden <?php } ?>> Coffee</dd>
+          <dd <?php if($friend->getCoffeeOrTea() !== "tea") {?> hidden <?php } ?>> Tea</dd>
           <dt>Name</dt>
           <dd><?=$friend->getFirstName()?></dd>
         </dl>
