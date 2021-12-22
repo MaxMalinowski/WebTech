@@ -3,6 +3,7 @@
 use model\Friend;
 
 require("../utils/global.php");
+ini_set("display_errors", 1);
 
 function checkForPresentUser()
 {
@@ -58,22 +59,18 @@ function getFriendsInformation()
     $requestsList = [];
 
     $allFriends = $service->listFriends();
+    $allUnread = $service->getUnread();
     foreach ($allFriends as $friend) {
         if ($friend->getStatus() == 'accepted') {
+            foreach ($allUnread as $unreadfriend => $unreadCount) {
+                if ($unreadfriend === $friend->getUsername()) {
+                    $friend->setUnreadMessages($unreadCount);
+                }
+            }
             array_push($friendsList, $friend);
         } elseif ($friend->getStatus() == 'requested') {
             array_push($requestsList, $friend);
         }
     }
-    $allUnread = $service->getUnread();
-    foreach ($allUnread as $index => $unreadCount) {
-        $unreadfriend = $friendsList [$index];
-        foreach ($friendsList as $friend) {
-            if ($unreadfriend === $friend->getUsername()) {
-                $friendsList[$friend->getUsername()]  = $unreadCount;
-            }
-        }
-    }
-
     return array($friendsList, $requestsList);
 }
